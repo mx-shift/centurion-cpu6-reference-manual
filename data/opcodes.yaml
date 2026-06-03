@@ -1,0 +1,22 @@
+# Canonical machine-readable CPU6 opcode index.
+#
+# This file is the shared source of truth between this manual (Appendix A
+# opcode map, per-instruction generated fields) and the emulator
+# (cen-isa's table is CI-checked against it).
+#
+# Seeded from webCenREE's oplist (src/cen.ts, Copyright (c) 2023
+# Meisaka Yukara, CenRE license) and the Nakazoto CenturionComputer wiki.
+#
+# Fields per opcode:
+#   mnemonic: canonical mnemonic        aliases: accepted alternatives
+#   mode:     impl|imm|dir|ind|pco|pcoi|idx|rr|rc|implr
+#   width:    b|w                       flags: none|f|l|mv|flmv|arith_fmv|arith_flmv
+#   ext:      extended-family tag (page|dma|big|mem|mpush|mpop|rii|xio), optional
+#
+# M1a/M2 work item: transcribe all 256 entries.
+
+0x00: { mnemonic: HLT, aliases: [HALT], mode: impl, width: b, flags: none }
+0x01: { mnemonic: NOP, mode: impl, width: b, flags: none }
+0x02: { mnemonic: SF, mode: impl, width: b, flags: f }
+0x20: { mnemonic: INRB, aliases: [INC], mode: rc, width: b, flags: arith_fmv }
+0x21: { mnemonic: DCRB, aliases: [DEC], mode: rc, width: b, flags: arith_fmv }

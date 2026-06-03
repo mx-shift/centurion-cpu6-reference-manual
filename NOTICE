@@ -1,0 +1,21 @@
+Centurion CPU6 Instruction Set Reference Manual
+Copyright 2026 Rick Altherr. Licensed CC-BY-4.0.
+
+This product is an original implementation, but its understanding of the
+Centurion CPU6 architecture is derived from community reverse-engineering
+work. In particular:
+
+1. webCenREE / CenRE — Copyright (c) 2023 Meisaka Yukara.
+   https://github.com/Meisaka/webCenREE
+   Used as a behavioral reference under the CenRE license (a permissive
+   zlib/ISC-style license). Opcode table structure and instruction
+   semantics for under-documented opcodes were studied from this source.
+   Per its license, the above copyright notice is reproduced here. This
+   project is not the original software and is not endorsed by its author.
+
+2. The CenturionComputer wiki, maintained by David Lovett (Usagi
+   Electric; GitHub: Nakazoto), with contributions from the Centurion
+   community.
+   https://github.com/Nakazoto/CenturionComputer/wiki
+   Source of hardware documentation: memory maps, board behavior, boot
+   process, and instruction documentation.

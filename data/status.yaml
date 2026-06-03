@@ -1,0 +1,11 @@
+# Per-opcode documentation tracking.
+#   status: documented  — corroborated by wiki OpC prose
+#           derived     — reconstructed from webCenREE semantics only
+#           unknown     — semantics unclear
+#   prose:  drafted | reviewed (absent = not started)
+#
+# `just check` reports totals; milestones gate on them.
+
+0x00: { mnemonic: HLT, status: documented, sources: [wiki:OpC_00-0F, ree:oplist] }
+0x01: { mnemonic: NOP, status: documented, sources: [wiki:OpC_00-0F, ree:oplist], prose: drafted }
+0x20: { mnemonic: INRB, status: documented, sources: [wiki:OpC_20-2F, wiki:Instructions, ree:oplist, ree:rcfetchb], prose: drafted }
