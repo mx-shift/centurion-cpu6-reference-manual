@@ -98,11 +98,12 @@
   "SVC",
   qualifier: "(service call)",
   summary: [
-    Operating-system service call. SVC pushes a 5-byte frame, saves
-    the return address in X, clears the flag nibble, and enters the
-    fixed supervisor entry point 0x0100. The immediate byte is the
-    request number, passed in the frame — it is *not* a vector index.
-    CPU6 only.
+    Operating-system service call. SVC pushes a 5-byte frame (under
+    the caller's page map), saves the return address in X, clears the
+    flag nibble, switches to page map 0, and enters the fixed
+    supervisor entry point 0x0100. The immediate byte is the request
+    number, passed in the frame — it is *not* a vector index. CPU6
+    only.
   ],
   encodings: (
     encoding(
@@ -119,10 +120,12 @@
     ```cpu6
     push (descending): cc-byte, 0x05, X<7:0>, X<15:8>, number
     // cc-byte = [V M F L][AOO][PTA]: the same composition the
-    // level-switch hardware saves into C.lo
-    X  = PC            // return address
-    cc = 0             // flag nibble cleared
-    PC = 0x0100
+    // level-switch hardware saves into C.lo; the pushes translate
+    // through the CALLER's map
+    X   = PC           // return address
+    cc  = 0            // flag nibble cleared
+    PTA = 0            // supervisor address space
+    PC  = 0x0100
     ```
   ],
   flags: flags-affected(fault: [cleared], link: [cleared],
@@ -130,7 +133,11 @@
   notes: [
     RSV unwinds the frame and, through the saved cc byte's low bits,
     restores the caller's page map — the dispatcher primitive for the
-    operating system's task switching.
+    operating system's task switching. The entry-time switch to map 0
+    is what lets user tasks (whose own maps need not expose page 0)
+    reach the supervisor at all; it was pinned by lockstep against
+    the microcode during the CENTOS boot, where the first dispatched
+    task's map leaves page 0 unmapped.
   ],
 )
 
