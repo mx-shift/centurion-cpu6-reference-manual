@@ -37,10 +37,10 @@
       decode: [
         ```cpu6
         // sub-mode from the nibble low bits (s,d):
-        //  s=1,d=0  immediate            multiplicand = pair LEADER of dst
-        //  s=0,d=1  direct MemW[addr]    multiplicand = pair LEADER of dst
+        //  s=1,d=0  immediate            multiplicand = R[src AND 14]
+        //  s=0,d=1  direct MemW[addr]    multiplicand = R[src AND 14]
         //  s=1,d=1  indexed MemW[R+disp] multiplicand = dst itself
-        //           (the src nibble's high bits select the index register)
+        //           (the src nibble selects the index register)
         ```
       ],
     ),
@@ -59,11 +59,14 @@
   ],
   flags: flags-affected(fault: [product > 16 bits], minus: "*", value: "*"),
   notes: [
-    The operand-pairing asymmetry between the immediate/direct and
-    indexed sub-modes is real and was pinned case-by-case against the
-    microcode (optest 77): `MUL= imm,A,B` multiplies *A* even though
-    the destination names B, while `MUL- A,7,B` multiplies *B* with A
-    serving as the index register.
+    In the immediate and direct sub-modes the src nibble names the
+    multiplicand register explicitly — the assembler's
+    `MUL= imm,<reg>,<dst>` encodes `<reg>` there (`77 12` multiplies
+    A, `77 32` B, `77 52` X; all microcode-verified), with the
+    destination selecting only the result pair. The indexed sub-mode
+    instead multiplies the destination itself, the src nibble naming
+    the index register (`MUL- A,7,B` multiplies *B* with A + 7 as the
+    operand address).
   ],
 )
 
@@ -71,11 +74,13 @@
   "DIV",
   qualifier: "(divide)",
   summary: [
-    Unsigned 16÷16 divide. The dividend follows the same pair rule as
-    MUL's multiplicand; the quotient goes to the pair follower and the
-    remainder to the leader (the remainder is only written when the
-    destination names the leader). Divide-by-zero sets F and leaves
-    the registers unchanged — there is no trap. CPU6 only.
+    Unsigned 16÷16 divide. The dividend follows the same operand rule
+    as MUL's multiplicand (src-nibble register for the immediate and
+    direct sub-modes, the destination itself otherwise); the quotient
+    goes to the pair follower and the remainder to the leader (the
+    remainder is only written when the destination names the leader).
+    Divide-by-zero sets F and leaves the registers unchanged — there
+    is no trap. CPU6 only.
   ],
   encodings: (
     encoding(
