@@ -18,5 +18,256 @@
 0x00: { mnemonic: HLT, aliases: [HALT], mode: impl, width: b, flags: none }
 0x01: { mnemonic: NOP, mode: impl, width: b, flags: none }
 0x02: { mnemonic: SF, mode: impl, width: b, flags: f }
+0x03: { mnemonic: RF, mode: impl, width: b, flags: f }
+0x04: { mnemonic: EI, mode: impl, width: b, flags: none }
+0x05: { mnemonic: DI, mode: impl, width: b, flags: none }
+0x06: { mnemonic: SL, mode: impl, width: b, flags: l }
+0x07: { mnemonic: RL, mode: impl, width: b, flags: l }
+0x08: { mnemonic: CL, aliases: [COML], mode: impl, width: b, flags: l }
+0x09: { mnemonic: RSR, aliases: [RET], mode: impl, width: b, flags: none }
+0x0A: { mnemonic: RI, aliases: [RETI], mode: impl, width: b, flags: flmv }
+0x0B: { mnemonic: "!ill0B", mode: impl, width: b, flags: none, illegal: true }
+0x0C: { mnemonic: SYN, aliases: [SYNC], mode: impl, width: b, flags: none }
+0x0D: { mnemonic: PCX, aliases: [MOV], mode: implr, src: implr, width: w, flags: none }
+0x0E: { mnemonic: DLY, aliases: [DELAY], mode: impl, width: b, flags: none }
+0x0F: { mnemonic: RSV, aliases: [SVRET], mode: impl, width: b, flags: none }
+0x10: { mnemonic: BL, mode: pco, width: b, flags: none }
+0x11: { mnemonic: BNL, mode: pco, width: b, flags: none }
+0x12: { mnemonic: BF, mode: pco, width: b, flags: none }
+0x13: { mnemonic: BNF, mode: pco, width: b, flags: none }
+0x14: { mnemonic: BZ, mode: pco, width: b, flags: none }
+0x15: { mnemonic: BNZ, mode: pco, width: b, flags: none }
+0x16: { mnemonic: BM, mode: pco, width: b, flags: none }
+0x17: { mnemonic: BP, mode: pco, width: b, flags: none }
+0x18: { mnemonic: BGZ, mode: pco, width: b, flags: none }
+0x19: { mnemonic: BLE, mode: pco, width: b, flags: none }
+0x1A: { mnemonic: BS1, mode: pco, width: b, flags: none }
+0x1B: { mnemonic: BS2, mode: pco, width: b, flags: none }
+0x1C: { mnemonic: BS3, mode: pco, width: b, flags: none }
+0x1D: { mnemonic: BS4, mode: pco, width: b, flags: none }
+0x1E: { mnemonic: BI, mode: pco, width: b, flags: none }
+0x1F: { mnemonic: BCK, mode: pco, width: b, flags: none }
 0x20: { mnemonic: INRB, aliases: [INC], mode: rc, width: b, flags: arith_fmv }
 0x21: { mnemonic: DCRB, aliases: [DEC], mode: rc, width: b, flags: arith_fmv }
+0x22: { mnemonic: CLRB, mode: rc, width: b, flags: flmv }
+0x23: { mnemonic: IVRB, aliases: [NOT], mode: rc, width: b, flags: mv }
+0x24: { mnemonic: SRRB, aliases: [SHR], mode: rc, width: b, flags: flmv }
+0x25: { mnemonic: SLRB, aliases: [SHL], mode: rc, width: b, flags: flmv }
+0x26: { mnemonic: RRRB, aliases: [RORC], mode: rc, width: b, flags: flmv }
+0x27: { mnemonic: RLRB, aliases: [ROLC], mode: rc, width: b, flags: flmv }
+0x28: { mnemonic: INAB, aliases: [INC], mode: implr, width: b, flags: arith_fmv }
+0x29: { mnemonic: DCAB, aliases: [DEC], mode: implr, width: b, flags: arith_fmv }
+0x2A: { mnemonic: CLAB, aliases: [CLR], mode: implr, width: b, flags: flmv }
+0x2B: { mnemonic: IVAB, aliases: [NOT], mode: implr, width: b, flags: mv }
+0x2C: { mnemonic: SRAB, aliases: [SHR], mode: implr, width: b, flags: flmv }
+0x2D: { mnemonic: SLAB, aliases: [SHL], mode: implr, width: b, flags: flmv }
+0x2E: { mnemonic: PAGE, mode: impl, width: b, flags: none, ext: page }
+0x2F: { mnemonic: DMA, mode: impl, width: b, flags: none, ext: dma }
+0x30: { mnemonic: INR, aliases: [INC], mode: rc, width: w, flags: arith_fmv }
+0x31: { mnemonic: DCR, aliases: [DEC], mode: rc, width: w, flags: arith_fmv }
+0x32: { mnemonic: CLR, aliases: [CAD], mode: rc, width: w, flags: flmv }
+0x33: { mnemonic: IVR, aliases: [NOT], mode: rc, width: w, flags: mv }
+0x34: { mnemonic: SRR, aliases: [SHR], mode: rc, width: w, flags: flmv }
+0x35: { mnemonic: SLR, aliases: [SHL], mode: rc, width: w, flags: flmv }
+0x36: { mnemonic: RRR, aliases: [RORC], mode: rc, width: w, flags: flmv }
+0x37: { mnemonic: RLR, aliases: [ROLC], mode: rc, width: w, flags: flmv }
+0x38: { mnemonic: INA, aliases: [INC], mode: implr, width: w, flags: arith_fmv }
+0x39: { mnemonic: DCA, aliases: [DEC], mode: implr, width: w, flags: arith_fmv }
+0x3A: { mnemonic: CLA, aliases: [CLR], mode: implr, width: w, flags: flmv }
+0x3B: { mnemonic: IVA, aliases: [NOT], mode: implr, width: w, flags: mv }
+0x3C: { mnemonic: SRA, aliases: [SHR], mode: implr, width: w, flags: flmv }
+0x3D: { mnemonic: SLA, aliases: [SHL], mode: implr, width: w, flags: flmv }
+0x3E: { mnemonic: INX, aliases: [INC], mode: implr, width: w, flags: arith_fmv }
+0x3F: { mnemonic: DCX, aliases: [DEC], mode: implr, width: w, flags: arith_fmv }
+0x40: { mnemonic: ADDB, mode: rr, width: b, flags: arith_flmv }
+0x41: { mnemonic: SUBB, mode: rr, width: b, flags: arith_flmv }
+0x42: { mnemonic: ANDB, mode: rr, width: b, flags: mv }
+0x43: { mnemonic: ORIB, aliases: [OR], mode: rr, width: b, flags: mv }
+0x44: { mnemonic: OREB, aliases: [XOR], mode: rr, width: b, flags: mv }
+0x45: { mnemonic: XFRB, aliases: [XFR], mode: rr, width: b, flags: mv }
+0x46: { mnemonic: BIG, mode: impl, width: b, flags: flmv, ext: big }
+0x47: { mnemonic: MEM, mode: impl, width: b, flags: flmv, ext: mem }
+0x48: { mnemonic: AABB, aliases: [ADD], mode: implr, src: implr, width: b, flags: arith_flmv }
+0x49: { mnemonic: SABB, aliases: [SUB], mode: implr, src: implr, width: b, flags: arith_flmv }
+0x4A: { mnemonic: NABB, aliases: [AND], mode: implr, src: implr, width: b, flags: mv }
+0x4B: { mnemonic: XAXB, aliases: [XFR], mode: implr, src: implr, width: b, flags: mv }
+0x4C: { mnemonic: XAYB, aliases: [XFR], mode: implr, src: implr, width: b, flags: mv }
+0x4D: { mnemonic: XABB, aliases: [XFR], mode: implr, src: implr, width: b, flags: mv }
+0x4E: { mnemonic: XAZB, aliases: [XFR], mode: implr, src: implr, width: b, flags: mv }
+0x4F: { mnemonic: XASB, aliases: [XFR], mode: implr, src: implr, width: b, flags: mv }
+0x50: { mnemonic: ADD, mode: rr, width: w, flags: arith_flmv }
+0x51: { mnemonic: SUB, mode: rr, width: w, flags: arith_flmv }
+0x52: { mnemonic: AND, mode: rr, width: w, flags: mv }
+0x53: { mnemonic: ORI, aliases: [OR], mode: rr, width: w, flags: mv }
+0x54: { mnemonic: ORE, aliases: [XOR], mode: rr, width: w, flags: mv }
+0x55: { mnemonic: XFR, mode: rrs, width: w, flags: mv }
+0x56: { mnemonic: EAO, mode: impl, width: b, flags: none }
+0x57: { mnemonic: DAO, mode: impl, width: b, flags: none }
+0x58: { mnemonic: AAB, aliases: [ADD], mode: implr, src: implr, width: w, flags: arith_flmv }
+0x59: { mnemonic: SAB, aliases: [SUB], mode: implr, src: implr, width: w, flags: arith_flmv }
+0x5A: { mnemonic: NAB, aliases: [AND], mode: implr, src: implr, width: w, flags: mv }
+0x5B: { mnemonic: XAX, aliases: [XFR], mode: implr, src: implr, width: w, flags: mv }
+0x5C: { mnemonic: XAY, aliases: [XFR], mode: implr, src: implr, width: w, flags: mv }
+0x5D: { mnemonic: XAB, aliases: [XFR], mode: implr, src: implr, width: w, flags: mv }
+0x5E: { mnemonic: XAZ, aliases: [XFR], mode: implr, src: implr, width: w, flags: mv }
+0x5F: { mnemonic: XAS, aliases: [XFR], mode: implr, src: implr, width: w, flags: mv }
+0x60: { mnemonic: LDX, aliases: [LD], mode: implr, src: imm, width: w, flags: mv }
+0x61: { mnemonic: LDX, aliases: [LD], mode: implr, src: dir, width: w, flags: mv }
+0x62: { mnemonic: LDX, aliases: [LD], mode: implr, src: ind, width: w, flags: mv }
+0x63: { mnemonic: LDX, aliases: [LD], mode: implr, src: pco, width: w, flags: mv }
+0x64: { mnemonic: LDX, aliases: [LD], mode: implr, src: pcoi, width: w, flags: mv }
+0x65: { mnemonic: LDX, aliases: [LD], mode: implr, src: idx, width: w, flags: mv }
+0x66: { mnemonic: SVC, aliases: [SVCALL], mode: impl, src: imm, width: b, flags: none }
+0x67: { mnemonic: MEM, mode: impl, width: b, flags: flmv, ext: mem }
+0x68: { mnemonic: STX, aliases: [ST], mode: imm, src: implr, width: w, flags: mv }
+0x69: { mnemonic: STX, aliases: [ST], mode: dir, src: implr, width: w, flags: mv }
+0x6A: { mnemonic: STX, aliases: [ST], mode: ind, src: implr, width: w, flags: mv }
+0x6B: { mnemonic: STX, aliases: [ST], mode: pco, src: implr, width: w, flags: mv }
+0x6C: { mnemonic: STX, aliases: [ST], mode: pcoi, src: implr, width: w, flags: mv }
+0x6D: { mnemonic: STX, aliases: [ST], mode: idx, src: implr, width: w, flags: mv }
+0x6E: { mnemonic: LST, aliases: [LDST], mode: dir, width: b, flags: arith_flmv }
+0x6F: { mnemonic: SST, aliases: [STST], mode: impl, src: dir, width: b, flags: arith_flmv }
+0x70: { mnemonic: "!ill70", mode: impl, width: b, flags: none, illegal: true }
+0x71: { mnemonic: JMP, mode: dir, width: b, flags: none }
+0x72: { mnemonic: JMP, mode: ind, width: b, flags: none }
+0x73: { mnemonic: JMP, mode: pco, width: b, flags: none }
+0x74: { mnemonic: JMP, mode: pcoi, width: b, flags: none }
+0x75: { mnemonic: JMP, mode: idx, width: b, flags: none }
+0x76: { mnemonic: EPE, aliases: [EN.PEF], mode: impl, width: b, flags: none }
+0x77: { mnemonic: MUL, mode: rrx, width: w, flags: arith_flmv }
+0x78: { mnemonic: DIV, mode: rrx, width: w, flags: arith_flmv }
+0x79: { mnemonic: JSR, aliases: [CALL], mode: dir, width: b, flags: none }
+0x7A: { mnemonic: JSR, aliases: [CALL], mode: ind, width: b, flags: none }
+0x7B: { mnemonic: JSR, aliases: [CALL], mode: pco, width: b, flags: none }
+0x7C: { mnemonic: JSR, aliases: [CALL], mode: pcoi, width: b, flags: none }
+0x7D: { mnemonic: JSR, aliases: [CALL], mode: idx, width: b, flags: none }
+0x7E: { mnemonic: STK, aliases: [MPUSH], mode: rc, width: b, flags: none, ext: mpush }
+0x7F: { mnemonic: POP, aliases: [MPOP], mode: rc, width: b, flags: none, ext: mpop }
+0x80: { mnemonic: LDAB, aliases: [LD], mode: implr, src: imm, width: b, flags: mv }
+0x81: { mnemonic: LDAB, aliases: [LD], mode: implr, src: dir, width: b, flags: mv }
+0x82: { mnemonic: LDAB, aliases: [LD], mode: implr, src: ind, width: b, flags: mv }
+0x83: { mnemonic: LDAB, aliases: [LD], mode: implr, src: pco, width: b, flags: mv }
+0x84: { mnemonic: LDAB, aliases: [LD], mode: implr, src: pcoi, width: b, flags: mv }
+0x85: { mnemonic: LDAB, aliases: [LD], mode: implr, src: idx, width: b, flags: mv }
+0x86: { mnemonic: DPE, aliases: [DIS.PEF], mode: impl, width: b, flags: none }
+0x87: { mnemonic: "!ill87", mode: impl, width: b, flags: none, illegal: true }
+0x88: { mnemonic: LDAB, aliases: [LD], mode: implr, src: implr_dir, width: b, flags: mv }
+0x89: { mnemonic: LDAB, aliases: [LD], mode: implr, src: implr_dir, width: b, flags: mv }
+0x8A: { mnemonic: LDAB, aliases: [LD], mode: implr, src: implr_dir, width: b, flags: mv }
+0x8B: { mnemonic: LDAB, aliases: [LD], mode: implr, src: implr_dir, width: b, flags: mv }
+0x8C: { mnemonic: LDAB, aliases: [LD], mode: implr, src: implr_dir, width: b, flags: mv }
+0x8D: { mnemonic: LDAB, aliases: [LD], mode: implr, src: implr_dir, width: b, flags: mv }
+0x8E: { mnemonic: LDAB, aliases: [LD], mode: implr, src: implr_dir, width: b, flags: mv }
+0x8F: { mnemonic: LDAB, aliases: [LD], mode: implr, src: implr_dir, width: b, flags: mv }
+0x90: { mnemonic: LDA, aliases: [LD], mode: implr, src: imm, width: w, flags: mv }
+0x91: { mnemonic: LDA, aliases: [LD], mode: implr, src: dir, width: w, flags: mv }
+0x92: { mnemonic: LDA, aliases: [LD], mode: implr, src: ind, width: w, flags: mv }
+0x93: { mnemonic: LDA, aliases: [LD], mode: implr, src: pco, width: w, flags: mv }
+0x94: { mnemonic: LDA, aliases: [LD], mode: implr, src: pcoi, width: w, flags: mv }
+0x95: { mnemonic: LDA, aliases: [LD], mode: implr, src: idx, width: w, flags: mv }
+0x96: { mnemonic: SOP, aliases: [SET.PO], mode: impl, width: b, flags: none }
+0x97: { mnemonic: "!ill97", mode: impl, width: b, flags: none, illegal: true }
+0x98: { mnemonic: LDA, aliases: [LD], mode: implr, src: implr_dir, width: w, flags: mv }
+0x99: { mnemonic: LDA, aliases: [LD], mode: implr, src: implr_dir, width: w, flags: mv }
+0x9A: { mnemonic: LDA, aliases: [LD], mode: implr, src: implr_dir, width: w, flags: mv }
+0x9B: { mnemonic: LDA, aliases: [LD], mode: implr, src: implr_dir, width: w, flags: mv }
+0x9C: { mnemonic: LDA, aliases: [LD], mode: implr, src: implr_dir, width: w, flags: mv }
+0x9D: { mnemonic: LDA, aliases: [LD], mode: implr, src: implr_dir, width: w, flags: mv }
+0x9E: { mnemonic: LDA, aliases: [LD], mode: implr, src: implr_dir, width: w, flags: mv }
+0x9F: { mnemonic: LDA, aliases: [LD], mode: implr, src: implr_dir, width: w, flags: mv }
+0xA0: { mnemonic: STAB, aliases: [ST], mode: imm, src: implr, width: b, flags: mv }
+0xA1: { mnemonic: STAB, aliases: [ST], mode: dir, src: implr, width: b, flags: mv }
+0xA2: { mnemonic: STAB, aliases: [ST], mode: ind, src: implr, width: b, flags: mv }
+0xA3: { mnemonic: STAB, aliases: [ST], mode: pco, src: implr, width: b, flags: mv }
+0xA4: { mnemonic: STAB, aliases: [ST], mode: pcoi, src: implr, width: b, flags: mv }
+0xA5: { mnemonic: STAB, aliases: [ST], mode: idx, src: implr, width: b, flags: mv }
+0xA6: { mnemonic: SEP, aliases: [SET.PE], mode: impl, width: b, flags: none }
+0xA7: { mnemonic: "!illA7", mode: impl, width: b, flags: none, illegal: true }
+0xA8: { mnemonic: STAB, aliases: [ST], mode: implr_dir, src: implr, width: b, flags: mv }
+0xA9: { mnemonic: STAB, aliases: [ST], mode: implr_dir, src: implr, width: b, flags: mv }
+0xAA: { mnemonic: STAB, aliases: [ST], mode: implr_dir, src: implr, width: b, flags: mv }
+0xAB: { mnemonic: STAB, aliases: [ST], mode: implr_dir, src: implr, width: b, flags: mv }
+0xAC: { mnemonic: STAB, aliases: [ST], mode: implr_dir, src: implr, width: b, flags: mv }
+0xAD: { mnemonic: STAB, aliases: [ST], mode: implr_dir, src: implr, width: b, flags: mv }
+0xAE: { mnemonic: STAB, aliases: [ST], mode: implr_dir, src: implr, width: b, flags: mv }
+0xAF: { mnemonic: STAB, aliases: [ST], mode: implr_dir, src: implr, width: b, flags: mv }
+0xB0: { mnemonic: STA, aliases: [ST], mode: imm, src: implr, width: w, flags: mv }
+0xB1: { mnemonic: STA, aliases: [ST], mode: dir, src: implr, width: w, flags: mv }
+0xB2: { mnemonic: STA, aliases: [ST], mode: ind, src: implr, width: w, flags: mv }
+0xB3: { mnemonic: STA, aliases: [ST], mode: pco, src: implr, width: w, flags: mv }
+0xB4: { mnemonic: STA, aliases: [ST], mode: pcoi, src: implr, width: w, flags: mv }
+0xB5: { mnemonic: STA, aliases: [ST], mode: idx, src: implr, width: w, flags: mv }
+0xB6: { mnemonic: ECK, aliases: [EN.CLK], mode: impl, width: b, flags: none }
+0xB7: { mnemonic: "!illB7", mode: impl, width: b, flags: none, illegal: true }
+0xB8: { mnemonic: STA, aliases: [ST], mode: implr_dir, src: implr, width: w, flags: mv }
+0xB9: { mnemonic: STA, aliases: [ST], mode: implr_dir, src: implr, width: w, flags: mv }
+0xBA: { mnemonic: STA, aliases: [ST], mode: implr_dir, src: implr, width: w, flags: mv }
+0xBB: { mnemonic: STA, aliases: [ST], mode: implr_dir, src: implr, width: w, flags: mv }
+0xBC: { mnemonic: STA, aliases: [ST], mode: implr_dir, src: implr, width: w, flags: mv }
+0xBD: { mnemonic: STA, aliases: [ST], mode: implr_dir, src: implr, width: w, flags: mv }
+0xBE: { mnemonic: STA, aliases: [ST], mode: implr_dir, src: implr, width: w, flags: mv }
+0xBF: { mnemonic: STA, aliases: [ST], mode: implr_dir, src: implr, width: w, flags: mv }
+0xC0: { mnemonic: LDBB, aliases: [LD], mode: implr, src: imm, width: b, flags: mv }
+0xC1: { mnemonic: LDBB, aliases: [LD], mode: implr, src: dir, width: b, flags: mv }
+0xC2: { mnemonic: LDBB, aliases: [LD], mode: implr, src: ind, width: b, flags: mv }
+0xC3: { mnemonic: LDBB, aliases: [LD], mode: implr, src: pco, width: b, flags: mv }
+0xC4: { mnemonic: LDBB, aliases: [LD], mode: implr, src: pcoi, width: b, flags: mv }
+0xC5: { mnemonic: LDBB, aliases: [LD], mode: implr, src: idx, width: b, flags: mv }
+0xC6: { mnemonic: DCK, aliases: [DIS.CLK], mode: impl, width: b, flags: none }
+0xC7: { mnemonic: "!illC7", mode: impl, width: b, flags: none, illegal: true }
+0xC8: { mnemonic: LDBB, aliases: [LD], mode: implr, src: implr_dir, width: b, flags: mv }
+0xC9: { mnemonic: LDBB, aliases: [LD], mode: implr, src: implr_dir, width: b, flags: mv }
+0xCA: { mnemonic: LDBB, aliases: [LD], mode: implr, src: implr_dir, width: b, flags: mv }
+0xCB: { mnemonic: LDBB, aliases: [LD], mode: implr, src: implr_dir, width: b, flags: mv }
+0xCC: { mnemonic: LDBB, aliases: [LD], mode: implr, src: implr_dir, width: b, flags: mv }
+0xCD: { mnemonic: LDBB, aliases: [LD], mode: implr, src: implr_dir, width: b, flags: mv }
+0xCE: { mnemonic: LDBB, aliases: [LD], mode: implr, src: implr_dir, width: b, flags: mv }
+0xCF: { mnemonic: LDBB, aliases: [LD], mode: implr, src: implr_dir, width: b, flags: mv }
+0xD0: { mnemonic: LDB, aliases: [LD], mode: implr, src: imm, width: w, flags: mv }
+0xD1: { mnemonic: LDB, aliases: [LD], mode: implr, src: dir, width: w, flags: mv }
+0xD2: { mnemonic: LDB, aliases: [LD], mode: implr, src: ind, width: w, flags: mv }
+0xD3: { mnemonic: LDB, aliases: [LD], mode: implr, src: pco, width: w, flags: mv }
+0xD4: { mnemonic: LDB, aliases: [LD], mode: implr, src: pcoi, width: w, flags: mv }
+0xD5: { mnemonic: LDB, aliases: [LD], mode: implr, src: idx, width: w, flags: mv }
+0xD6: { mnemonic: STR, mode: rrsr, width: w, flags: mv }
+0xD7: { mnemonic: SAR, mode: impl, src: implr, width: w, flags: arith_flmv, ext: rii }
+0xD8: { mnemonic: LDB, aliases: [LD], mode: implr, src: implr_dir, width: w, flags: mv }
+0xD9: { mnemonic: LDB, aliases: [LD], mode: implr, src: implr_dir, width: w, flags: mv }
+0xDA: { mnemonic: LDB, aliases: [LD], mode: implr, src: implr_dir, width: w, flags: mv }
+0xDB: { mnemonic: LDB, aliases: [LD], mode: implr, src: implr_dir, width: w, flags: mv }
+0xDC: { mnemonic: LDB, aliases: [LD], mode: implr, src: implr_dir, width: w, flags: mv }
+0xDD: { mnemonic: LDB, aliases: [LD], mode: implr, src: implr_dir, width: w, flags: mv }
+0xDE: { mnemonic: LDB, aliases: [LD], mode: implr, src: implr_dir, width: w, flags: mv }
+0xDF: { mnemonic: LDB, aliases: [LD], mode: implr, src: implr_dir, width: w, flags: mv }
+0xE0: { mnemonic: STBB, aliases: [ST], mode: imm, src: implr, width: b, flags: mv }
+0xE1: { mnemonic: STBB, aliases: [ST], mode: dir, src: implr, width: b, flags: mv }
+0xE2: { mnemonic: STBB, aliases: [ST], mode: ind, src: implr, width: b, flags: mv }
+0xE3: { mnemonic: STBB, aliases: [ST], mode: pco, src: implr, width: b, flags: mv }
+0xE4: { mnemonic: STBB, aliases: [ST], mode: pcoi, src: implr, width: b, flags: mv }
+0xE5: { mnemonic: STBB, aliases: [ST], mode: idx, src: implr, width: b, flags: mv }
+0xE6: { mnemonic: LAR, mode: implr, width: w, flags: arith_flmv, ext: rii }
+0xE7: { mnemonic: "!illE7", mode: impl, width: b, flags: none, illegal: true }
+0xE8: { mnemonic: STBB, aliases: [ST], mode: implr_dir, src: implr, width: b, flags: mv }
+0xE9: { mnemonic: STBB, aliases: [ST], mode: implr_dir, src: implr, width: b, flags: mv }
+0xEA: { mnemonic: STBB, aliases: [ST], mode: implr_dir, src: implr, width: b, flags: mv }
+0xEB: { mnemonic: STBB, aliases: [ST], mode: implr_dir, src: implr, width: b, flags: mv }
+0xEC: { mnemonic: STBB, aliases: [ST], mode: implr_dir, src: implr, width: b, flags: mv }
+0xED: { mnemonic: STBB, aliases: [ST], mode: implr_dir, src: implr, width: b, flags: mv }
+0xEE: { mnemonic: STBB, aliases: [ST], mode: implr_dir, src: implr, width: b, flags: mv }
+0xEF: { mnemonic: STBB, aliases: [ST], mode: implr_dir, src: implr, width: b, flags: mv }
+0xF0: { mnemonic: STB, aliases: [ST], mode: imm, src: implr, width: w, flags: mv }
+0xF1: { mnemonic: STB, aliases: [ST], mode: dir, src: implr, width: w, flags: mv }
+0xF2: { mnemonic: STB, aliases: [ST], mode: ind, src: implr, width: w, flags: mv }
+0xF3: { mnemonic: STB, aliases: [ST], mode: pco, src: implr, width: w, flags: mv }
+0xF4: { mnemonic: STB, aliases: [ST], mode: pcoi, src: implr, width: w, flags: mv }
+0xF5: { mnemonic: STB, aliases: [ST], mode: idx, src: implr, width: w, flags: mv }
+0xF6: { mnemonic: LIO, mode: impl, width: b, flags: none, ext: xio }
+0xF7: { mnemonic: MVL, aliases: [MOVML], mode: impl, width: w, flags: none }
+0xF8: { mnemonic: STB, aliases: [ST], mode: implr_dir, src: implr, width: w, flags: mv }
+0xF9: { mnemonic: STB, aliases: [ST], mode: implr_dir, src: implr, width: w, flags: mv }
+0xFA: { mnemonic: STB, aliases: [ST], mode: implr_dir, src: implr, width: w, flags: mv }
+0xFB: { mnemonic: STB, aliases: [ST], mode: implr_dir, src: implr, width: w, flags: mv }
+0xFC: { mnemonic: STB, aliases: [ST], mode: implr_dir, src: implr, width: w, flags: mv }
+0xFD: { mnemonic: STB, aliases: [ST], mode: implr_dir, src: implr, width: w, flags: mv }
+0xFE: { mnemonic: STB, aliases: [ST], mode: implr_dir, src: implr, width: w, flags: mv }
+0xFF: { mnemonic: STB, aliases: [ST], mode: implr_dir, src: implr, width: w, flags: mv }

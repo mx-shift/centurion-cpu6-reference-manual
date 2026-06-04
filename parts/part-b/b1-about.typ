@@ -11,24 +11,24 @@ the pseudocode appendix); the *Flags affected* box (F fault, L link,
 M minus, V value); *Exceptions*; and optional *Notes* and a worked
 *Example*.
 
-== Registers and operand fields
+== Conventions
 
-The CPU6 has eight word registers — `A`, `B`, `X`, `Y`, `Z`, `S`, `C`,
-and `P` — each addressable as upper and lower byte halves (e.g. `AU`,
-`AL`). Register operand fields in encoding diagrams hold the 4-bit
-register-file byte index of the operand: word operands use even indexes
-(`A`=0, `B`=2, …, `P`=14); byte operands address any of the 16 register
-bytes directly.
+Part A is the reference for the programmers' model; these descriptions
+assume it. The notes here cover only what is specific to reading an
+instruction entry.
 
-== Flags
+*Register operand fields.* A register field in an encoding diagram holds
+the 4-bit register-file byte index of its operand (the registers and
+their byte halves are §A2.2): word operands use even indexes (`A`=0,
+`B`=2, …, `P`=14); byte operands address any of the 16 register bytes
+directly.
 
-The condition flags live in the low byte of the `C` (context) register:
-
-- *V* (value), bit 7 — set when the result is zero. Note the inverted
-  sense relative to most architectures' Z flag.
-- *M* (minus), bit 6 — set when the result is negative.
-- *F* (fault), bit 5 — arithmetic overflow, or a block-operation fault.
-- *L* (link), bit 4 — carry, borrow, or the shifted-out bit.
+*The Flags affected box.* The box names the four condition flags in the
+`C` register's low byte — *F* (fault), *L* (link), *M* (minus), *V*
+(value); their meanings are §A2.5. Within an entry, "—" marks a flag the
+instruction leaves unchanged and "\*" one set from the result; any other
+text states the specific rule. Recall that *V* has inverted sense — it
+is set when the result is _zero_.
 
 == Documentation status
 

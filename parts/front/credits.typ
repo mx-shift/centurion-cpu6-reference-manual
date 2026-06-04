@@ -15,9 +15,13 @@ International license (CC-BY-4.0).
 The architecture described here was reverse-engineered by the Centurion
 community. This manual builds directly on:
 
-- *The Nakazoto CenturionComputer wiki* and its contributors
+- *David Lovett (Usagi Electric)*, who recovered and restored a working
+  Centurion system and documented the effort publicly, catalysing the
+  reverse-engineering project. He maintains the *CenturionComputer wiki*
+  under the GitHub handle _Nakazoto_
   (https://github.com/Nakazoto/CenturionComputer/wiki) — instruction
-  documentation, register and memory models, and worked examples.
+  documentation, register and memory models, board-level analysis, and
+  worked examples — to which the wider community has contributed.
 
 - *webCenREE / CenRE*, Copyright © 2023 Meisaka Yukara
   (https://github.com/Meisaka/webCenREE) — the reference emulator whose
@@ -26,8 +30,9 @@ community. This manual builds directly on:
   license requires. This manual is an independent work and is not
   endorsed by the author of webCenREE.
 
-- *David Lovett (Usagi Electric)* and the wider Centurion community for
-  hardware preservation and the reverse-engineering effort.
+- The wider *Centurion community* for hardware preservation, microcode
+  and disk-format analysis, and the collective reverse-engineering
+  effort that this manual records.
 
 Instruction descriptions marked _derived_ were reconstructed from
 emulator semantics rather than period documentation and may contain

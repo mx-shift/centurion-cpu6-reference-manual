@@ -1,0 +1,3817 @@
+{
+ "A": {
+  "asm": "A",
+  "bytes": "88",
+  "addr": "0BEF"
+ },
+ "A+": {
+  "asm": "A+",
+  "bytes": "6501",
+  "addr": "5848"
+ },
+ "A-": {
+  "asm": "A-",
+  "bytes": "6502",
+  "addr": "5853"
+ },
+ "AAB": {
+  "asm": "AAB",
+  "bytes": "58",
+  "addr": "013A"
+ },
+ "AABB": {
+  "asm": "AABB",
+  "bytes": "48",
+  "addr": "55A0"
+ },
+ "ABORTEND": {
+  "asm": "ABORTEND JMP    RIABORT",
+  "bytes": "73E4",
+  "addr": "0218"
+ },
+ "ABORTFLAG": {
+  "asm": "ABORTFLAG",
+  "bytes": "A101FB",
+  "addr": "035C"
+ },
+ "ABORTFLAGDB": {
+  "asm": "ABORTFLAGDB 0",
+  "bytes": "00",
+  "addr": "01FB"
+ },
+ "ABORTINT": {
+  "asm": "ABORTINT",
+  "bytes": "9001FF",
+  "addr": "033E"
+ },
+ "ADD=": {
+  "asm": "ADD= 2,A",
+  "bytes": "50100002",
+  "addr": "5607"
+ },
+ "ADDB": {
+  "asm": "ADDB BL,AL",
+  "bytes": "4031",
+  "addr": "03E9"
+ },
+ "AISETFLGSDB": {
+  "asm": "AISETFLGSDB 0",
+  "bytes": "00",
+  "addr": "01FD"
+ },
+ "AL": {
+  "asm": "AL ,BL",
+  "bytes": "4D",
+  "addr": "045C"
+ },
+ "ALNUMMASK": {
+  "asm": "ALNUMMASK",
+  "bytes": "D0077F",
+  "addr": "4865"
+ },
+ "ALPHAMASK": {
+  "asm": "ALPHAMASK",
+  "bytes": "D0067F",
+  "addr": "47D7"
+ },
+ "ANC": {
+  "asm": "ANC (16)-X,-A",
+  "bytes": "475A0F40",
+  "addr": "4CE2"
+ },
+ "ANCR": {
+  "asm": "ANCR -X,-B",
+  "bytes": "675A42",
+  "addr": "64E1"
+ },
+ "AND=": {
+  "asm": "AND= 2,A",
+  "bytes": "52100002",
+  "addr": "568F"
+ },
+ "AU": {
+  "asm": "AU ,AL",
+  "bytes": "4501",
+  "addr": "03BD"
+ },
+ "B": {
+  "asm": "B",
+  "bytes": "89",
+  "addr": "0BFA"
+ },
+ "B+": {
+  "asm": "B+",
+  "bytes": "8521",
+  "addr": "0B67"
+ },
+ "B-": {
+  "asm": "B-",
+  "bytes": "8522",
+  "addr": "0B72"
+ },
+ "BCK": {
+  "asm": "BCK T1FDONE",
+  "bytes": "1F03",
+  "addr": "0CF2"
+ },
+ "BF": {
+  "asm": "BF T12PASS",
+  "bytes": "1202",
+  "addr": "0C32"
+ },
+ "BGZ": {
+  "asm": "BGZ HNLETTER",
+  "bytes": "1804",
+  "addr": "03E1"
+ },
+ "BI": {
+  "asm": "BI T1EPASS",
+  "bytes": "1E02",
+  "addr": "0CE7"
+ },
+ "BL": {
+  "asm": "BL PRV1",
+  "bytes": "1007",
+  "addr": "024A"
+ },
+ "BLE": {
+  "asm": "BLE T19PASS",
+  "bytes": "1902",
+  "addr": "0CB0"
+ },
+ "BM": {
+  "asm": "BM H2IERROR",
+  "bytes": "1617",
+  "addr": "0427"
+ },
+ "BN1": {
+  "asm": "BN1",
+  "bytes": "600182",
+  "addr": "1CEE"
+ },
+ "BN1-": {
+  "asm": "BN1- 2",
+  "bytes": "600180",
+  "addr": "1B2C"
+ },
+ "BN1/": {
+  "asm": "BN1/ 2,Y",
+  "bytes": "557600C1",
+  "addr": "1C09"
+ },
+ "BN2": {
+  "asm": "BN2",
+  "bytes": "900192",
+  "addr": "1AE3"
+ },
+ "BN2-": {
+  "asm": "BN2- 3",
+  "bytes": "90018F",
+  "addr": "1A82"
+ },
+ "BN2/": {
+  "asm": "BN2/ 2",
+  "bytes": "9000C9",
+  "addr": "1AAE"
+ },
+ "BN3": {
+  "asm": "BN3",
+  "bytes": "9001A2",
+  "addr": "35EA"
+ },
+ "BNF": {
+  "asm": "BNF T13PASS",
+  "bytes": "1302",
+  "addr": "0C44"
+ },
+ "BNL": {
+  "asm": "BNL GOWAIT",
+  "bytes": "11F9",
+  "addr": "0412"
+ },
+ "BNZ": {
+  "asm": "BNZ II1",
+  "bytes": "15F0",
+  "addr": "033C"
+ },
+ "BP": {
+  "asm": "BP H2IERROR",
+  "bytes": "1706",
+  "addr": "0438"
+ },
+ "BS1": {
+  "asm": "BS1 T1APASS",
+  "bytes": "1A02",
+  "addr": "0CBB"
+ },
+ "BS2": {
+  "asm": "BS2 T1BPASS",
+  "bytes": "1B02",
+  "addr": "0CC6"
+ },
+ "BS3": {
+  "asm": "BS3 T1CPASS",
+  "bytes": "1C02",
+  "addr": "0CD1"
+ },
+ "BS4": {
+  "asm": "BS4 T1DPASS",
+  "bytes": "1D02",
+  "addr": "0CDC"
+ },
+ "BU": {
+  "asm": "BU",
+  "bytes": "2020",
+  "addr": "0CFE"
+ },
+ "BYTE0": {
+  "asm": "BYTE0",
+  "bytes": "C1015A",
+  "addr": "1510"
+ },
+ "BYTE1": {
+  "asm": "BYTE1",
+  "bytes": "D0015B",
+  "addr": "0B61"
+ },
+ "BYTE2": {
+  "asm": "BYTE2",
+  "bytes": "60015C",
+  "addr": "0C01"
+ },
+ "BYTE2+": {
+  "asm": "BYTE2+ 1",
+  "bytes": "D0015D",
+  "addr": "0B6C"
+ },
+ "BYTE3": {
+  "asm": "BYTE3",
+  "bytes": "015D",
+  "addr": "017E"
+ },
+ "BYTE3ADDR": {
+  "asm": "BYTE3ADDR",
+  "bytes": "82017E",
+  "addr": "0B3D"
+ },
+ "BYTE4": {
+  "asm": "BYTE4",
+  "bytes": "015E",
+  "addr": "0180"
+ },
+ "BYTE4ADDR": {
+  "asm": "BYTE4ADDR",
+  "bytes": "D00180",
+  "addr": "0B82"
+ },
+ "BYTE5": {
+  "asm": "BYTE5",
+  "bytes": "015F",
+  "addr": "0182"
+ },
+ "BYTE5ADDR+": {
+  "asm": "BYTE5ADDR+ 2",
+  "bytes": "D00184",
+  "addr": "0B8D"
+ },
+ "BYTE6": {
+  "asm": "BYTE6",
+  "bytes": "900160",
+  "addr": "0C38"
+ },
+ "BYTE6-": {
+  "asm": "BYTE6- 3",
+  "bytes": "D0015D",
+  "addr": "0B98"
+ },
+ "BYTE7": {
+  "asm": "BYTE7",
+  "bytes": "810161",
+  "addr": "0E57"
+ },
+ "BYTE7-": {
+  "asm": "BYTE7- 5",
+  "bytes": "D0015C",
+  "addr": "0BA4"
+ },
+ "BYTE8": {
+  "asm": "BYTE8",
+  "bytes": "810162",
+  "addr": "0E69"
+ },
+ "BYTE8-": {
+  "asm": "BYTE8- 3",
+  "bytes": "D0015F",
+  "addr": "0BB0"
+ },
+ "BYTE9": {
+  "asm": "BYTE9",
+  "bytes": "0163",
+  "addr": "0184"
+ },
+ "BYTE9ADDR-": {
+  "asm": "BYTE9ADDR- 3",
+  "bytes": "D00181",
+  "addr": "0BBC"
+ },
+ "BYTEA": {
+  "asm": "BYTEA",
+  "bytes": "0164",
+  "addr": "0186"
+ },
+ "BYTEAADDR+": {
+  "asm": "BYTEAADDR+ 1",
+  "bytes": "D00187",
+  "addr": "0BC8"
+ },
+ "BYTEB": {
+  "asm": "BYTEB",
+  "bytes": "0165",
+  "addr": "0188"
+ },
+ "BYTEBADDR-": {
+  "asm": "BYTEBADDR- 1",
+  "bytes": "D00187",
+  "addr": "0BD4"
+ },
+ "BZ": {
+  "asm": "BZ ABORTGET",
+  "bytes": "140C",
+  "addr": "0205"
+ },
+ "C": {
+  "asm": "C",
+  "bytes": "8E",
+  "addr": "0C40"
+ },
+ "CFB": {
+  "asm": "CFB -X(10),-Y(2)",
+  "bytes": "46819A46",
+  "addr": "4038"
+ },
+ "CL": {
+  "asm": "CL",
+  "bytes": "08",
+  "addr": "0BA7"
+ },
+ "CLA": {
+  "asm": "CLA",
+  "bytes": "3A",
+  "addr": "0304"
+ },
+ "CLAB": {
+  "asm": "CLAB",
+  "bytes": "2A",
+  "addr": "01FF"
+ },
+ "CNTRLMASK": {
+  "asm": "CNTRLMASK",
+  "bytes": "D0087F",
+  "addr": "4835"
+ },
+ "CPF": {
+  "asm": "CPF (5)-X,-A",
+  "bytes": "478A0440",
+  "addr": "539A"
+ },
+ "CPFR": {
+  "asm": "CPFR -X,-B",
+  "bytes": "678A42",
+  "addr": "6BDE"
+ },
+ "CPUTYPE": {
+  "asm": "CPUTYPE",
+  "bytes": "790353",
+  "addr": "011E"
+ },
+ "CPV": {
+  "asm": "CPV (0)-X,-A",
+  "bytes": "471A0040",
+  "addr": "4653"
+ },
+ "CPVR": {
+  "asm": "CPVR -X,-B",
+  "bytes": "671A42",
+  "addr": "5DF1"
+ },
+ "CR": {
+  "asm": "CR",
+  "bytes": "8D",
+  "addr": "04BF"
+ },
+ "CRLF": {
+  "asm": "CRLF",
+  "bytes": "8D8A",
+  "addr": "012D"
+ },
+ "CTB": {
+  "asm": "CTB -X(8),-B(7)",
+  "bytes": "46668A42",
+  "addr": "3D39"
+ },
+ "CTYPE": {
+  "asm": "CTYPE DB     ISCNTRL,9",
+  "bytes": "08",
+  "addr": "4144"
+ },
+ "CTYPE-": {
+  "asm": "CTYPE- 2",
+  "bytes": "604142",
+  "addr": "4825"
+ },
+ "CTYPE/": {
+  "asm": "CTYPE/ 2,Y",
+  "bytes": "557620A2",
+  "addr": "487D"
+ },
+ "CVX": {
+  "asm": "CVX -X,-Y",
+  "bytes": "470A46",
+  "addr": "4509"
+ },
+ "CVXR": {
+  "asm": "CVXR -X,-Y",
+  "bytes": "670A46",
+  "addr": "5CA3"
+ },
+ "CVXTEST": {
+  "asm": "CVXTEST",
+  "bytes": "60412B",
+  "addr": "4266"
+ },
+ "CVXTEST-": {
+  "asm": "CVXTEST- 1",
+  "bytes": "60412A",
+  "addr": "41FF"
+ },
+ "CVXTEST/": {
+  "asm": "CVXTEST/ 2,Y",
+  "bytes": "55762095",
+  "addr": "4230"
+ },
+ "D": {
+  "asm": "D -X(7),-A(7)",
+  "bytes": "46666A40",
+  "addr": "34F9"
+ },
+ "DAB": {
+  "asm": "DAB",
+  "bytes": "2F07",
+  "addr": "1610"
+ },
+ "DAO": {
+  "asm": "DAO",
+  "bytes": "57",
+  "addr": "5782"
+ },
+ "DCA": {
+  "asm": "DCA",
+  "bytes": "39",
+  "addr": "1949"
+ },
+ "DCAB": {
+  "asm": "DCAB",
+  "bytes": "29",
+  "addr": "04B9"
+ },
+ "DCK": {
+  "asm": "DCK",
+  "bytes": "C6",
+  "addr": "11E7"
+ },
+ "DCX": {
+  "asm": "DCX",
+  "bytes": "3F",
+  "addr": "1990"
+ },
+ "DEFINT": {
+  "asm": "DEFINT JMP    RIDEF",
+  "bytes": "73FD",
+  "addr": "01F9"
+ },
+ "DI": {
+  "asm": "DI",
+  "bytes": "05",
+  "addr": "0B8D"
+ },
+ "DIGITMASK": {
+  "asm": "DIGITMASK",
+  "bytes": "D0017F",
+  "addr": "484B"
+ },
+ "DIV=": {
+  "asm": "DIV= 6,A",
+  "bytes": "78100006",
+  "addr": "7091"
+ },
+ "DLY": {
+  "asm": "DLY",
+  "bytes": "0E",
+  "addr": "0BE7"
+ },
+ "DPE": {
+  "asm": "DPE",
+  "bytes": "86",
+  "addr": "0BE4"
+ },
+ "DRM": {
+  "asm": "DRM -X(7),-B(7)",
+  "bytes": "46667A42",
+  "addr": "3949"
+ },
+ "EAB": {
+  "asm": "EAB",
+  "bytes": "2F06",
+  "addr": "1607"
+ },
+ "EAO": {
+  "asm": "EAO",
+  "bytes": "56",
+  "addr": "577A"
+ },
+ "ECK": {
+  "asm": "ECK",
+  "bytes": "B6",
+  "addr": "1086"
+ },
+ "EI": {
+  "asm": "EI",
+  "bytes": "04",
+  "addr": "0350"
+ },
+ "EPE": {
+  "asm": "EPE",
+  "bytes": "76",
+  "addr": "7001"
+ },
+ "FIL": {
+  "asm": "FIL (16)-X,-A",
+  "bytes": "479A0F40",
+  "addr": "5545"
+ },
+ "FILR": {
+  "asm": "FILR -X,-B",
+  "bytes": "679A42",
+  "addr": "6DA0"
+ },
+ "FLM": {
+  "asm": "FLM -X,-A",
+  "bytes": "2E4A40",
+  "addr": "150A"
+ },
+ "FLM1": {
+  "asm": "FLM1",
+  "bytes": "6013F2",
+  "addr": "14CE"
+ },
+ "FLM1-": {
+  "asm": "FLM1- 2",
+  "bytes": "6013F0",
+  "addr": "1430"
+ },
+ "FLM1/": {
+  "asm": "FLM1/ 2",
+  "bytes": "9009F9",
+  "addr": "1477"
+ },
+ "G2H0": {
+  "asm": "G2H0 JSR    GETONE",
+  "bytes": "7BBF",
+  "addr": "044A"
+ },
+ "G2H2": {
+  "asm": "G2H2 JSR    GETONE",
+  "bytes": "7BAC",
+  "addr": "045D"
+ },
+ "GET1DEC": {
+  "asm": "GET1DEC",
+  "bytes": "790493",
+  "addr": "0E6E"
+ },
+ "GET2HEX": {
+  "asm": "GET2HEX",
+  "bytes": "790448",
+  "addr": "0133"
+ },
+ "GETONE": {
+  "asm": "GETONE",
+  "bytes": "79040B",
+  "addr": "0159"
+ },
+ "HACRLF": {
+  "asm": "HACRLF JSR    HEXWORD",
+  "bytes": "7B02",
+  "addr": "03B7"
+ },
+ "HALCRLF": {
+  "asm": "HALCRLF JSR    HEXBYTE",
+  "bytes": "7B0C",
+  "addr": "037D"
+ },
+ "HBCRLF": {
+  "asm": "HBCRLF JSR    HEXBUFF",
+  "bytes": "7BEC",
+  "addr": "03AE"
+ },
+ "HBCRLF2": {
+  "asm": "HBCRLF2 JSR/   PRINTNULL",
+  "bytes": "790379",
+  "addr": "03B0"
+ },
+ "HELLOCAP": {
+  "asm": "HELLOCAP",
+  "bytes": "6040D2",
+  "addr": "4614"
+ },
+ "HELLOCAP+": {
+  "asm": "HELLOCAP+ 3",
+  "bytes": "9040D5",
+  "addr": "4813"
+ },
+ "HELLOCAP-": {
+  "asm": "HELLOCAP- (HELLOCAP/2)-1",
+  "bytes": "D02068",
+  "addr": "454F"
+ },
+ "HELLOCAP/": {
+  "asm": "HELLOCAP/ 2",
+  "bytes": "902069",
+  "addr": "454C"
+ },
+ "HELLOLOW": {
+  "asm": "HELLOLOW",
+  "bytes": "9040DD",
+  "addr": "45AA"
+ },
+ "HELLOLOW-": {
+  "asm": "HELLOLOW- (HELLOLOW/2)-1",
+  "bytes": "D0206E",
+  "addr": "4597"
+ },
+ "HELLOLOW/": {
+  "asm": "HELLOLOW/ 2",
+  "bytes": "90206E",
+  "addr": "4594"
+ },
+ "HELPCAP": {
+  "asm": "HELPCAP",
+  "bytes": "6040D8",
+  "addr": "4623"
+ },
+ "HELPCAP-": {
+  "asm": "HELPCAP- 3",
+  "bytes": "9040D5",
+  "addr": "453C"
+ },
+ "HELPCAP/": {
+  "asm": "HELPCAP/ 2",
+  "bytes": "90206C",
+  "addr": "4638"
+ },
+ "HEXBUFF": {
+  "asm": "HEXBUFF",
+  "bytes": "71039C",
+  "addr": "01B7"
+ },
+ "HEXBYTE": {
+  "asm": "HEXBYTE",
+  "bytes": "7903C5",
+  "addr": "01BC"
+ },
+ "HEXNIBBLE": {
+  "asm": "HEXNIBBLE",
+  "bytes": "7903DC",
+  "addr": "0B64"
+ },
+ "HEXT1": {
+  "asm": "HEXT1 LDAB   TBUFF",
+  "bytes": "83C6",
+  "addr": "01BA"
+ },
+ "HEXT16": {
+  "asm": "HEXT16",
+  "bytes": "7901CF",
+  "addr": "41F6"
+ },
+ "HEXT2": {
+  "asm": "HEXT2",
+  "bytes": "7901C6",
+  "addr": "1649"
+ },
+ "HEXT32": {
+  "asm": "HEXT32",
+  "bytes": "7901D8",
+  "addr": "0E2D"
+ },
+ "HEXT48": {
+  "asm": "HEXT48 JSR    HEXT32",
+  "bytes": "7BF9",
+  "addr": "01DD"
+ },
+ "HEXWORD": {
+  "asm": "HEXWORD",
+  "bytes": "7903BB",
+  "addr": "02A2"
+ },
+ "HHH-": {
+  "asm": "HHH- 1",
+  "bytes": "8010",
+  "addr": "5FAC"
+ },
+ "HLT": {
+  "asm": "HLT",
+  "bytes": "00",
+  "addr": "0B52"
+ },
+ "ILL5": {
+  "asm": "ILL5",
+  "bytes": "F7",
+  "addr": "0364"
+ },
+ "ILL56": {
+  "asm": "ILL56",
+  "bytes": "E7",
+  "addr": "0222"
+ },
+ "INA": {
+  "asm": "INA",
+  "bytes": "38",
+  "addr": "02DF"
+ },
+ "INAB": {
+  "asm": "INAB",
+  "bytes": "28",
+  "addr": "0200"
+ },
+ "INITINT": {
+  "asm": "INITINT",
+  "bytes": "790314",
+  "addr": "011B"
+ },
+ "INX": {
+  "asm": "INX",
+  "bytes": "3E",
+  "addr": "1981"
+ },
+ "ISCNTRL": {
+  "asm": "ISCNTRL",
+  "bytes": "08",
+  "addr": "41C3"
+ },
+ "ISCPU5": {
+  "asm": "ISCPU5",
+  "bytes": "D00352",
+  "addr": "035F"
+ },
+ "ISSPACE": {
+  "asm": "ISSPACE",
+  "bytes": "10",
+  "addr": "4164"
+ },
+ "IVA": {
+  "asm": "IVA",
+  "bytes": "3B",
+  "addr": "195F"
+ },
+ "IVAB": {
+  "asm": "IVAB",
+  "bytes": "2B",
+  "addr": "0E0B"
+ },
+ "JMP": {
+  "asm": "JMP ENTRY",
+  "bytes": "73A6",
+  "addr": "015C"
+ },
+ "JMP$": {
+  "asm": "JMP$ T711+1",
+  "bytes": "726F57",
+  "addr": "6F61"
+ },
+ "JMP*": {
+  "asm": "JMP* T711+1",
+  "bytes": "74E9",
+  "addr": "6F6C"
+ },
+ "JMP+": {
+  "asm": "JMP+ A",
+  "bytes": "7500",
+  "addr": "0100"
+ },
+ "JMP-": {
+  "asm": "JMP- *A-",
+  "bytes": "7506",
+  "addr": "6FAE"
+ },
+ "JSR": {
+  "asm": "JSR HEXWORD",
+  "bytes": "7B18",
+  "addr": "03A1"
+ },
+ "JSR$": {
+  "asm": "JSR$ TEST79+1",
+  "bytes": "7A70E0",
+  "addr": "70E3"
+ },
+ "JSR*": {
+  "asm": "JSR* TEST79+1",
+  "bytes": "7CF4",
+  "addr": "70EA"
+ },
+ "JSR+": {
+  "asm": "JSR+ *B",
+  "bytes": "7D24",
+  "addr": "013B"
+ },
+ "JSR-": {
+  "asm": "JSR- *A-",
+  "bytes": "7D06",
+  "addr": "7109"
+ },
+ "JSR/": {
+  "asm": "JSR/ PRINTNULL",
+  "bytes": "790379",
+  "addr": "01E1"
+ },
+ "LAR": {
+  "asm": "LAR 1,Y",
+  "bytes": "E616",
+  "addr": "1507"
+ },
+ "LDA": {
+  "asm": "LDA PRX",
+  "bytes": "931E",
+  "addr": "02F2"
+ },
+ "LDA*": {
+  "asm": "LDA* T91+1",
+  "bytes": "94E2",
+  "addr": "0C84"
+ },
+ "LDA+": {
+  "asm": "LDA+ S+",
+  "bytes": "95A1",
+  "addr": "0371"
+ },
+ "LDA-": {
+  "asm": "LDA- *B-",
+  "bytes": "9526",
+  "addr": "0CC7"
+ },
+ "LDA/": {
+  "asm": "LDA/ WORD0",
+  "bytes": "91015A",
+  "addr": "0C67"
+ },
+ "LDA=": {
+  "asm": "LDA= TBUFF",
+  "bytes": "900182",
+  "addr": "01B4"
+ },
+ "LDAB": {
+  "asm": "LDAB AISETFLGS",
+  "bytes": "83F8",
+  "addr": "0203"
+ },
+ "LDAB*": {
+  "asm": "LDAB* T81+1",
+  "bytes": "84E2",
+  "addr": "0B50"
+ },
+ "LDAB+": {
+  "asm": "LDAB+ S+",
+  "bytes": "85A1",
+  "addr": "0394"
+ },
+ "LDAB-": {
+  "asm": "LDAB- *B-",
+  "bytes": "8526",
+  "addr": "0B93"
+ },
+ "LDAB/": {
+  "asm": "LDAB/ X'000C'+1",
+  "bytes": "81000D",
+  "addr": "0213"
+ },
+ "LDAB=": {
+  "asm": "LDAB= 1",
+  "bytes": "8001",
+  "addr": "021C"
+ },
+ "LDB": {
+  "asm": "LDB TD0+1",
+  "bytes": "D3E1",
+  "addr": "127E"
+ },
+ "LDB*": {
+  "asm": "LDB* TD1+1",
+  "bytes": "D4E2",
+  "addr": "1287"
+ },
+ "LDB+": {
+  "asm": "LDB+ *A",
+  "bytes": "D504",
+  "addr": "12B4"
+ },
+ "LDB-": {
+  "asm": "LDB- *A-",
+  "bytes": "D506",
+  "addr": "12CA"
+ },
+ "LDB/": {
+  "asm": "LDB/ WORD0",
+  "bytes": "D1015A",
+  "addr": "126A"
+ },
+ "LDB=": {
+  "asm": "LDB= 2/2",
+  "bytes": "D00001",
+  "addr": "01C9"
+ },
+ "LDBB": {
+  "asm": "LDBB TC0+1",
+  "bytes": "C3E2",
+  "addr": "114A"
+ },
+ "LDBB*": {
+  "asm": "LDBB* TC1+1",
+  "bytes": "C4E2",
+  "addr": "1153"
+ },
+ "LDBB+": {
+  "asm": "LDBB+ X+",
+  "bytes": "C541",
+  "addr": "0384"
+ },
+ "LDBB-": {
+  "asm": "LDBB- *A-",
+  "bytes": "C506",
+  "addr": "1196"
+ },
+ "LDBB/": {
+  "asm": "LDBB/ X'F200'",
+  "bytes": "C1F200",
+  "addr": "03FA"
+ },
+ "LDBB=": {
+  "asm": "LDBB= '6'",
+  "bytes": "C0B6",
+  "addr": "036A"
+ },
+ "LDM": {
+  "asm": "LDM -X,-A",
+  "bytes": "2E0A40",
+  "addr": "0FA4"
+ },
+ "LDM1": {
+  "asm": "LDM1",
+  "bytes": "600E8C",
+  "addr": "0F68"
+ },
+ "LDM1-": {
+  "asm": "LDM1- 2",
+  "bytes": "600E8A",
+  "addr": "0ECA"
+ },
+ "LDM1/": {
+  "asm": "LDM1/ 2",
+  "bytes": "900746",
+  "addr": "0F11"
+ },
+ "LDX": {
+  "asm": "LDX PRX",
+  "bytes": "630E",
+  "addr": "0302"
+ },
+ "LDX*": {
+  "asm": "LDX* T61+1",
+  "bytes": "64D6",
+  "addr": "582D"
+ },
+ "LDX+": {
+  "asm": "LDX+ *A",
+  "bytes": "6504",
+  "addr": "585E"
+ },
+ "LDX-": {
+  "asm": "LDX- *A-",
+  "bytes": "6506",
+  "addr": "5874"
+ },
+ "LDX/": {
+  "asm": "LDX/ WORD0",
+  "bytes": "61015E",
+  "addr": "5804"
+ },
+ "LDX=": {
+  "asm": "LDX= 32*1024",
+  "bytes": "608000",
+  "addr": "0104"
+ },
+ "LFNULL": {
+  "asm": "LFNULL",
+  "bytes": "8A00",
+  "addr": "04B7"
+ },
+ "LOWERMASK": {
+  "asm": "LOWERMASK",
+  "bytes": "D0027F",
+  "addr": "4810"
+ },
+ "LSM": {
+  "asm": "LSM -X,-A",
+  "bytes": "2E2A40",
+  "addr": "1257"
+ },
+ "LSM1": {
+  "asm": "LSM1",
+  "bytes": "60113F",
+  "addr": "121B"
+ },
+ "LSM1-": {
+  "asm": "LSM1- 2",
+  "bytes": "60113D",
+  "addr": "117D"
+ },
+ "LSM1/": {
+  "asm": "LSM1/ 2",
+  "bytes": "90089F",
+  "addr": "11C4"
+ },
+ "M": {
+  "asm": "M -X(7),-A(7)",
+  "bytes": "46665A40",
+  "addr": "30FC"
+ },
+ "MB1": {
+  "asm": "MB1",
+  "bytes": "900182",
+  "addr": "41C6"
+ },
+ "MB1-": {
+  "asm": "MB1- 2",
+  "bytes": "600180",
+  "addr": "4B87"
+ },
+ "MB1/": {
+  "asm": "MB1/ 2,Y",
+  "bytes": "557600C1",
+  "addr": "4BFD"
+ },
+ "MB2": {
+  "asm": "MB2",
+  "bytes": "B10192",
+  "addr": "41C9"
+ },
+ "MB2-": {
+  "asm": "MB2- 2",
+  "bytes": "600190",
+  "addr": "4295"
+ },
+ "MB2/": {
+  "asm": "MB2/ 2,Y",
+  "bytes": "557600C9",
+  "addr": "4370"
+ },
+ "MORE": {
+  "asm": "MORE",
+  "bytes": "7904B0",
+  "addr": "1BED"
+ },
+ "MUL=": {
+  "asm": "MUL= 6,A",
+  "bytes": "77100006",
+  "addr": "7026"
+ },
+ "MVF": {
+  "asm": "MVF (14)-X,-A",
+  "bytes": "474A0D40",
+  "addr": "4A93"
+ },
+ "MVFR": {
+  "asm": "MVFR -X,-B",
+  "bytes": "674A42",
+  "addr": "627B"
+ },
+ "MVL": {
+  "asm": "MVL",
+  "bytes": "F7",
+  "addr": "1745"
+ },
+ "MVV": {
+  "asm": "MVV (99,0)-X,-A",
+  "bytes": "472A620040",
+  "addr": "47C7"
+ },
+ "MVVR": {
+  "asm": "MVVR -X,-B",
+  "bytes": "672A42",
+  "addr": "5F79"
+ },
+ "NAB": {
+  "asm": "NAB",
+  "bytes": "5A",
+  "addr": "57AF"
+ },
+ "NABB": {
+  "asm": "NABB",
+  "bytes": "4A",
+  "addr": "55B8"
+ },
+ "NOP": {
+  "asm": "NOP",
+  "bytes": "01",
+  "addr": "0B6B"
+ },
+ "OPTESTS": {
+  "asm": "OPTESTS",
+  "bytes": "D0093A",
+  "addr": "0137"
+ },
+ "OPTESTS2E": {
+  "asm": "OPTESTS2E",
+  "bytes": "D00E78",
+  "addr": "0E72"
+ },
+ "OPTESTS2F": {
+  "asm": "OPTESTS2F",
+  "bytes": "D015B4",
+  "addr": "15AE"
+ },
+ "OPTESTS46": {
+  "asm": "OPTESTS46",
+  "bytes": "D01A37",
+  "addr": "1A31"
+ },
+ "OPTESTS47": {
+  "asm": "OPTESTS47",
+  "bytes": "D040BE",
+  "addr": "40B8"
+ },
+ "OPTESTS67": {
+  "asm": "OPTESTS67",
+  "bytes": "D0594A",
+  "addr": "5944"
+ },
+ "ORC": {
+  "asm": "ORC (16)-X,-A",
+  "bytes": "476A0F40",
+  "addr": "4F57"
+ },
+ "ORCR": {
+  "asm": "ORCR -X,-B",
+  "bytes": "676A42",
+  "addr": "676D"
+ },
+ "ORE=": {
+  "asm": "ORE= 2,A",
+  "bytes": "54100002",
+  "addr": "5717"
+ },
+ "ORI=": {
+  "asm": "ORI= 2,A",
+  "bytes": "53100002",
+  "addr": "56D3"
+ },
+ "ORIB": {
+  "asm": "ORIB AL,BL",
+  "bytes": "4313",
+  "addr": "046D"
+ },
+ "P": {
+  "asm": "P",
+  "bytes": "8F",
+  "addr": "0C55"
+ },
+ "PCX": {
+  "asm": "PCX",
+  "bytes": "0D",
+  "addr": "0BDD"
+ },
+ "POP": {
+  "asm": "POP Y,4",
+  "bytes": "7F63",
+  "addr": "7155"
+ },
+ "PRDONE": {
+  "asm": "PRDONE JSR/   PRINTNULL",
+  "bytes": "790379",
+  "addr": "0307"
+ },
+ "PRINTMENU": {
+  "asm": "PRINTMENU",
+  "bytes": "7904CF",
+  "addr": "0130"
+ },
+ "PRINTMENU+": {
+  "asm": "PRINTMENU+ 3",
+  "bytes": "9004D2",
+  "addr": "455F"
+ },
+ "PRINTNULL": {
+  "asm": "PRINTNULL",
+  "bytes": "790379",
+  "addr": "0109"
+ },
+ "PRINTONE": {
+  "asm": "PRINTONE",
+  "bytes": "7903F0",
+  "addr": "024E"
+ },
+ "PRINTREGP": {
+  "asm": "PRINTREGP",
+  "bytes": "710229",
+  "addr": "6091"
+ },
+ "PRINTREGS": {
+  "asm": "PRINTREGS",
+  "bytes": "79022D",
+  "addr": "0B56"
+ },
+ "PRINTSTR": {
+  "asm": "PRINTSTR",
+  "bytes": "7901E1",
+  "addr": "3DDA"
+ },
+ "PRP": {
+  "asm": "PRP",
+  "bytes": "B10310",
+  "addr": "0238"
+ },
+ "PRV": {
+  "asm": "PRV LDAB   L0FLAGS",
+  "bytes": "83BB",
+  "addr": "023F"
+ },
+ "PRX": {
+  "asm": "PRX",
+  "bytes": "910312",
+  "addr": "0230"
+ },
+ "PSSTR": {
+  "asm": "PSSTR DB     0,PSBYTES",
+  "bytes": "00",
+  "addr": "01E4"
+ },
+ "PSSTR-": {
+  "asm": "PSSTR- 2",
+  "bytes": "6001E2",
+  "addr": "3E57"
+ },
+ "PSSTR/": {
+  "asm": "PSSTR/ 2",
+  "bytes": "9000F2",
+  "addr": "4687"
+ },
+ "PUNCTMASK": {
+  "asm": "PUNCTMASK",
+  "bytes": "D0407F",
+  "addr": "4822"
+ },
+ "RAD": {
+  "asm": "RAD ,B",
+  "bytes": "2F21",
+  "addr": "15D7"
+ },
+ "RCT": {
+  "asm": "RCT ,B",
+  "bytes": "2F23",
+  "addr": "15EC"
+ },
+ "RDV": {
+  "asm": "RDV ,B",
+  "bytes": "2F25",
+  "addr": "15FE"
+ },
+ "RF": {
+  "asm": "RF",
+  "bytes": "03",
+  "addr": "0B7D"
+ },
+ "RI": {
+  "asm": "RI",
+  "bytes": "0A",
+  "addr": "01F8"
+ },
+ "RL": {
+  "asm": "RL",
+  "bytes": "07",
+  "addr": "0B9F"
+ },
+ "RMN": {
+  "asm": "RMN ,B",
+  "bytes": "2F29",
+  "addr": "1624"
+ },
+ "RSR": {
+  "asm": "RSR",
+  "bytes": "09",
+  "addr": "01C5"
+ },
+ "RSV": {
+  "asm": "RSV",
+  "bytes": "0F",
+  "addr": "0BFF"
+ },
+ "S": {
+  "asm": "S",
+  "bytes": "9D",
+  "addr": "023B"
+ },
+ "S+": {
+  "asm": "S+",
+  "bytes": "95A1",
+  "addr": "030D"
+ },
+ "S-": {
+  "asm": "S-",
+  "bytes": "B5A2",
+  "addr": "022E"
+ },
+ "SAB": {
+  "asm": "SAB",
+  "bytes": "59",
+  "addr": "0C55"
+ },
+ "SABB": {
+  "asm": "SABB",
+  "bytes": "49",
+  "addr": "03E0"
+ },
+ "SAD": {
+  "asm": "SAD ,A",
+  "bytes": "2F00",
+  "addr": "15CE"
+ },
+ "SAR": {
+  "asm": "SAR 1,Z",
+  "bytes": "D718",
+  "addr": "135B"
+ },
+ "SCN": {
+  "asm": "SCN (4)-X,-A",
+  "bytes": "473A0340",
+  "addr": "492E"
+ },
+ "SCNR": {
+  "asm": "SCNR -X,-Y",
+  "bytes": "673A46",
+  "addr": "6103"
+ },
+ "SCT": {
+  "asm": "SCT ,A",
+  "bytes": "2F02",
+  "addr": "15E3"
+ },
+ "SDV": {
+  "asm": "SDV ,3",
+  "bytes": "2F34",
+  "addr": "15F5"
+ },
+ "SEP": {
+  "asm": "SEP",
+  "bytes": "A6",
+  "addr": "0EB5"
+ },
+ "SETFLAGS": {
+  "asm": "SETFLAGS STAB   L0FLAGS",
+  "bytes": "A3E0",
+  "addr": "021A"
+ },
+ "SETFLAGS0": {
+  "asm": "SETFLAGS0",
+  "bytes": "790224",
+  "addr": "0BD0"
+ },
+ "SETFLAGS0STAB": {
+  "asm": "SETFLAGS0STAB SFSAVE+1",
+  "bytes": "A3FB",
+  "addr": "0224"
+ },
+ "SF": {
+  "asm": "SF",
+  "bytes": "02",
+  "addr": "0B73"
+ },
+ "SL": {
+  "asm": "SL",
+  "bytes": "06",
+  "addr": "0B95"
+ },
+ "SLA": {
+  "asm": "SLA",
+  "bytes": "3D",
+  "addr": "0136"
+ },
+ "SLAB": {
+  "asm": "SLAB",
+  "bytes": "2D",
+  "addr": "0E1F"
+ },
+ "SMN": {
+  "asm": "SMN ,A",
+  "bytes": "2F08",
+  "addr": "161B"
+ },
+ "SOP": {
+  "asm": "SOP",
+  "bytes": "96",
+  "addr": "0D18"
+ },
+ "SPACEMASK": {
+  "asm": "SPACEMASK",
+  "bytes": "D0107F",
+  "addr": "4891"
+ },
+ "SRA": {
+  "asm": "SRA",
+  "bytes": "3C",
+  "addr": "196A"
+ },
+ "SRAB": {
+  "asm": "SRAB",
+  "bytes": "2C",
+  "addr": "0E15"
+ },
+ "SSM": {
+  "asm": "SSM -X,-A",
+  "bytes": "2E3A40",
+  "addr": "13AF"
+ },
+ "SSM1": {
+  "asm": "SSM1",
+  "bytes": "601297",
+  "addr": "1373"
+ },
+ "SSM1-": {
+  "asm": "SSM1- 2",
+  "bytes": "601295",
+  "addr": "12D5"
+ },
+ "SSM1/": {
+  "asm": "SSM1/ 2",
+  "bytes": "90094B",
+  "addr": "131C"
+ },
+ "STA": {
+  "asm": "STA PRX",
+  "bytes": "B30B",
+  "addr": "0305"
+ },
+ "STA*": {
+  "asm": "STA* TB1+1",
+  "bytes": "B4CE",
+  "addr": "0FA2"
+ },
+ "STA+": {
+  "asm": "STA+ X+",
+  "bytes": "B541",
+  "addr": "032E"
+ },
+ "STA-": {
+  "asm": "STA- S-",
+  "bytes": "B5A2",
+  "addr": "0314"
+ },
+ "STA/": {
+  "asm": "STA/ TBUFF",
+  "bytes": "B1018A",
+  "addr": "0F71"
+ },
+ "STA=": {
+  "asm": "STA= 0",
+  "bytes": "B00000",
+  "addr": "0F5F"
+ },
+ "STAB": {
+  "asm": "STAB ABORTFLAG",
+  "bytes": "A3F8",
+  "addr": "0201"
+ },
+ "STAB*": {
+  "asm": "STAB* TA1+1",
+  "bytes": "A4D1",
+  "addr": "0DD1"
+ },
+ "STAB+": {
+  "asm": "STAB+ *B",
+  "bytes": "A524",
+  "addr": "0E16"
+ },
+ "STAB-": {
+  "asm": "STAB- *B-",
+  "bytes": "A526",
+  "addr": "0E38"
+ },
+ "STAB/": {
+  "asm": "STAB/ TBUFF",
+  "bytes": "A1018A",
+  "addr": "0DA3"
+ },
+ "STAB=": {
+  "asm": "STAB= 0",
+  "bytes": "A000",
+  "addr": "0D93"
+ },
+ "STB": {
+  "asm": "STB TF0+1",
+  "bytes": "F3CD",
+  "addr": "15E3"
+ },
+ "STB*": {
+  "asm": "STB* TF1+1",
+  "bytes": "F4CE",
+  "addr": "15F4"
+ },
+ "STB+": {
+  "asm": "STB+ *A",
+  "bytes": "F504",
+  "addr": "1639"
+ },
+ "STB-": {
+  "asm": "STB- S-",
+  "bytes": "F5A2",
+  "addr": "0420"
+ },
+ "STB/": {
+  "asm": "STB/ TBUFF",
+  "bytes": "F1018A",
+  "addr": "15C3"
+ },
+ "STB=": {
+  "asm": "STB= 0",
+  "bytes": "F00000",
+  "addr": "15B1"
+ },
+ "STBB": {
+  "asm": "STBB TE0+1",
+  "bytes": "E3D1",
+  "addr": "140D"
+ },
+ "STBB*": {
+  "asm": "STBB* TE1+1",
+  "bytes": "E4D1",
+  "addr": "141D"
+ },
+ "STBB+": {
+  "asm": "STBB+ *A",
+  "bytes": "E504",
+  "addr": "1462"
+ },
+ "STBB-": {
+  "asm": "STBB- S-",
+  "bytes": "E5A2",
+  "addr": "03F0"
+ },
+ "STBB/": {
+  "asm": "STBB/ TBUFF",
+  "bytes": "E1018A",
+  "addr": "13EF"
+ },
+ "STBB=": {
+  "asm": "STBB= 0",
+  "bytes": "E000",
+  "addr": "13DF"
+ },
+ "STK": {
+  "asm": "STK X,2",
+  "bytes": "7E41",
+  "addr": "0E8D"
+ },
+ "STM": {
+  "asm": "STM -X,-A",
+  "bytes": "2E1A40",
+  "addr": "10FC"
+ },
+ "STM1": {
+  "asm": "STM1",
+  "bytes": "600FE4",
+  "addr": "10C0"
+ },
+ "STM1-": {
+  "asm": "STM1- 2",
+  "bytes": "600FE2",
+  "addr": "1022"
+ },
+ "STM1/": {
+  "asm": "STM1/ 2",
+  "bytes": "9007F2",
+  "addr": "1069"
+ },
+ "STR16": {
+  "asm": "STR16",
+  "bytes": "6040E3",
+  "addr": "543A"
+ },
+ "STR16+": {
+  "asm": "STR16+ 12",
+  "bytes": "6040EF",
+  "addr": "54FD"
+ },
+ "STR16-": {
+  "asm": "STR16- (STR16/2)",
+  "bytes": "602072",
+  "addr": "5495"
+ },
+ "STR16/": {
+  "asm": "STR16/ 2,Y",
+  "bytes": "55762071",
+  "addr": "5491"
+ },
+ "STR16H": {
+  "asm": "STR16H",
+  "bytes": "9040F4",
+  "addr": "48D3"
+ },
+ "STR16H-": {
+  "asm": "STR16H- 3",
+  "bytes": "9040F1",
+  "addr": "47EA"
+ },
+ "STR16H/": {
+  "asm": "STR16H/ 2",
+  "bytes": "90207A",
+  "addr": "48B5"
+ },
+ "STR18": {
+  "asm": "STR18",
+  "bytes": "604105",
+  "addr": "477C"
+ },
+ "STR18-": {
+  "asm": "STR18- 2",
+  "bytes": "604103",
+  "addr": "46B1"
+ },
+ "STR18/": {
+  "asm": "STR18/ 2,Y",
+  "bytes": "55762082",
+  "addr": "470C"
+ },
+ "STR18H": {
+  "asm": "STR18H",
+  "bytes": "604118",
+  "addr": "478F"
+ },
+ "STR18H-": {
+  "asm": "STR18H- 2",
+  "bytes": "604116",
+  "addr": "46C5"
+ },
+ "STR18H/": {
+  "asm": "STR18H/ 2",
+  "bytes": "90208C",
+  "addr": "4851"
+ },
+ "STR=": {
+  "asm": "STR= 0,Z",
+  "bytes": "D6980000",
+  "addr": "1326"
+ },
+ "STX": {
+  "asm": "STX T68+1",
+  "bytes": "6BC1",
+  "addr": "6E3D"
+ },
+ "STX*": {
+  "asm": "STX* T69+1",
+  "bytes": "6CC2",
+  "addr": "6E52"
+ },
+ "STX+": {
+  "asm": "STX+ *A",
+  "bytes": "6D04",
+  "addr": "6E9B"
+ },
+ "STX-": {
+  "asm": "STX- S-",
+  "bytes": "6DA2",
+  "addr": "039C"
+ },
+ "STX/": {
+  "asm": "STX/ TBUFF",
+  "bytes": "690182",
+  "addr": "6E15"
+ },
+ "STX=": {
+  "asm": "STX= 0",
+  "bytes": "680000",
+  "addr": "6DFF"
+ },
+ "SUB=": {
+  "asm": "SUB= 2,A",
+  "bytes": "51100002",
+  "addr": "564B"
+ },
+ "SVC": {
+  "asm": "SVC 255",
+  "bytes": "66FF",
+  "addr": "58CA"
+ },
+ "SYN": {
+  "asm": "SYN",
+  "bytes": "0C",
+  "addr": "0BD3"
+ },
+ "T0FRSV": {
+  "asm": "T0FRSV",
+  "bytes": "900BF3",
+  "addr": "0BE9"
+ },
+ "T2ELOOP": {
+  "asm": "T2ELOOP STAB   T2ESTM+2",
+  "bytes": "A302",
+  "addr": "0E26"
+ },
+ "T460DIDL+": {
+  "asm": "T460DIDL+ 5",
+  "bytes": "901CC6",
+  "addr": "1CCD"
+ },
+ "T460DL+": {
+  "asm": "T460DL+ 5",
+  "bytes": "901B03",
+  "addr": "1B0A"
+ },
+ "T460IDL+": {
+  "asm": "T460IDL+ 5",
+  "bytes": "901BDC",
+  "addr": "1BE3"
+ },
+ "T460IL+": {
+  "asm": "T460IL+ 4",
+  "bytes": "901D91",
+  "addr": "1D98"
+ },
+ "T460LL+": {
+  "asm": "T460LL+ 4",
+  "bytes": "901E37",
+  "addr": "1E3E"
+ },
+ "T461DIDL+": {
+  "asm": "T461DIDL+ 5",
+  "bytes": "9020C3",
+  "addr": "20CA"
+ },
+ "T461DL+": {
+  "asm": "T461DL+ 5",
+  "bytes": "901F01",
+  "addr": "1F08"
+ },
+ "T461IDL+": {
+  "asm": "T461IDL+ 5",
+  "bytes": "901FD9",
+  "addr": "1FE0"
+ },
+ "T461IL+": {
+  "asm": "T461IL+ 4",
+  "bytes": "90218E",
+  "addr": "2195"
+ },
+ "T461LL+": {
+  "asm": "T461LL+ 4",
+  "bytes": "902234",
+  "addr": "223B"
+ },
+ "T463DIDL+": {
+  "asm": "T463DIDL+ 5",
+  "bytes": "902854",
+  "addr": "285B"
+ },
+ "T463DL+": {
+  "asm": "T463DL+ 5",
+  "bytes": "902692",
+  "addr": "2699"
+ },
+ "T463IDL+": {
+  "asm": "T463IDL+ 5",
+  "bytes": "90276A",
+  "addr": "2771"
+ },
+ "T463IL+": {
+  "asm": "T463IL+ 4",
+  "bytes": "90291F",
+  "addr": "2926"
+ },
+ "T463LL+": {
+  "asm": "T463LL+ 4",
+  "bytes": "9029C5",
+  "addr": "29CC"
+ },
+ "T464DIDL+": {
+  "asm": "T464DIDL+ 5",
+  "bytes": "902C52",
+  "addr": "2C59"
+ },
+ "T464DL+": {
+  "asm": "T464DL+ 5",
+  "bytes": "902A90",
+  "addr": "2A97"
+ },
+ "T464IDL+": {
+  "asm": "T464IDL+ 5",
+  "bytes": "902B68",
+  "addr": "2B6F"
+ },
+ "T464IL+": {
+  "asm": "T464IL+ 4",
+  "bytes": "902D1D",
+  "addr": "2D24"
+ },
+ "T464LL+": {
+  "asm": "T464LL+ 4",
+  "bytes": "902DC3",
+  "addr": "2DCA"
+ },
+ "T465DIDL+": {
+  "asm": "T465DIDL+ 5",
+  "bytes": "90304F",
+  "addr": "3056"
+ },
+ "T465DL+": {
+  "asm": "T465DL+ 5",
+  "bytes": "902E8D",
+  "addr": "2E94"
+ },
+ "T465IDL+": {
+  "asm": "T465IDL+ 5",
+  "bytes": "902F65",
+  "addr": "2F6C"
+ },
+ "T465IL+": {
+  "asm": "T465IL+ 4",
+  "bytes": "90311A",
+  "addr": "3121"
+ },
+ "T465LL+": {
+  "asm": "T465LL+ 4",
+  "bytes": "9031C0",
+  "addr": "31C7"
+ },
+ "T466DIDL+": {
+  "asm": "T466DIDL+ 5",
+  "bytes": "90344C",
+  "addr": "3453"
+ },
+ "T466DL+": {
+  "asm": "T466DL+ 5",
+  "bytes": "90328A",
+  "addr": "3291"
+ },
+ "T466IDL+": {
+  "asm": "T466IDL+ 5",
+  "bytes": "903362",
+  "addr": "3369"
+ },
+ "T466IL+": {
+  "asm": "T466IL+ 4",
+  "bytes": "903517",
+  "addr": "351E"
+ },
+ "T466LL+": {
+  "asm": "T466LL+ 4",
+  "bytes": "9035BD",
+  "addr": "35C4"
+ },
+ "T467DIDL+": {
+  "asm": "T467DIDL+ 5",
+  "bytes": "903882",
+  "addr": "3889"
+ },
+ "T467DL+": {
+  "asm": "T467DL+ 5",
+  "bytes": "903697",
+  "addr": "369E"
+ },
+ "T467IDL+": {
+  "asm": "T467IDL+ 5",
+  "bytes": "903784",
+  "addr": "378B"
+ },
+ "T467IL+": {
+  "asm": "T467IL+ 4",
+  "bytes": "90396A",
+  "addr": "3971"
+ },
+ "T467LL+": {
+  "asm": "T467LL+ 4",
+  "bytes": "903A28",
+  "addr": "3A2F"
+ },
+ "T468DIDL+": {
+  "asm": "T468DIDL+ 5",
+  "bytes": "903C98",
+  "addr": "3C9F"
+ },
+ "T468DL+": {
+  "asm": "T468DL+ 5",
+  "bytes": "903AFA",
+  "addr": "3B01"
+ },
+ "T468IDL+": {
+  "asm": "T468IDL+ 5",
+  "bytes": "903BBD",
+  "addr": "3BC4"
+ },
+ "T468IL+": {
+  "asm": "T468IL+ 4",
+  "bytes": "903D58",
+  "addr": "3D5F"
+ },
+ "T66RSV": {
+  "asm": "T66RSV",
+  "bytes": "9058D0",
+  "addr": "58C4"
+ },
+ "T673P": {
+  "asm": "T673P",
+  "bytes": "906094",
+  "addr": "606A"
+ },
+ "T711": {
+  "asm": "T711 JMP/   T712",
+  "bytes": "716F5A",
+  "addr": "6F56"
+ },
+ "T751": {
+  "asm": "T751",
+  "bytes": "906F71",
+  "addr": "6FD7"
+ },
+ "T751+": {
+  "asm": "T751+ 1",
+  "bytes": "906F72",
+  "addr": "6F92"
+ },
+ "T75DONE": {
+  "asm": "T75DONE",
+  "bytes": "D06FF8",
+  "addr": "6FF2"
+ },
+ "T75ID": {
+  "asm": "T75ID",
+  "bytes": "D06FB0",
+  "addr": "6FAB"
+ },
+ "T75IDPD": {
+  "asm": "T75IDPD",
+  "bytes": "D06FC8",
+  "addr": "6FC2"
+ },
+ "T75IDPI": {
+  "asm": "T75IDPI",
+  "bytes": "D06FBC",
+  "addr": "6FB6"
+ },
+ "T75II": {
+  "asm": "T75II",
+  "bytes": "D06F8F",
+  "addr": "6F8A"
+ },
+ "T75IID": {
+  "asm": "T75IID",
+  "bytes": "D06FD4",
+  "addr": "6FCE"
+ },
+ "T75IIDPD": {
+  "asm": "T75IIDPD",
+  "bytes": "D06FEC",
+  "addr": "6FE6"
+ },
+ "T75IIDPI": {
+  "asm": "T75IIDPI",
+  "bytes": "D06FE0",
+  "addr": "6FDA"
+ },
+ "T75IIPD": {
+  "asm": "T75IIPD",
+  "bytes": "D06FA5",
+  "addr": "6FA0"
+ },
+ "T75IIPI": {
+  "asm": "T75IIPI",
+  "bytes": "D06F9A",
+  "addr": "6F95"
+ },
+ "T75IPD": {
+  "asm": "T75IPD",
+  "bytes": "D06F84",
+  "addr": "6F7F"
+ },
+ "T75IPI": {
+  "asm": "T75IPI",
+  "bytes": "D06F79",
+  "addr": "6F74"
+ },
+ "T75TGT": {
+  "asm": "T75TGT",
+  "bytes": "906FF9",
+  "addr": "6F7C"
+ },
+ "T75TGT+": {
+  "asm": "T75TGT+ 2",
+  "bytes": "906FFB",
+  "addr": "6F87"
+ },
+ "T75TGT-": {
+  "asm": "T75TGT- 3",
+  "bytes": "906FF6",
+  "addr": "6FB3"
+ },
+ "T79": {
+  "asm": "T79",
+  "bytes": "9070DF",
+  "addr": "7122"
+ },
+ "T79+": {
+  "asm": "T79+ 1",
+  "bytes": "9070E0",
+  "addr": "70FC"
+ },
+ "T8FDONE": {
+  "asm": "T8FDONE",
+  "bytes": "D00C59",
+  "addr": "0C4A"
+ },
+ "T9FDONE": {
+  "asm": "T9FDONE",
+  "bytes": "D00D8D",
+  "addr": "0D7E"
+ },
+ "TAFDONE": {
+  "asm": "TAFDONE",
+  "bytes": "D00F55",
+  "addr": "0F40"
+ },
+ "TBFDONE": {
+  "asm": "TBFDONE",
+  "bytes": "D01126",
+  "addr": "1111"
+ },
+ "TBUFF": {
+  "asm": "TBUFF DB     X'FF',48",
+  "bytes": "FF",
+  "addr": "0182"
+ },
+ "TBUFF+": {
+  "asm": "TBUFF+ 2",
+  "bytes": "900184",
+  "addr": "6E84"
+ },
+ "TBUFF-": {
+  "asm": "TBUFF- 3",
+  "bytes": "90017F",
+  "addr": "0E9B"
+ },
+ "TBUFF/": {
+  "asm": "TBUFF/ 2",
+  "bytes": "9000C1",
+  "addr": "0EAA"
+ },
+ "TBUFFADDR": {
+  "asm": "TBUFFADDR",
+  "bytes": "6A01B2",
+  "addr": "6E29"
+ },
+ "TBUFFADDR+": {
+  "asm": "TBUFFADDR+ 2",
+  "bytes": "9001B4",
+  "addr": "6EB7"
+ },
+ "TBUFFADDR-": {
+  "asm": "TBUFFADDR- 3",
+  "bytes": "9001AF",
+  "addr": "6F03"
+ },
+ "TCFDONE": {
+  "asm": "TCFDONE",
+  "bytes": "D0125C",
+  "addr": "124D"
+ },
+ "TD6+": {
+  "asm": "TD6+ 2",
+  "bytes": "901328",
+  "addr": "132D"
+ },
+ "TDFDONE": {
+  "asm": "TDFDONE",
+  "bytes": "D013D9",
+  "addr": "13CA"
+ },
+ "TEFDONE": {
+  "asm": "TEFDONE",
+  "bytes": "D015A7",
+  "addr": "1592"
+ },
+ "TEST01": {
+  "asm": "TEST01",
+  "bytes": "0B68",
+  "addr": "093C"
+ },
+ "TEST02": {
+  "asm": "TEST02",
+  "bytes": "0B70",
+  "addr": "093E"
+ },
+ "TEST03": {
+  "asm": "TEST03",
+  "bytes": "0B78",
+  "addr": "0940"
+ },
+ "TEST04": {
+  "asm": "TEST04",
+  "bytes": "0B82",
+  "addr": "0942"
+ },
+ "TEST05": {
+  "asm": "TEST05",
+  "bytes": "0B8A",
+  "addr": "0944"
+ },
+ "TEST06": {
+  "asm": "TEST06",
+  "bytes": "0B92",
+  "addr": "0946"
+ },
+ "TEST07": {
+  "asm": "TEST07",
+  "bytes": "0B9A",
+  "addr": "0948"
+ },
+ "TEST08": {
+  "asm": "TEST08",
+  "bytes": "0BA4",
+  "addr": "094A"
+ },
+ "TEST09": {
+  "asm": "TEST09",
+  "bytes": "0BB5",
+  "addr": "094C"
+ },
+ "TEST09+": {
+  "asm": "TEST09+ 2",
+  "bytes": "900BB7",
+  "addr": "70F7"
+ },
+ "TEST09-": {
+  "asm": "TEST09- 4",
+  "bytes": "900BB1",
+  "addr": "7110"
+ },
+ "TEST0A": {
+  "asm": "TEST0A",
+  "bytes": "0BC8",
+  "addr": "094E"
+ },
+ "TEST0C": {
+  "asm": "TEST0C",
+  "bytes": "0BD0",
+  "addr": "0952"
+ },
+ "TEST0D": {
+  "asm": "TEST0D",
+  "bytes": "0BD8",
+  "addr": "0954"
+ },
+ "TEST0E": {
+  "asm": "TEST0E",
+  "bytes": "0BE4",
+  "addr": "0956"
+ },
+ "TEST0F": {
+  "asm": "TEST0F",
+  "bytes": "0BE9",
+  "addr": "0958"
+ },
+ "TEST10": {
+  "asm": "TEST10",
+  "bytes": "0C04",
+  "addr": "095A"
+ },
+ "TEST11": {
+  "asm": "TEST11",
+  "bytes": "0C16",
+  "addr": "095C"
+ },
+ "TEST12": {
+  "asm": "TEST12",
+  "bytes": "0C28",
+  "addr": "095E"
+ },
+ "TEST13": {
+  "asm": "TEST13",
+  "bytes": "0C3A",
+  "addr": "0960"
+ },
+ "TEST14": {
+  "asm": "TEST14",
+  "bytes": "0C4C",
+  "addr": "0962"
+ },
+ "TEST15": {
+  "asm": "TEST15",
+  "bytes": "0C5E",
+  "addr": "0964"
+ },
+ "TEST16": {
+  "asm": "TEST16",
+  "bytes": "0C70",
+  "addr": "0966"
+ },
+ "TEST17": {
+  "asm": "TEST17",
+  "bytes": "0C82",
+  "addr": "0968"
+ },
+ "TEST18": {
+  "asm": "TEST18",
+  "bytes": "0C94",
+  "addr": "096A"
+ },
+ "TEST19": {
+  "asm": "TEST19",
+  "bytes": "0CA6",
+  "addr": "096C"
+ },
+ "TEST1A": {
+  "asm": "TEST1A",
+  "bytes": "0CB8",
+  "addr": "096E"
+ },
+ "TEST1B": {
+  "asm": "TEST1B",
+  "bytes": "0CC3",
+  "addr": "0970"
+ },
+ "TEST1C": {
+  "asm": "TEST1C",
+  "bytes": "0CCE",
+  "addr": "0972"
+ },
+ "TEST1D": {
+  "asm": "TEST1D",
+  "bytes": "0CD9",
+  "addr": "0974"
+ },
+ "TEST1E": {
+  "asm": "TEST1E",
+  "bytes": "0CE4",
+  "addr": "0976"
+ },
+ "TEST1F": {
+  "asm": "TEST1F",
+  "bytes": "0CEF",
+  "addr": "0978"
+ },
+ "TEST20": {
+  "asm": "TEST20",
+  "bytes": "0CF8",
+  "addr": "097A"
+ },
+ "TEST21": {
+  "asm": "TEST21",
+  "bytes": "0D0C",
+  "addr": "097C"
+ },
+ "TEST22": {
+  "asm": "TEST22",
+  "bytes": "0D20",
+  "addr": "097E"
+ },
+ "TEST23": {
+  "asm": "TEST23",
+  "bytes": "0D34",
+  "addr": "0980"
+ },
+ "TEST24": {
+  "asm": "TEST24",
+  "bytes": "0D48",
+  "addr": "0982"
+ },
+ "TEST25": {
+  "asm": "TEST25",
+  "bytes": "0D6F",
+  "addr": "0984"
+ },
+ "TEST26": {
+  "asm": "TEST26",
+  "bytes": "0D96",
+  "addr": "0986"
+ },
+ "TEST27": {
+  "asm": "TEST27",
+  "bytes": "0DBF",
+  "addr": "0988"
+ },
+ "TEST28": {
+  "asm": "TEST28",
+  "bytes": "0DE8",
+  "addr": "098A"
+ },
+ "TEST29": {
+  "asm": "TEST29",
+  "bytes": "0DF2",
+  "addr": "098C"
+ },
+ "TEST2A": {
+  "asm": "TEST2A",
+  "bytes": "0DFC",
+  "addr": "098E"
+ },
+ "TEST2B": {
+  "asm": "TEST2B",
+  "bytes": "0E06",
+  "addr": "0990"
+ },
+ "TEST2C": {
+  "asm": "TEST2C",
+  "bytes": "0E10",
+  "addr": "0992"
+ },
+ "TEST2D": {
+  "asm": "TEST2D",
+  "bytes": "0E1A",
+  "addr": "0994"
+ },
+ "TEST2E": {
+  "asm": "TEST2E",
+  "bytes": "0E24",
+  "addr": "0996"
+ },
+ "TEST2E0": {
+  "asm": "TEST2E0",
+  "bytes": "0E8D",
+  "addr": "0E78"
+ },
+ "TEST2E1": {
+  "asm": "TEST2E1",
+  "bytes": "0FE5",
+  "addr": "0E7A"
+ },
+ "TEST2E2": {
+  "asm": "TEST2E2",
+  "bytes": "1140",
+  "addr": "0E7C"
+ },
+ "TEST2E3": {
+  "asm": "TEST2E3",
+  "bytes": "1298",
+  "addr": "0E7E"
+ },
+ "TEST2E4": {
+  "asm": "TEST2E4",
+  "bytes": "13F3",
+  "addr": "0E80"
+ },
+ "TEST2F": {
+  "asm": "TEST2F",
+  "bytes": "1552",
+  "addr": "0998"
+ },
+ "TEST2F0": {
+  "asm": "TEST2F0",
+  "bytes": "15C8",
+  "addr": "15B4"
+ },
+ "TEST2F1": {
+  "asm": "TEST2F1",
+  "bytes": "15D4",
+  "addr": "15B6"
+ },
+ "TEST2F2": {
+  "asm": "TEST2F2",
+  "bytes": "15DD",
+  "addr": "15B8"
+ },
+ "TEST2F3": {
+  "asm": "TEST2F3",
+  "bytes": "15E9",
+  "addr": "15BA"
+ },
+ "TEST2F4": {
+  "asm": "TEST2F4",
+  "bytes": "15F2",
+  "addr": "15BC"
+ },
+ "TEST2F5": {
+  "asm": "TEST2F5",
+  "bytes": "15FB",
+  "addr": "15BE"
+ },
+ "TEST2F6": {
+  "asm": "TEST2F6",
+  "bytes": "1604",
+  "addr": "15C0"
+ },
+ "TEST2F7": {
+  "asm": "TEST2F7",
+  "bytes": "160D",
+  "addr": "15C2"
+ },
+ "TEST2F8": {
+  "asm": "TEST2F8",
+  "bytes": "1616",
+  "addr": "15C4"
+ },
+ "TEST2F9": {
+  "asm": "TEST2F9",
+  "bytes": "1621",
+  "addr": "15C6"
+ },
+ "TEST30": {
+  "asm": "TEST30",
+  "bytes": "162A",
+  "addr": "099A"
+ },
+ "TEST31": {
+  "asm": "TEST31",
+  "bytes": "168A",
+  "addr": "099C"
+ },
+ "TEST32": {
+  "asm": "TEST32",
+  "bytes": "16EC",
+  "addr": "099E"
+ },
+ "TEST33": {
+  "asm": "TEST33",
+  "bytes": "174E",
+  "addr": "09A0"
+ },
+ "TEST34": {
+  "asm": "TEST34",
+  "bytes": "17AF",
+  "addr": "09A2"
+ },
+ "TEST35": {
+  "asm": "TEST35",
+  "bytes": "1811",
+  "addr": "09A4"
+ },
+ "TEST36": {
+  "asm": "TEST36",
+  "bytes": "1873",
+  "addr": "09A6"
+ },
+ "TEST37": {
+  "asm": "TEST37",
+  "bytes": "18D7",
+  "addr": "09A8"
+ },
+ "TEST38": {
+  "asm": "TEST38",
+  "bytes": "193B",
+  "addr": "09AA"
+ },
+ "TEST39": {
+  "asm": "TEST39",
+  "bytes": "1944",
+  "addr": "09AC"
+ },
+ "TEST3A": {
+  "asm": "TEST3A",
+  "bytes": "194E",
+  "addr": "09AE"
+ },
+ "TEST3B": {
+  "asm": "TEST3B",
+  "bytes": "1959",
+  "addr": "09B0"
+ },
+ "TEST3C": {
+  "asm": "TEST3C",
+  "bytes": "1964",
+  "addr": "09B2"
+ },
+ "TEST3D": {
+  "asm": "TEST3D",
+  "bytes": "196F",
+  "addr": "09B4"
+ },
+ "TEST3E": {
+  "asm": "TEST3E",
+  "bytes": "197A",
+  "addr": "09B6"
+ },
+ "TEST3F": {
+  "asm": "TEST3F",
+  "bytes": "1988",
+  "addr": "09B8"
+ },
+ "TEST40": {
+  "asm": "TEST40",
+  "bytes": "1997",
+  "addr": "09BA"
+ },
+ "TEST41": {
+  "asm": "TEST41",
+  "bytes": "19A4",
+  "addr": "09BC"
+ },
+ "TEST42": {
+  "asm": "TEST42",
+  "bytes": "19B1",
+  "addr": "09BE"
+ },
+ "TEST43": {
+  "asm": "TEST43",
+  "bytes": "19BE",
+  "addr": "09C0"
+ },
+ "TEST44": {
+  "asm": "TEST44",
+  "bytes": "19CB",
+  "addr": "09C2"
+ },
+ "TEST45": {
+  "asm": "TEST45",
+  "bytes": "19D8",
+  "addr": "09C4"
+ },
+ "TEST46": {
+  "asm": "TEST46",
+  "bytes": "19E5",
+  "addr": "09C6"
+ },
+ "TEST460": {
+  "asm": "TEST460",
+  "bytes": "1A4B",
+  "addr": "1A37"
+ },
+ "TEST461": {
+  "asm": "TEST461",
+  "bytes": "1E49",
+  "addr": "1A39"
+ },
+ "TEST462": {
+  "asm": "TEST462",
+  "bytes": "2246",
+  "addr": "1A3B"
+ },
+ "TEST463": {
+  "asm": "TEST463",
+  "bytes": "25DA",
+  "addr": "1A3D"
+ },
+ "TEST464": {
+  "asm": "TEST464",
+  "bytes": "29D8",
+  "addr": "1A3F"
+ },
+ "TEST465": {
+  "asm": "TEST465",
+  "bytes": "2DD5",
+  "addr": "1A41"
+ },
+ "TEST466": {
+  "asm": "TEST466",
+  "bytes": "31D2",
+  "addr": "1A43"
+ },
+ "TEST467": {
+  "asm": "TEST467",
+  "bytes": "35CF",
+  "addr": "1A45"
+ },
+ "TEST468": {
+  "asm": "TEST468",
+  "bytes": "3A42",
+  "addr": "1A47"
+ },
+ "TEST469": {
+  "asm": "TEST469",
+  "bytes": "3DBA",
+  "addr": "1A49"
+ },
+ "TEST47": {
+  "asm": "TEST47",
+  "bytes": "4062",
+  "addr": "09C8"
+ },
+ "TEST470": {
+  "asm": "TEST470",
+  "bytes": "41C4",
+  "addr": "40BE"
+ },
+ "TEST471": {
+  "asm": "TEST471",
+  "bytes": "452D",
+  "addr": "40C0"
+ },
+ "TEST472": {
+  "asm": "TEST472",
+  "bytes": "465D",
+  "addr": "40C2"
+ },
+ "TEST473": {
+  "asm": "TEST473",
+  "bytes": "47D5",
+  "addr": "40C4"
+ },
+ "TEST474": {
+  "asm": "TEST474",
+  "bytes": "4938",
+  "addr": "40C6"
+ },
+ "TEST475": {
+  "asm": "TEST475",
+  "bytes": "4B15",
+  "addr": "40C8"
+ },
+ "TEST476": {
+  "asm": "TEST476",
+  "bytes": "4D8A",
+  "addr": "40CA"
+ },
+ "TEST477": {
+  "asm": "TEST477",
+  "bytes": "4FFF",
+  "addr": "40CC"
+ },
+ "TEST478": {
+  "asm": "TEST478",
+  "bytes": "5274",
+  "addr": "40CE"
+ },
+ "TEST479": {
+  "asm": "TEST479",
+  "bytes": "53ED",
+  "addr": "40D0"
+ },
+ "TEST48": {
+  "asm": "TEST48",
+  "bytes": "5599",
+  "addr": "09CA"
+ },
+ "TEST49": {
+  "asm": "TEST49",
+  "bytes": "55A5",
+  "addr": "09CC"
+ },
+ "TEST4A": {
+  "asm": "TEST4A",
+  "bytes": "55B1",
+  "addr": "09CE"
+ },
+ "TEST4B": {
+  "asm": "TEST4B",
+  "bytes": "55BD",
+  "addr": "09D0"
+ },
+ "TEST4C": {
+  "asm": "TEST4C",
+  "bytes": "55CB",
+  "addr": "09D2"
+ },
+ "TEST4D": {
+  "asm": "TEST4D",
+  "bytes": "55D5",
+  "addr": "09D4"
+ },
+ "TEST4E": {
+  "asm": "TEST4E",
+  "bytes": "55DF",
+  "addr": "09D6"
+ },
+ "TEST4F": {
+  "asm": "TEST4F",
+  "bytes": "55E9",
+  "addr": "09D8"
+ },
+ "TEST50": {
+  "asm": "TEST50",
+  "bytes": "55F6",
+  "addr": "09DA"
+ },
+ "TEST51": {
+  "asm": "TEST51",
+  "bytes": "563A",
+  "addr": "09DC"
+ },
+ "TEST52": {
+  "asm": "TEST52",
+  "bytes": "567E",
+  "addr": "09DE"
+ },
+ "TEST53": {
+  "asm": "TEST53",
+  "bytes": "56C2",
+  "addr": "09E0"
+ },
+ "TEST54": {
+  "asm": "TEST54",
+  "bytes": "5706",
+  "addr": "09E2"
+ },
+ "TEST55": {
+  "asm": "TEST55",
+  "bytes": "574A",
+  "addr": "09E4"
+ },
+ "TEST56": {
+  "asm": "TEST56",
+  "bytes": "5777",
+  "addr": "09E6"
+ },
+ "TEST57": {
+  "asm": "TEST57",
+  "bytes": "577F",
+  "addr": "09E8"
+ },
+ "TEST58": {
+  "asm": "TEST58",
+  "bytes": "578A",
+  "addr": "09EA"
+ },
+ "TEST59": {
+  "asm": "TEST59",
+  "bytes": "5798",
+  "addr": "09EC"
+ },
+ "TEST5A": {
+  "asm": "TEST5A",
+  "bytes": "57A6",
+  "addr": "09EE"
+ },
+ "TEST5B": {
+  "asm": "TEST5B",
+  "bytes": "57B4",
+  "addr": "09F0"
+ },
+ "TEST5C": {
+  "asm": "TEST5C",
+  "bytes": "57C3",
+  "addr": "09F2"
+ },
+ "TEST5D": {
+  "asm": "TEST5D",
+  "bytes": "57CE",
+  "addr": "09F4"
+ },
+ "TEST5E": {
+  "asm": "TEST5E",
+  "bytes": "57D9",
+  "addr": "09F6"
+ },
+ "TEST5F": {
+  "asm": "TEST5F",
+  "bytes": "57E4",
+  "addr": "09F8"
+ },
+ "TEST60": {
+  "asm": "TEST60",
+  "bytes": "57F1",
+  "addr": "09FA"
+ },
+ "TEST61": {
+  "asm": "TEST61",
+  "bytes": "57FF",
+  "addr": "09FC"
+ },
+ "TEST62": {
+  "asm": "TEST62",
+  "bytes": "580D",
+  "addr": "09FE"
+ },
+ "TEST63": {
+  "asm": "TEST63",
+  "bytes": "581B",
+  "addr": "0A00"
+ },
+ "TEST64": {
+  "asm": "TEST64",
+  "bytes": "5828",
+  "addr": "0A02"
+ },
+ "TEST65": {
+  "asm": "TEST65",
+  "bytes": "5835",
+  "addr": "0A04"
+ },
+ "TEST66": {
+  "asm": "TEST66",
+  "bytes": "58C4",
+  "addr": "0A06"
+ },
+ "TEST67": {
+  "asm": "TEST67",
+  "bytes": "58E4",
+  "addr": "0A08"
+ },
+ "TEST670": {
+  "asm": "TEST670",
+  "bytes": "595E",
+  "addr": "594A"
+ },
+ "TEST671": {
+  "asm": "TEST671",
+  "bytes": "5CC7",
+  "addr": "594C"
+ },
+ "TEST672": {
+  "asm": "TEST672",
+  "bytes": "5DFA",
+  "addr": "594E"
+ },
+ "TEST673": {
+  "asm": "TEST673",
+  "bytes": "5F85",
+  "addr": "5950"
+ },
+ "TEST674": {
+  "asm": "TEST674",
+  "bytes": "610C",
+  "addr": "5952"
+ },
+ "TEST675": {
+  "asm": "TEST675",
+  "bytes": "6300",
+  "addr": "5954"
+ },
+ "TEST676": {
+  "asm": "TEST676",
+  "bytes": "658C",
+  "addr": "5956"
+ },
+ "TEST677": {
+  "asm": "TEST677",
+  "bytes": "6818",
+  "addr": "5958"
+ },
+ "TEST678": {
+  "asm": "TEST678",
+  "bytes": "6AA4",
+  "addr": "595A"
+ },
+ "TEST679": {
+  "asm": "TEST679",
+  "bytes": "6C34",
+  "addr": "595C"
+ },
+ "TEST68": {
+  "asm": "TEST68",
+  "bytes": "6DF7",
+  "addr": "0A0A"
+ },
+ "TEST69": {
+  "asm": "TEST69",
+  "bytes": "6E0D",
+  "addr": "0A0C"
+ },
+ "TEST6A": {
+  "asm": "TEST6A",
+  "bytes": "6E21",
+  "addr": "0A0E"
+ },
+ "TEST6B": {
+  "asm": "TEST6B",
+  "bytes": "6E35",
+  "addr": "0A10"
+ },
+ "TEST6C": {
+  "asm": "TEST6C",
+  "bytes": "6E4A",
+  "addr": "0A12"
+ },
+ "TEST6D": {
+  "asm": "TEST6D",
+  "bytes": "6E5D",
+  "addr": "0A14"
+ },
+ "TEST6E": {
+  "asm": "TEST6E",
+  "bytes": "6F39",
+  "addr": "0A16"
+ },
+ "TEST6F": {
+  "asm": "TEST6F",
+  "bytes": "6F48",
+  "addr": "0A18"
+ },
+ "TEST71": {
+  "asm": "TEST71",
+  "bytes": "6F53",
+  "addr": "0A1C"
+ },
+ "TEST72": {
+  "asm": "TEST72",
+  "bytes": "6F5E",
+  "addr": "0A1E"
+ },
+ "TEST73": {
+  "asm": "TEST73",
+  "bytes": "6F64",
+  "addr": "0A20"
+ },
+ "TEST74": {
+  "asm": "TEST74",
+  "bytes": "6F69",
+  "addr": "0A22"
+ },
+ "TEST75": {
+  "asm": "TEST75",
+  "bytes": "6F6E",
+  "addr": "0A24"
+ },
+ "TEST76": {
+  "asm": "TEST76",
+  "bytes": "6FFE",
+  "addr": "0A26"
+ },
+ "TEST77": {
+  "asm": "TEST77",
+  "bytes": "7006",
+  "addr": "0A28"
+ },
+ "TEST78": {
+  "asm": "TEST78",
+  "bytes": "7074",
+  "addr": "0A2A"
+ },
+ "TEST79": {
+  "asm": "TEST79",
+  "bytes": "70DF",
+  "addr": "0A2C"
+ },
+ "TEST7A": {
+  "asm": "TEST7A",
+  "bytes": "70E3",
+  "addr": "0A2E"
+ },
+ "TEST7B": {
+  "asm": "TEST7B",
+  "bytes": "70E7",
+  "addr": "0A30"
+ },
+ "TEST7C": {
+  "asm": "TEST7C",
+  "bytes": "70EA",
+  "addr": "0A32"
+ },
+ "TEST7D": {
+  "asm": "TEST7D",
+  "bytes": "70ED",
+  "addr": "0A34"
+ },
+ "TEST7E": {
+  "asm": "TEST7E",
+  "bytes": "7135",
+  "addr": "0A36"
+ },
+ "TEST7F": {
+  "asm": "TEST7F",
+  "bytes": "7153",
+  "addr": "0A38"
+ },
+ "TEST80": {
+  "asm": "TEST80",
+  "bytes": "0B27",
+  "addr": "0A12"
+ },
+ "TEST81": {
+  "asm": "TEST81",
+  "bytes": "0B30",
+  "addr": "0A14"
+ },
+ "TEST82": {
+  "asm": "TEST82",
+  "bytes": "0B3A",
+  "addr": "0A16"
+ },
+ "TEST83": {
+  "asm": "TEST83",
+  "bytes": "0B44",
+  "addr": "0A18"
+ },
+ "TEST84": {
+  "asm": "TEST84",
+  "bytes": "0B4D",
+  "addr": "0A1A"
+ },
+ "TEST85": {
+  "asm": "TEST85",
+  "bytes": "0B56",
+  "addr": "0A1C"
+ },
+ "TEST86": {
+  "asm": "TEST86",
+  "bytes": "0BE1",
+  "addr": "0A1E"
+ },
+ "TEST88": {
+  "asm": "TEST88",
+  "bytes": "0BE9",
+  "addr": "0A22"
+ },
+ "TEST89": {
+  "asm": "TEST89",
+  "bytes": "0BF4",
+  "addr": "0A24"
+ },
+ "TEST8A": {
+  "asm": "TEST8A",
+  "bytes": "0BFF",
+  "addr": "0A26"
+ },
+ "TEST8B": {
+  "asm": "TEST8B",
+  "bytes": "0C0E",
+  "addr": "0A28"
+ },
+ "TEST8C": {
+  "asm": "TEST8C",
+  "bytes": "0C1A",
+  "addr": "0A2A"
+ },
+ "TEST8D": {
+  "asm": "TEST8D",
+  "bytes": "0C26",
+  "addr": "0A2C"
+ },
+ "TEST8E": {
+  "asm": "TEST8E",
+  "bytes": "0C36",
+  "addr": "0A2E"
+ },
+ "TEST8F": {
+  "asm": "TEST8F",
+  "bytes": "0C47",
+  "addr": "0A30"
+ },
+ "TEST90": {
+  "asm": "TEST90",
+  "bytes": "0C5A",
+  "addr": "0A32"
+ },
+ "TEST91": {
+  "asm": "TEST91",
+  "bytes": "0C64",
+  "addr": "0A34"
+ },
+ "TEST92": {
+  "asm": "TEST92",
+  "bytes": "0C6E",
+  "addr": "0A36"
+ },
+ "TEST93": {
+  "asm": "TEST93",
+  "bytes": "0C78",
+  "addr": "0A38"
+ },
+ "TEST94": {
+  "asm": "TEST94",
+  "bytes": "0C81",
+  "addr": "0A3A"
+ },
+ "TEST95": {
+  "asm": "TEST95",
+  "bytes": "0C8A",
+  "addr": "0A3C"
+ },
+ "TEST96": {
+  "asm": "TEST96",
+  "bytes": "0D15",
+  "addr": "0A3E"
+ },
+ "TEST98": {
+  "asm": "TEST98",
+  "bytes": "0D1D",
+  "addr": "0A42"
+ },
+ "TEST99": {
+  "asm": "TEST99",
+  "bytes": "0D28",
+  "addr": "0A44"
+ },
+ "TEST9A": {
+  "asm": "TEST9A",
+  "bytes": "0D33",
+  "addr": "0A46"
+ },
+ "TEST9B": {
+  "asm": "TEST9B",
+  "bytes": "0D42",
+  "addr": "0A48"
+ },
+ "TEST9C": {
+  "asm": "TEST9C",
+  "bytes": "0D4E",
+  "addr": "0A4A"
+ },
+ "TEST9D": {
+  "asm": "TEST9D",
+  "bytes": "0D5A",
+  "addr": "0A4C"
+ },
+ "TEST9E": {
+  "asm": "TEST9E",
+  "bytes": "0D6A",
+  "addr": "0A4E"
+ },
+ "TEST9F": {
+  "asm": "TEST9F",
+  "bytes": "0D7B",
+  "addr": "0A50"
+ },
+ "TESTA0": {
+  "asm": "TESTA0",
+  "bytes": "0D8E",
+  "addr": "0A52"
+ },
+ "TESTA1": {
+  "asm": "TESTA1",
+  "bytes": "0D9E",
+  "addr": "0A54"
+ },
+ "TESTA2": {
+  "asm": "TESTA2",
+  "bytes": "0DAD",
+  "addr": "0A56"
+ },
+ "TESTA3": {
+  "asm": "TESTA3",
+  "bytes": "0DBC",
+  "addr": "0A58"
+ },
+ "TESTA4": {
+  "asm": "TESTA4",
+  "bytes": "0DCC",
+  "addr": "0A5A"
+ },
+ "TESTA5": {
+  "asm": "TESTA5",
+  "bytes": "0DDA",
+  "addr": "0A5C"
+ },
+ "TESTA6": {
+  "asm": "TESTA6",
+  "bytes": "0EB2",
+  "addr": "0A5E"
+ },
+ "TESTA8": {
+  "asm": "TESTA8",
+  "bytes": "0EBA",
+  "addr": "0A62"
+ },
+ "TESTA9": {
+  "asm": "TESTA9",
+  "bytes": "0EC8",
+  "addr": "0A64"
+ },
+ "TESTAA": {
+  "asm": "TESTAA",
+  "bytes": "0ED9",
+  "addr": "0A66"
+ },
+ "TESTAB": {
+  "asm": "TESTAB",
+  "bytes": "0EEE",
+  "addr": "0A68"
+ },
+ "TESTAC": {
+  "asm": "TESTAC",
+  "bytes": "0F00",
+  "addr": "0A6A"
+ },
+ "TESTAD": {
+  "asm": "TESTAD",
+  "bytes": "0F12",
+  "addr": "0A6C"
+ },
+ "TESTAE": {
+  "asm": "TESTAE",
+  "bytes": "0F29",
+  "addr": "0A6E"
+ },
+ "TESTAF": {
+  "asm": "TESTAF",
+  "bytes": "0F40",
+  "addr": "0A70"
+ },
+ "TESTB0": {
+  "asm": "TESTB0",
+  "bytes": "0F59",
+  "addr": "0A72"
+ },
+ "TESTB1": {
+  "asm": "TESTB1",
+  "bytes": "0F6B",
+  "addr": "0A74"
+ },
+ "TESTB2": {
+  "asm": "TESTB2",
+  "bytes": "0F7B",
+  "addr": "0A76"
+ },
+ "TESTB3": {
+  "asm": "TESTB3",
+  "bytes": "0F8B",
+  "addr": "0A78"
+ },
+ "TESTB4": {
+  "asm": "TESTB4",
+  "bytes": "0F9C",
+  "addr": "0A7A"
+ },
+ "TESTB5": {
+  "asm": "TESTB5",
+  "bytes": "0FAB",
+  "addr": "0A7C"
+ },
+ "TESTB6": {
+  "asm": "TESTB6",
+  "bytes": "1083",
+  "addr": "0A7E"
+ },
+ "TESTB8": {
+  "asm": "TESTB8",
+  "bytes": "108B",
+  "addr": "0A82"
+ },
+ "TESTB9": {
+  "asm": "TESTB9",
+  "bytes": "1099",
+  "addr": "0A84"
+ },
+ "TESTBA": {
+  "asm": "TESTBA",
+  "bytes": "10AA",
+  "addr": "0A86"
+ },
+ "TESTBB": {
+  "asm": "TESTBB",
+  "bytes": "10BF",
+  "addr": "0A88"
+ },
+ "TESTBC": {
+  "asm": "TESTBC",
+  "bytes": "10D1",
+  "addr": "0A8A"
+ },
+ "TESTBD": {
+  "asm": "TESTBD",
+  "bytes": "10E3",
+  "addr": "0A8C"
+ },
+ "TESTBE": {
+  "asm": "TESTBE",
+  "bytes": "10FA",
+  "addr": "0A8E"
+ },
+ "TESTBF": {
+  "asm": "TESTBF",
+  "bytes": "1111",
+  "addr": "0A90"
+ },
+ "TESTC0": {
+  "asm": "TESTC0",
+  "bytes": "112A",
+  "addr": "0A92"
+ },
+ "TESTC1": {
+  "asm": "TESTC1",
+  "bytes": "1133",
+  "addr": "0A94"
+ },
+ "TESTC2": {
+  "asm": "TESTC2",
+  "bytes": "113D",
+  "addr": "0A96"
+ },
+ "TESTC3": {
+  "asm": "TESTC3",
+  "bytes": "1147",
+  "addr": "0A98"
+ },
+ "TESTC4": {
+  "asm": "TESTC4",
+  "bytes": "1150",
+  "addr": "0A9A"
+ },
+ "TESTC5": {
+  "asm": "TESTC5",
+  "bytes": "1159",
+  "addr": "0A9C"
+ },
+ "TESTC6": {
+  "asm": "TESTC6",
+  "bytes": "11E4",
+  "addr": "0A9E"
+ },
+ "TESTC8": {
+  "asm": "TESTC8",
+  "bytes": "11EC",
+  "addr": "0AA2"
+ },
+ "TESTC9": {
+  "asm": "TESTC9",
+  "bytes": "11F7",
+  "addr": "0AA4"
+ },
+ "TESTCA": {
+  "asm": "TESTCA",
+  "bytes": "1202",
+  "addr": "0AA6"
+ },
+ "TESTCB": {
+  "asm": "TESTCB",
+  "bytes": "1211",
+  "addr": "0AA8"
+ },
+ "TESTCC": {
+  "asm": "TESTCC",
+  "bytes": "121D",
+  "addr": "0AAA"
+ },
+ "TESTCD": {
+  "asm": "TESTCD",
+  "bytes": "1229",
+  "addr": "0AAC"
+ },
+ "TESTCE": {
+  "asm": "TESTCE",
+  "bytes": "1239",
+  "addr": "0AAE"
+ },
+ "TESTCF": {
+  "asm": "TESTCF",
+  "bytes": "124A",
+  "addr": "0AB0"
+ },
+ "TESTD0": {
+  "asm": "TESTD0",
+  "bytes": "125D",
+  "addr": "0AB2"
+ },
+ "TESTD1": {
+  "asm": "TESTD1",
+  "bytes": "1267",
+  "addr": "0AB4"
+ },
+ "TESTD2": {
+  "asm": "TESTD2",
+  "bytes": "1271",
+  "addr": "0AB6"
+ },
+ "TESTD3": {
+  "asm": "TESTD3",
+  "bytes": "127B",
+  "addr": "0AB8"
+ },
+ "TESTD4": {
+  "asm": "TESTD4",
+  "bytes": "1284",
+  "addr": "0ABA"
+ },
+ "TESTD5": {
+  "asm": "TESTD5",
+  "bytes": "128D",
+  "addr": "0ABC"
+ },
+ "TESTD6": {
+  "asm": "TESTD6",
+  "bytes": "1318",
+  "addr": "0ABE"
+ },
+ "TESTD7": {
+  "asm": "TESTD7",
+  "bytes": "1353",
+  "addr": "0AC0"
+ },
+ "TESTD8": {
+  "asm": "TESTD8",
+  "bytes": "1369",
+  "addr": "0AC2"
+ },
+ "TESTD9": {
+  "asm": "TESTD9",
+  "bytes": "1374",
+  "addr": "0AC4"
+ },
+ "TESTDA": {
+  "asm": "TESTDA",
+  "bytes": "137F",
+  "addr": "0AC6"
+ },
+ "TESTDB": {
+  "asm": "TESTDB",
+  "bytes": "138E",
+  "addr": "0AC8"
+ },
+ "TESTDC": {
+  "asm": "TESTDC",
+  "bytes": "139A",
+  "addr": "0ACA"
+ },
+ "TESTDD": {
+  "asm": "TESTDD",
+  "bytes": "13A6",
+  "addr": "0ACC"
+ },
+ "TESTDE": {
+  "asm": "TESTDE",
+  "bytes": "13B6",
+  "addr": "0ACE"
+ },
+ "TESTDF": {
+  "asm": "TESTDF",
+  "bytes": "13C7",
+  "addr": "0AD0"
+ },
+ "TESTE0": {
+  "asm": "TESTE0",
+  "bytes": "13DA",
+  "addr": "0AD2"
+ },
+ "TESTE1": {
+  "asm": "TESTE1",
+  "bytes": "13EA",
+  "addr": "0AD4"
+ },
+ "TESTE2": {
+  "asm": "TESTE2",
+  "bytes": "13F9",
+  "addr": "0AD6"
+ },
+ "TESTE3": {
+  "asm": "TESTE3",
+  "bytes": "1408",
+  "addr": "0AD8"
+ },
+ "TESTE4": {
+  "asm": "TESTE4",
+  "bytes": "1418",
+  "addr": "0ADA"
+ },
+ "TESTE5": {
+  "asm": "TESTE5",
+  "bytes": "1426",
+  "addr": "0ADC"
+ },
+ "TESTE6": {
+  "asm": "TESTE6",
+  "bytes": "14FE",
+  "addr": "0ADE"
+ },
+ "TESTE8": {
+  "asm": "TESTE8",
+  "bytes": "150D",
+  "addr": "0AE2"
+ },
+ "TESTE9": {
+  "asm": "TESTE9",
+  "bytes": "151E",
+  "addr": "0AE4"
+ },
+ "TESTEA": {
+  "asm": "TESTEA",
+  "bytes": "152C",
+  "addr": "0AE6"
+ },
+ "TESTEB": {
+  "asm": "TESTEB",
+  "bytes": "1541",
+  "addr": "0AE8"
+ },
+ "TESTEC": {
+  "asm": "TESTEC",
+  "bytes": "1553",
+  "addr": "0AEA"
+ },
+ "TESTED": {
+  "asm": "TESTED",
+  "bytes": "1565",
+  "addr": "0AEC"
+ },
+ "TESTEE": {
+  "asm": "TESTEE",
+  "bytes": "157B",
+  "addr": "0AEE"
+ },
+ "TESTEF": {
+  "asm": "TESTEF",
+  "bytes": "1592",
+  "addr": "0AF0"
+ },
+ "TESTF0": {
+  "asm": "TESTF0",
+  "bytes": "15AB",
+  "addr": "0AF2"
+ },
+ "TESTF1": {
+  "asm": "TESTF1",
+  "bytes": "15BD",
+  "addr": "0AF4"
+ },
+ "TESTF2": {
+  "asm": "TESTF2",
+  "bytes": "15CD",
+  "addr": "0AF6"
+ },
+ "TESTF3": {
+  "asm": "TESTF3",
+  "bytes": "15DD",
+  "addr": "0AF8"
+ },
+ "TESTF4": {
+  "asm": "TESTF4",
+  "bytes": "15EE",
+  "addr": "0AFA"
+ },
+ "TESTF5": {
+  "asm": "TESTF5",
+  "bytes": "15FD",
+  "addr": "0AFC"
+ },
+ "TESTF6": {
+  "asm": "TESTF6",
+  "bytes": "16D5",
+  "addr": "0AFE"
+ },
+ "TESTF7": {
+  "asm": "TESTF7",
+  "bytes": "172B",
+  "addr": "0B00"
+ },
+ "TESTF8": {
+  "asm": "TESTF8",
+  "bytes": "174D",
+  "addr": "0B02"
+ },
+ "TESTF9": {
+  "asm": "TESTF9",
+  "bytes": "175E",
+  "addr": "0B04"
+ },
+ "TESTFA": {
+  "asm": "TESTFA",
+  "bytes": "176C",
+  "addr": "0B06"
+ },
+ "TESTFB": {
+  "asm": "TESTFB",
+  "bytes": "1781",
+  "addr": "0B08"
+ },
+ "TESTFC": {
+  "asm": "TESTFC",
+  "bytes": "1793",
+  "addr": "0B0A"
+ },
+ "TESTFD": {
+  "asm": "TESTFD",
+  "bytes": "17A5",
+  "addr": "0B0C"
+ },
+ "TESTFE": {
+  "asm": "TESTFE",
+  "bytes": "17BB",
+  "addr": "0B0E"
+ },
+ "TESTFF": {
+  "asm": "TESTFF",
+  "bytes": "17D2",
+  "addr": "0B10"
+ },
+ "TESTILL": {
+  "asm": "TESTILL",
+  "bytes": "0B3A",
+  "addr": "0950"
+ },
+ "TFFDONE": {
+  "asm": "TFFDONE",
+  "bytes": "D017E7",
+  "addr": "17D2"
+ },
+ "WORD0": {
+  "asm": "WORD0",
+  "bytes": "90015E",
+  "addr": "5837"
+ },
+ "WORD1": {
+  "asm": "WORD1",
+  "bytes": "900160",
+  "addr": "5842"
+ },
+ "WORD1-": {
+  "asm": "WORD1- 7",
+  "bytes": "D00159",
+  "addr": "7056"
+ },
+ "WORD2": {
+  "asm": "WORD2",
+  "bytes": "610162",
+  "addr": "6E81"
+ },
+ "WORD2+": {
+  "asm": "WORD2+ 2",
+  "bytes": "900164",
+  "addr": "584D"
+ },
+ "WORD3": {
+  "asm": "WORD3",
+  "bytes": "0164",
+  "addr": "0176"
+ },
+ "WORD3-": {
+  "asm": "WORD3- 7",
+  "bytes": "D0015D",
+  "addr": "562C"
+ },
+ "WORD3ADDR": {
+  "asm": "WORD3ADDR",
+  "bytes": "620176",
+  "addr": "5812"
+ },
+ "WORD4": {
+  "asm": "WORD4",
+  "bytes": "0166",
+  "addr": "0178"
+ },
+ "WORD4ADDR": {
+  "asm": "WORD4ADDR",
+  "bytes": "900178",
+  "addr": "5863"
+ },
+ "WORD5": {
+  "asm": "WORD5",
+  "bytes": "0168",
+  "addr": "017A"
+ },
+ "WORD5ADDR+": {
+  "asm": "WORD5ADDR+ 2",
+  "bytes": "90017C",
+  "addr": "586E"
+ },
+ "WORD6": {
+  "asm": "WORD6",
+  "bytes": "61016A",
+  "addr": "6ECA"
+ },
+ "WORD6-": {
+  "asm": "WORD6- 3",
+  "bytes": "900167",
+  "addr": "5879"
+ },
+ "WORD7": {
+  "asm": "WORD7",
+  "bytes": "61016C",
+  "addr": "6EDC"
+ },
+ "WORD7-": {
+  "asm": "WORD7- 5",
+  "bytes": "900167",
+  "addr": "5885"
+ },
+ "WORD8": {
+  "asm": "WORD8",
+  "bytes": "61016E",
+  "addr": "6EEE"
+ },
+ "WORD8-": {
+  "asm": "WORD8- 3",
+  "bytes": "90016B",
+  "addr": "5891"
+ },
+ "WORD9": {
+  "asm": "WORD9",
+  "bytes": "0170",
+  "addr": "017C"
+ },
+ "WORD9ADDR-": {
+  "asm": "WORD9ADDR- 3",
+  "bytes": "900179",
+  "addr": "589D"
+ },
+ "WORDA": {
+  "asm": "WORDA",
+  "bytes": "0172",
+  "addr": "017E"
+ },
+ "WORDAADDR+": {
+  "asm": "WORDAADDR+ 1",
+  "bytes": "90017F",
+  "addr": "58A9"
+ },
+ "WORDB": {
+  "asm": "WORDB",
+  "bytes": "0174",
+  "addr": "0180"
+ },
+ "WORDBADDR-": {
+  "asm": "WORDBADDR- 1",
+  "bytes": "90017F",
+  "addr": "58B5"
+ },
+ "X": {
+  "asm": "X",
+  "bytes": "FA",
+  "addr": "0330"
+ },
+ "XAB": {
+  "asm": "XAB",
+  "bytes": "5D",
+  "addr": "57D4"
+ },
+ "XABB": {
+  "asm": "XABB",
+  "bytes": "4D",
+  "addr": "03C9"
+ },
+ "XAS": {
+  "asm": "XAS",
+  "bytes": "5F",
+  "addr": "55F4"
+ },
+ "XASB": {
+  "asm": "XASB",
+  "bytes": "4F",
+  "addr": "55EF"
+ },
+ "XAX": {
+  "asm": "XAX",
+  "bytes": "5B",
+  "addr": "039E"
+ },
+ "XAXB": {
+  "asm": "XAXB",
+  "bytes": "4B",
+  "addr": "55C4"
+ },
+ "XAY": {
+  "asm": "XAY",
+  "bytes": "5C",
+  "addr": "0349"
+ },
+ "XAYB": {
+  "asm": "XAYB",
+  "bytes": "4C",
+  "addr": "0383"
+ },
+ "XAZ": {
+  "asm": "XAZ",
+  "bytes": "5E",
+  "addr": "0346"
+ },
+ "XAZB": {
+  "asm": "XAZB",
+  "bytes": "4E",
+  "addr": "55E4"
+ },
+ "XDIGTMASK": {
+  "asm": "XDIGTMASK",
+  "bytes": "D0207F",
+  "addr": "487A"
+ },
+ "XFR": {
+  "asm": "XFR S,A",
+  "bytes": "55A0",
+  "addr": "55E9"
+ },
+ "XFR=": {
+  "asm": "XFR= 2,Y",
+  "bytes": "55760002",
+  "addr": "5758"
+ },
+ "XFRB": {
+  "asm": "XFRB BU,AL",
+  "bytes": "4521",
+  "addr": "0443"
+ },
+ "XRC": {
+  "asm": "XRC (16)-X,-A",
+  "bytes": "477A0F40",
+  "addr": "51CC"
+ },
+ "XRCR": {
+  "asm": "XRCR -X,-B",
+  "bytes": "677A42",
+  "addr": "69F9"
+ },
+ "Y": {
+  "asm": "Y",
+  "bytes": "8B",
+  "addr": "0C15"
+ },
+ "YL": {
+  "asm": "YL ,AL",
+  "bytes": "4571",
+  "addr": "037D"
+ },
+ "Z": {
+  "asm": "Z",
+  "bytes": "AC",
+  "addr": "466F"
+ },
+ "ZAD": {
+  "asm": "ZAD -X(7),-A(7)",
+  "bytes": "46663A40",
+  "addr": "2901"
+ },
+ "ZSU": {
+  "asm": "ZSU -X(7),-A(7)",
+  "bytes": "46664A40",
+  "addr": "2CFF"
+ }
+}

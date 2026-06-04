@@ -24,14 +24,17 @@
 
 #let bitbox(..bytes) = {
   let bytes = bytes.pos().map(b => if type(b) == str { ((bits: 8, value: b),) } else { b })
-  let total-bits = 8 * bytes.len()
+  let total-bits = bytes.map(b => b.map(f => f.bits).sum()).sum()
   set text(font: mono-font, size: 8pt)
   block(breakable: false, width: 100%)[
     // Bit-number ruler, 7..0 repeated per byte.
     #grid(
       columns: (1fr,) * total-bits,
       ..bytes
-        .map(_ => range(8).map(i => align(center, text(size: 6.5pt)[#(7 - i)])))
+        .map(b => {
+          let w = b.map(f => f.bits).sum()
+          range(w).map(i => align(center, text(size: 6.5pt)[#calc.rem(w - 1 - i, 8)]))
+        })
         .flatten()
     )
     // Field boxes.
@@ -56,7 +59,7 @@
             }
             used += field.bits
           }
-          assert(used == 8, message: "byte " + str(bi) + " has " + str(used) + " bits")
+          assert(calc.rem(used, 8) == 0, message: "byte " + str(bi) + " has " + str(used) + " bits")
         }
         cells
       }
@@ -64,12 +67,20 @@
     // Byte labels underneath.
     #grid(
       columns: (1fr,) * total-bits,
-      ..bytes
-        .enumerate()
-        .map(((bi, _)) => grid.cell(
-          colspan: 8,
-          align(center, text(size: 6.5pt, font: heading-font, fill: rule-gray)[byte #bi]),
-        ))
+      ..{
+        let labels = ()
+        let bi = 0
+        for byte in bytes {
+          let w = byte.map(f => f.bits).sum()
+          let label = if w == 8 [byte #bi] else [bytes #bi–#(bi + calc.quo(w, 8) - 1)]
+          labels.push(grid.cell(
+            colspan: w,
+            align(center, text(size: 6.5pt, font: heading-font, fill: rule-gray)[#label]),
+          ))
+          bi += calc.quo(w, 8)
+        }
+        labels
+      }
     )
   ]
 }
