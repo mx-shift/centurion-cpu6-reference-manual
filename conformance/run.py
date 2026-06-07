@@ -206,7 +206,10 @@ def run_suite(io, args, log):
     k.wait_signon()
     k.ping()
 
-    tiers = [int(x) for x in args.tiers.split(",")]
+    if args.tiers == "all":
+        tiers = gen.ALL_TIERS
+    else:
+        tiers = [int(x) for x in args.tiers.split(",")]
     vectors = gen.generate(tiers, capture)
     print(f"{len(vectors)} vectors (tiers {args.tiers})")
 

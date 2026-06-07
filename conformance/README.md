@@ -30,8 +30,17 @@ the other end of the wire.
   the manual's Operation pseudocode, sharing no code with any
   emulator. Ambiguous readings are marked `# READING:`.
 - **gen.py** — vector tiers: 0 harness-trust smoke, 1 loads/stores/
-  branches in every addressing mode, 2 ALU/inc/dec/shift/rotate,
-  3 MUL/DIV, 4 BIG (including divide-with-remainder), 5 stack ops.
+  branches, 2 ALU/inc/dec/shift/rotate, 3 MUL/DIV, 4 BIG core
+  (including divide-with-remainder), 5 stack ops, 6 MEM block
+  operations and MVL, 7 BIG completion (CTB/CFB, all operand specs),
+  8 SVC/RSV round trips with frame capture, 9 seeded random soup
+  (straight-line compositions — this is what catches
+  flag-interaction rules single-op vectors cannot), 11/12 addressing
+  and ALU completion sweeps. `--tiers all` runs everything.
+- **shrink.py** — given a report with failing soup vectors, replays
+  each against the microcode simulator (needs the emulator repo's
+  harness) and bisects to the first instruction where the model and
+  the microcode disagree.
 
 ## Running
 
@@ -71,13 +80,28 @@ to separate the two.
   0x4D00, test memory window at 0x6000 — chosen clear of TOS's
   low-RAM workspace and the DIAG ROMs at 0x8000.
 
-## First results (2026-06-06, against the emulator)
+## Results (2026-06-06, against the emulator)
 
-1129 vectors: 1127 pass, 2 model-skips. Bringing the suite up found
-five errors in the manual (indexed-mode-byte bit positions, INX/DCX
-step size, DIV's dividend width and result placement, IVRB's
-carry/overflow flags, rotate-left's fault flag) — all arbitrated
-against the microcode simulator and corrected — and one real emulator
-bug (SLR by the full register width must set FAULT when the sign
-drains out). The fact that a manual-only suite immediately caught
-both kinds of error is the point of building it this way.
+Full suite: 1729 vectors, 1729 pass. Bringing the suite up found ten
+errors in the manual — indexed-mode-byte bit positions, INX/DCX step
+size, DIV's dividend width and result placement, IVRB's
+carry/overflow flags (and the n = 0 pure-complement case that
+preserves them), rotate-left's fault flag, right shifts/rotates
+preserving F, MUL clearing L, DIV clearing F on success — all
+arbitrated against the microcode simulator and corrected — plus one
+real emulator bug (SLR by the full register width must set FAULT when
+the sign drains out). Most of the flag-policy rules fell out of the
+random-soup tier, which composes instructions so the *incoming* flag
+state varies — single-op vectors all enter with clean flags and
+cannot distinguish "cleared" from "preserved". A manual-only suite
+catching both kinds of error is the point of building it this way.
+
+Coverage: every non-system opcode (loads/stores in all modes
+including the one-byte register-pointer rows, branches, byte/word
+ALU with all CPU6 sub-modes, register-constant rows with memory
+forms, all one-byte aliases, MUL/DIV in all forms, BIG sub-ops 0-9
+with all operand specs, MEM block ops, MVL, STR, LST/SST, SAR/LAR,
+flag ops, PCX, SVC/RSV). Excluded as untestable under a monitor:
+HLT, EI/DI, RI, PAGE, DMA, LIO/SIO, the parity and clock controls,
+sense-switch branches (panel-state dependent), and the MEM record
+loader (planned).
