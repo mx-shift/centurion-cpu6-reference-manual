@@ -183,26 +183,62 @@
   "MEM",
   qualifier: "(memory block operations, 0x47 / 0x67)",
   summary: [
-    The block family: fill, move, compare, scan, and the boot
-    loader's record interpreter. A selector byte picks the
-    sub-operation; operands follow as base/index register
-    specifications. The 0x67 row is the reversed-direction variant
-    set. CPU6 only.
+    The block family: fill, move, block logicals, compare,
+    copy-until-match, and the boot loader's record interpreter. A
+    selector byte carries the sub-operation and two operand specs;
+    a length byte follows (0x47) or the length comes from `AL`
+    (0x67). Block length is the length value + 1 bytes. CPU6 only.
   ],
   encodings: (
     encoding(
-      "Selector",
+      "Selector + length",
       applicability: "CPU6",
       asm: "FIL(<n>)=<v>, /<dst>   (and family)",
       diagram: bitbox(
         ((bits: 8, value: "01000111"),),
-        ((name: "sub", bits: 4), (name: "spec", bits: 4)),
+        ((name: "sub", bits: 4), (name: "sspec", bits: 2), (name: "dspec", bits: 2)),
+        ((name: "len−1 (0x47 row only)", bits: 8),),
         ((name: "operand bytes per spec", bits: 16),),
       ),
+      decode: [
+        ```cpu6
+        sub:  0 record loader   2 MVV copy-until-match
+              4 MVF copy        5 ANC and   6 ORC or   7 XRC xor
+              8 CPF compare     9 FIL fill
+        spec: 0 absolute word address
+              1 base reg + optional index reg + displacement
+                ([breg|d:1][ireg:4]; d=1: disp16, else signed disp8;
+                EA = R[breg] + disp (+ R[ireg] unless 0))
+              2 register indirect; one shared register byte when both
+                operands use it (src = high nibble, dst = low)
+              3 (source only) inline literal in the instruction
+                stream: 1 byte for FIL, len+1 bytes otherwise
+        // MVV: a match byte sits between the length and the operands
+        ```
+      ],
     ),
   ),
-  flags: flags-affected(value: "*", minus: "*"),
+  operation: [
+    ```cpu6
+    MVF/ANC/ORC/XRC: byte-wise ascending; dst op= src; one OR
+        accumulator over the result bytes drives the flags:
+        VALUE = block all zero, MINUS = any result bit 7; F L kept
+    CPF: unsigned byte compare dst vs src, ascending, stops at the
+        first mismatch; VALUE = equal, MINUS = dst < src; F L kept
+    MVV: copy src -> dst INCLUDING the byte that equals the match
+        byte; Y/Z end at the match address in src/dst (one past the
+        block when no match); FAULT = no match; V M L kept
+    FIL: fill dst with src[0]; flags untouched
+    // all block ops leave P at the next instruction's address
+    ```
+  ],
+  flags: flags-affected(fault: [MVV: no match], value: "*", minus: "*"),
   notes: [
+    Sub-operations 1 and 3 are unassigned (illegal). The operand
+    grammar and per-op flag rules are microcode-verified (emulator
+    probe campaign; CPF's F/L preservation contradicts webCenREE's
+    instruction-level model).
+
     Sub-operation 0 is the *record loader* used by the bootstrap and
     by executable files: it interprets a stream of
     `[type][len][offset₁₆][payload…][checksum]` records (byte sum ≡ 0

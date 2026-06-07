@@ -74,16 +74,19 @@
   operation: [
     ```cpu6
     result = n                  // CLRB (0x22)
-    result = (~R[reg]) + n      // IVRB (0x23): carry/overflow from
-    R[reg] = result<7:0>        // the add land in L and F
+    result = (~R[reg]) + n      // IVRB (0x23)
+    R[reg] = result<7:0>
+    // IVRB with n = 0 is a pure complement: L and F untouched.
+    // With n >= 1 the add's carry and signed overflow land in L
+    // and F (microcode-verified).
     ```
   ],
-  flags: flags-affected(fault: [CLRB: cleared; IVRB: add overflow],
-    link: [CLRB: cleared; IVRB: add carry],
+  flags: flags-affected(fault: [CLRB: cleared; IVRB n≥1: add overflow],
+    link: [CLRB: cleared; IVRB n≥1: add carry],
     minus: "*", value: "*"),
   notes: [
     `CLAB`/`IVAB` (0x2A/0x2B) are the one-byte `AL` aliases with
-    n = 0.
+    n = 0 — IVAB therefore preserves L and F.
   ],
 )
 
@@ -115,14 +118,14 @@
   ),
   operation: [
     ```cpu6
-    // SRRB: arithmetic right; last bit out enters L
+    // SRRB: arithmetic right; last bit out enters L; F PRESERVED
     // SLRB: left; L receives the last bit shifted out of bit 7,
-    //       F set if the sign changed at any step (a shift by the
-    //       full width drains the sign itself: SLR 0xFFFF by 16
-    //       faults — microcode-verified)
-    // RRRB: 9-bit rotate through L; F cleared
-    // RLRB: 9-bit rotate through L; F set on sign change per step,
-    //       like SLRB
+    //       F written: set if the sign changed at any step (a shift
+    //       by the full width drains the sign itself: SLR 0xFFFF by
+    //       16 faults), cleared otherwise — microcode-verified
+    // RRRB: 9-bit rotate through L; F preserved
+    // RLRB: 9-bit rotate through L; F written on per-step sign
+    //       change, like SLRB
     ```
   ],
   flags: flags-affected(fault: [SLRB: sign change], link: [last bit out],

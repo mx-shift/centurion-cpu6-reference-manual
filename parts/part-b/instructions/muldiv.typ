@@ -55,6 +55,7 @@
     VALUE = IsZero(product)
     FAULT = product > 0xFFFF
     MINUS = product<31> if FAULT else product<15>
+    LINK  = 0                               // microcode-verified
     ```
   ],
   flags: flags-affected(fault: [product > 16 bits], minus: "*", value: "*"),
@@ -106,6 +107,7 @@
   operation: [
     ```cpu6
     if divisor == 0 then FAULT = 1; return   // regs unchanged
+    FAULT = 0                                // success clears F
     dividend = R[dst]                        // 16 bits, NOT a pair
     q = dividend / divisor; r = dividend mod divisor
     if dst is pair leader then
