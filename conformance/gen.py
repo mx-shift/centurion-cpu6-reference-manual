@@ -723,3 +723,229 @@ def tier9(capture, seed=0xCE6, n=400):
 
 TIERS[9] = tier9
 ALL_TIERS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12]
+
+
+def tier10(capture):
+    """Traps: HLT below level 15 and illegal opcodes vector to a
+    planted level-15 stub that records the cause and entry stamp,
+    redirects the level-0 resume, and RIs back."""
+    v = []
+    jc = list(_jmp_capture(capture))
+
+    def trap_vec(name, trap_bytes):
+        S = model.SLOT
+        # layout: prologue(15) trap stub(...)
+        prologue = [
+            0x90, 0, 0,        # LDA= stub (fixed below)
+            0xD7, 0xFE,        # SAR FE: level-15 P = stub
+            0x90, 0x00, 0x00,
+            0xD7, 0xFC,        # level-15 C = 0
+            0x90, 0x11, 0x22,
+            0xD7, 0xF0,        # level-15 A = 0x1122 (AU must survive)
+        ]
+        stub_at = S + len(prologue) + len(trap_bytes)
+        prologue[1], prologue[2] = stub_at >> 8, stub_at & 0xFF
+        stub = [
+            0x81, 0x00, 0xF1,  # AL15 = cause (via the regfile alias)
+            0xA1, MEMW >> 8, MEMW & 0xFF,
+            0x81, 0x00, 0xF0,  # AU15 (must still be 0x11)
+            0xA1, (MEMW + 1) >> 8, (MEMW + 1) & 0xFF,
+            0x81, 0x00, 0xFC,  # CU15 entry stamp (old<<4 | 5)
+            0xA1, (MEMW + 2) >> 8, (MEMW + 2) & 0xFF,
+            0x90, 0, 0,        # LDA= resume (fixed below)
+            0xD7, 0x0E,        # level-0 P = resume
+            0x0A,              # RI
+        ]
+        resume_at = stub_at + len(stub)
+        stub[19], stub[20] = resume_at >> 8, resume_at & 0xFF
+        code = prologue + list(trap_bytes) + stub + jc
+        v.append(Vector(name, code, mem=bytes(4)))
+
+    trap_vec("trap.hlt", [0x00])
+    trap_vec("trap.ill0b", [0x0B])
+    trap_vec("trap.ill70", [0x70])
+    return v
+
+
+def tier13(capture):
+    """System-lite: EI/DI/BI, ECK/DCK/BCK, PAGE table access, DMA
+    channel registers, cross-level SAR/LAR with the memory alias,
+    store-immediate self-modification."""
+    v = []
+    jc = list(_jmp_capture(capture))
+    # BI/BCK: normalized both ways; taken and fall-through paths load
+    # distinct markers (the fall-through jumps over the taken load).
+    S = model.SLOT
+
+    def branch_vec(name, prelude, br, postlude=()):
+        base = S + len(prelude)
+        join = base + 2 + 2 + 3  # past BI, marker load, JMP
+        code = list(prelude) + [
+            br, 0x05,          # branch -> taken marker
+            0x80, 0x11,        # fall-through marker
+            0x71, join >> 8, join & 0xFF,
+            0x80, 0x22,        # taken marker
+        ] + list(postlude) + jc
+        v.append(Vector(name, code))
+
+    branch_vec("sys.bi.di", [0x05], 0x1E)
+    # BI under EI is only safe inside the controlled interrupt plant
+    # (tier 14) — bare EI in the monitor environment vectors into
+    # unplanted banks if anything is already pending.
+    branch_vec("sys.bck.off", [0xC6], 0x1F)
+    branch_vec("sys.bck.on", [0xB6], 0x1F, [0xC6])
+    # PAGE: store map-0 entries 0..7 (identity), single entry 0x1E
+    v.append(
+        Vector(
+            "page.store8",
+            [0x2E, 0x1C, 0x38, MEMW >> 8, MEMW & 0xFF] + jc,
+            mem=bytes(10),
+        )
+    )
+    v.append(
+        Vector(
+            "page.store1",
+            [0x2E, 0x3C, 0xF0, MEMW >> 8, MEMW & 0xFF] + jc,
+            mem=bytes(2),
+        )
+    )
+    # PAGE: load scratch map 7 from the window, store it back
+    v.append(
+        Vector(
+            "page.roundtrip",
+            [
+                0x2E, 0x0C, 0x3F, MEMW >> 8, MEMW & 0xFF,  # load 0..7 -> map 7
+                0x2E, 0x1C, 0x3F, (MEMW + 8) >> 8, (MEMW + 8) & 0xFF,  # store back
+            ]
+            + jc,
+            mem=bytes([0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x18]) + bytes(8),
+        )
+    )
+    # DMA register round trips (never enabled)
+    v.append(
+        Vector(
+            "dma.addr",
+            [0x90, 0x12, 0x34, 0x2F, 0x00, 0x2F, 0x21] + jc,  # set from A, read to B
+        )
+    )
+    v.append(
+        Vector(
+            "dma.count",
+            [0x60, 0xFE, 0xDC, 0x2F, 0x42, 0x2F, 0x63] + jc,  # set from X, read to Y
+        )
+    )
+    # SAR/LAR cross-level + the phys 0x00xx alias
+    v.append(
+        Vector(
+            "sar.bank3",
+            [
+                0x90, 0xAB, 0xCD,
+                0xD7, 0x34,         # bank-3 X = 0xABCD
+                0xD1, 0x00, 0x34,   # LDB/ 0x0034 (alias readback)
+                0xE6, 0x34,         # LAR into A as well
+            ]
+            + jc,
+        )
+    )
+    # store-immediate self-modification, window over the slot
+    S = model.SLOT
+    v.append(
+        Vector(
+            "selfmod.sta_imm",
+            [0x90, 0xBE, 0xEF, 0xB0, 0x00, 0x00] + jc,
+            mem_addr=S,
+            mem=bytes(12),
+        )
+    )
+    return v
+
+
+def tier14(capture):
+    """Interrupt entry and return: a forced MUX TX interrupt vectors
+    to a planted level-2 ISR which records the cause, clears it, and
+    RIs back to the interrupted code."""
+    v = []
+    jc = list(_jmp_capture(capture))
+    S = model.SLOT
+    main = [
+        0x05,              # DI before touching anything
+        0x80, 0x00,
+        0xA1, 0xF2, 0x0D,  # mux interrupts off
+        0x90, 0, 0,        # LDA= isr (fixed below)
+        0xD7, 0x2E,        # level-2 P = isr
+        0x90, 0x00, 0x00,
+        0xD7, 0x2C,        # level-2 C = 0
+        0x80, 0x02,
+        0xA1, 0xF2, 0x0A,  # mux interrupt level = 2
+        0x80, 0x01,
+        0xA1, 0xF2, 0x0C,  # force TX interrupt, port 0
+        0xA1, 0xF2, 0x0E,  # enable mux interrupts
+        0x04,              # EI -> entry at the next boundary
+        0x01, 0x01,        # the interrupted window
+        0x05,              # DI again on the resumed path
+        0x80, 0x77,        # path marker
+        0xA1, 0, 0,        # patched below: window+2
+    ]
+    isr_at = S + len(main) + 3
+    main[7], main[8] = isr_at >> 8, isr_at & 0xFF
+    main[-2], main[-1] = (MEMW + 2) >> 8, (MEMW + 2) & 0xFF
+    # Interrupt entry acknowledges the request; the ISR only reads
+    # the cause latch and gates further MUX interrupts off.
+    join = isr_at + 18  # the shared marker store after the BI ladder
+    isr = [
+        0x81, 0xF2, 0x0F,  # cause readback (port 0, TX -> 0x01)
+        0xA1, MEMW >> 8, MEMW & 0xFF,
+        0xA1, 0xF2, 0x0D,  # disable mux interrupts
+        # BI inside the plant: globally enabled here, nothing pending
+        0x1E, 0x05,
+        0x80, 0x11,
+        0x71, join >> 8, join & 0xFF,
+        0x80, 0x22,        # expected: taken
+        0xA1, (MEMW + 3) >> 8, (MEMW + 3) & 0xFF,
+        0x0A,              # RI
+    ]
+    code = main + jc + isr
+    v.append(Vector("int.muxtx", code, mem=bytes(4)))
+    return v
+
+
+TIERS.update({10: tier10, 13: tier13, 14: tier14})
+ALL_TIERS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+
+
+def tier6_loader(capture):
+    """MEM record-loader vectors (sub-op 0)."""
+    v = []
+    jc = list(_jmp_capture(capture))
+    base_ptr = MEMW  # word at MEMW holds the load base
+    target = MEMW + 32
+
+    def rec_vec(name, records, zoff=8):
+        mem = bytearray(48)
+        mem[0:2] = bytes([(target >> 8) & 0xFF, target & 0xFF])
+        mem[zoff : zoff + len(records)] = records
+        code = [
+            0x60, (MEMW + zoff) >> 8, (MEMW + zoff) & 0xFF,  # X = record ptr
+            0x47, 0x02, base_ptr >> 8, base_ptr & 0xFF, 0x04,  # MEM 0, src abs, dst reg X
+        ] + jc
+        v.append(Vector(name, code, mem=bytes(mem)))
+
+    # data record: type 0, len 3, offset 2, payload, checksum
+    rec = bytes([0x00, 0x03, 0x00, 0x02, 0xAA, 0xBB, 0xCC])
+    rec += bytes([(-sum(rec)) & 0xFF])
+    rec_vec("memload.data", rec)
+    # end-of-section: len 0
+    rec = bytes([0x00, 0x00, 0x00, 0x00])
+    rec += bytes([(-sum(rec)) & 0xFF])
+    rec_vec("memload.end", rec)
+    # stream end marker 0x80
+    rec_vec("memload.streamend", bytes([0x80]))
+    # bad checksum
+    rec_vec("memload.badsum", bytes([0x00, 0x01, 0x00, 0x00, 0x55, 0xFF]))
+    # bad type
+    rec_vec("memload.badtype", bytes([0x07]))
+    return v
+
+
+TIERS[15] = tier6_loader
+ALL_TIERS.append(15)

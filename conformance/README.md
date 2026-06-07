@@ -82,7 +82,7 @@ to separate the two.
 
 ## Results (2026-06-06, against the emulator)
 
-Full suite: 1729 vectors, 1729 pass. Bringing the suite up found ten
+Full suite: 1748 vectors, 1748 pass, 0 skips. Bringing the suite up found ten
 errors in the manual — indexed-mode-byte bit positions, INX/DCX step
 size, DIV's dividend width and result placement, IVRB's
 carry/overflow flags (and the n = 0 pure-complement case that
@@ -100,8 +100,20 @@ Coverage: every non-system opcode (loads/stores in all modes
 including the one-byte register-pointer rows, branches, byte/word
 ALU with all CPU6 sub-modes, register-constant rows with memory
 forms, all one-byte aliases, MUL/DIV in all forms, BIG sub-ops 0-9
-with all operand specs, MEM block ops, MVL, STR, LST/SST, SAR/LAR,
-flag ops, PCX, SVC/RSV). Excluded as untestable under a monitor:
-HLT, EI/DI, RI, PAGE, DMA, LIO/SIO, the parity and clock controls,
-sense-switch branches (panel-state dependent), and the MEM record
-loader (planned).
+with all operand specs, MEM block ops including the record loader,
+MVL, STR, LST/SST, SAR/LAR, flag ops, PCX, SVC/RSV) — plus the
+system behaviors reachable by planting register banks: HLT-below-15
+and illegal-opcode traps (cause codes, AU survival, entry stamp,
+RI return through a redirected resume), a full MUX-forced interrupt
+entry/RI round trip with a BI probe inside the ISR, EI/DI and
+ECK/DCK/BCK (self-normalizing), PAGE table store/round-trip through
+a scratch map, the DMA channel registers (never enabled), and
+cross-level SAR/LAR against the register file's memory alias.
+
+Genuinely untestable here: HLT at level 15 (real halt), bare EI in
+an unplanted environment (anything already pending vectors into
+garbage — discovered the hard way), actual DMA transfers (needs a
+device), LIO/SIO, the parity poison/abort machinery, sense-switch
+branches (panel state), and timing. As a timing aid on real
+hardware, DLY's ~4.55 ms claim can be checked by timing a frame of
+repeated DLYs from the host.

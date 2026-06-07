@@ -20,53 +20,139 @@ class Trap(Exception):
     hitting one marks the vector unusable, not failed."""
 
 
+#: MMU page RAM after reset under the DIAG monitor (map 0 identity
+#: through page 0x1D, boot pages 0x1E/0x1F 0x7E/0x7F; maps 1-7 clear).
+RESET_PAGE_RAM = list(range(0x1E)) + [0x7E, 0x7F] + [0] * 224
+
+
 class Machine:
     def __init__(self):
-        self.r = {"A": 0, "B": 0, "X": 0, "Y": 0, "Z": 0, "S": 0}
+        # Full 256-byte register file (§A2): 16 banks of 16 bytes,
+        # selected by the interrupt level; word registers A B X Y Z S
+        # C P at even offsets, big-endian. Bank contents are
+        # zero-initialized — vectors must write any cross-level cell
+        # before reading it (real banks hold boot residue).
+        self.rf = bytearray(256)
+        self.level = 0
         self.f = {"F": 0, "L": 0, "M": 0, "V": 0}
+        self.int_enable = 0  # A4: reset disables interrupts
+        self.clock_run = 0  # A4: reset stops the clock
+        self.aoo = 0
+        self.pta = 0
+        self.page_ram = list(RESET_PAGE_RAM)
+        # DMA channel registers (B2 DMA); never enabled by vectors.
+        self.dma = {"addr": 0, "count": 0, "dev": 0, "en": 0, "ilvl": 0}
+        # Minimal MUX interrupt machinery for the forced-TX round trip.
+        self.mux = {"ilvl": 0, "int_en": 0, "pend": 0, "cause": 0}
         self.mem = {}
         self.pc = 0
 
-    # -- register file (§A2): byte-addressed, big-endian word pairs ---
-    _WORDS = {0: "A", 2: "B", 4: "X", 6: "Y", 8: "Z", 10: "S"}
-
+    # -- register file accessors (current bank) -----------------------
     def rget(self, idx):
-        if idx not in self._WORDS:
-            raise Trap(f"register {idx} (C/P) not modeled")
-        return self.r[self._WORDS[idx]]
+        if idx in (12, 14):
+            raise Trap("C/P as a named operand not modeled")
+        b = (self.level << 4) | (idx & 0xE)
+        return (self.rf[b] << 8) | self.rf[b + 1]
 
     def rset(self, idx, v):
-        if idx not in self._WORDS:
-            raise Trap(f"register {idx} (C/P) not modeled")
-        self.r[self._WORDS[idx]] = v & 0xFFFF
+        if idx in (12, 14):
+            raise Trap("C/P as a named operand not modeled")
+        b = (self.level << 4) | (idx & 0xE)
+        self.rf[b] = (v >> 8) & 0xFF
+        self.rf[b + 1] = v & 0xFF
 
     def bget(self, idx):
-        w = self.rget(idx & 0xE)
-        return (w >> 8) & 0xFF if idx % 2 == 0 else w & 0xFF
+        return self.rf[(self.level << 4) | (idx & 0xF)]
 
     def bset(self, idx, v):
-        w = self.rget(idx & 0xE)
-        v &= 0xFF
-        w = (v << 8) | (w & 0xFF) if idx % 2 == 0 else (w & 0xFF00) | v
-        self.rset(idx & 0xE, w)
+        self.rf[(self.level << 4) | (idx & 0xF)] = v & 0xFF
 
-    # -- memory; the register file shadows 0x0000-0x00FF (§A3) -------
+    # raw register-file access (SAR/LAR, level switching)
+    def rfw(self, addr, v):
+        self.rf[addr & 0xFF] = v & 0xFF
+
+    def rfr(self, addr):
+        return self.rf[addr & 0xFF]
+
+    # -- status composition (§A4): C.lo = [V M F L][AOO][PTA] ---------
+    def compose_clo(self):
+        return (
+            (self.f["V"] << 7) | (self.f["M"] << 6) | (self.f["F"] << 5)
+            | (self.f["L"] << 4) | (self.aoo << 3) | (self.pta & 7)
+        )
+
+    def apply_clo(self, v):
+        self.aoo = (v >> 3) & 1
+        self.pta = v & 7
+
+    # -- level switching (§A4 Entry / RI) ------------------------------
+    def enter_level(self, target, cause=None):
+        old = self.level
+        base = old << 4
+        self.rf[base + 14] = (self.pc >> 8) & 0xFF
+        self.rf[base + 15] = self.pc & 0xFF
+        self.rf[base + 13] = self.compose_clo()
+        tbase = target << 4
+        self.rf[tbase + 12] = (old << 4) | 5  # entry stamp
+        for k in self.f:
+            self.f[k] = 0
+        self.apply_clo(self.rf[tbase + 13])
+        self.level = target
+        if cause is not None:
+            self.rf[tbase + 1] = cause  # AL only; AU survives
+        self.pc = (self.rf[tbase + 14] << 8) | self.rf[tbase + 15]
+
+    def trap15(self, cause):
+        self.enter_level(15, cause=cause)
+
+    def check_interrupts(self):
+        """Pending MUX interrupt entry at an instruction boundary."""
+        if (
+            self.int_enable
+            and self.mux["int_en"]
+            and self.mux["pend"]
+            and self.mux["ilvl"] > self.level
+        ):
+            self.enter_level(self.mux["ilvl"])
+            self.mux["pend"] = 0  # entry acknowledges the request
+
+    # -- memory; the register file shadows 0x0000-0x00FF (§A3),
+    #    MMIO at 0xF200-0xF20F is the MUX (interrupt subset only) ----
     def mr(self, a):
         a &= 0xFFFF
         if a < 0x100:
-            if a < 12:  # A..S as the kernel knows them
-                return self.bget(a)
-            raise Trap(f"regfile byte {a:#x} not modeled")
+            return self.rf[a]
+        if a == 0xF20F:
+            v = self.mux["cause"]
+            self.mux["cause"] = 0  # reading consumes the cause latch
+            return v
+        if 0xF200 <= a <= 0xF2FF and a not in (0xF20F,):
+            raise Trap(f"MUX register {a:#x} read not modeled")
         return self.mem.get(a, 0)
 
     def mw(self, a, v):
         a &= 0xFFFF
+        v &= 0xFF
         if a < 0x100:
-            if a < 12:
-                self.bset(a, v)
-                return
-            raise Trap(f"regfile byte {a:#x} not modeled")
-        self.mem[a] = v & 0xFF
+            self.rf[a] = v
+            return
+        if 0xF200 <= a <= 0xF2FF:
+            if a == 0xF20A:
+                self.mux["ilvl"] = v & 0xF
+            elif a == 0xF20C:  # force TX interrupt, ports in low nibble
+                if v & 0xF:
+                    self.mux["pend"] = 1
+                    self.mux["cause"] = 1  # port 0, TX flag
+            elif a == 0xF20D:
+                self.mux["int_en"] = 0
+            elif a == 0xF20E:
+                self.mux["int_en"] = 1
+            elif a == 0xF20F:
+                self.mux["pend"] = 0
+            else:
+                raise Trap(f"MUX register {a:#x} write not modeled")
+            return
+        self.mem[a] = v
 
     def mrw(self, a):
         return (self.mr(a) << 8) | self.mr(a + 1)
@@ -176,7 +262,17 @@ def _nop(m, op_):
 
 @op(0x00)
 def _hlt(m, op_):
-    raise Trap("HLT")
+    # A4: HLT below level 15 traps to 15 with cause 1; the saved PC
+    # points past the HLT. At level 15 it genuinely halts.
+    if m.level == 15:
+        raise Trap("HLT at level 15")
+    m.trap15(1)
+
+
+# Illegal opcodes trap to level 15 with cause 0 (§A4).
+@op(0x0B, 0x70, 0x87, 0x97, 0xA7, 0xB7, 0xC7, 0xE7)
+def _illegal(m, op_):
+    m.trap15(0)
 
 
 # B2 Bcc: PC-relative, disp from the next instruction; no flags.
@@ -874,23 +970,28 @@ CAPTURE_SENTINEL = 0xFFFF
 def run_vector(regs, mem_addr, mem_bytes, code, capture_addr, max_steps=10000):
     """Returns (flags_nibble, regs_dict, mem_bytes_after) or raises Trap."""
     m = Machine()
+    names = {"A": 0, "B": 2, "X": 4, "Y": 6, "Z": 8, "S": 10}
     for k, v in regs.items():
-        m.r[k] = v & 0xFFFF
+        m.rset(names[k], v)
     # Kernel entry flags: CLRB clears F and L; the register loads are
     # mv-only, ending with LDA of the requested A value.
     m.f["F"] = 0
     m.f["L"] = 0
-    m.mv(m.r["A"], 16)
+    m.mv(m.rget(0), 16)
     for i, b in enumerate(mem_bytes):
         m.mem[(mem_addr + i) & 0xFFFF] = b
     for i, b in enumerate(code):
         m.mem[(SLOT + i) & 0xFFFF] = b
     m.pc = SLOT
     for _ in range(max_steps):
+        m.check_interrupts()
         if m.pc == capture_addr:
+            if m.level != 0:
+                raise Trap("capture reached above level 0")
             flags = (m.f["F"] << 3) | (m.f["L"] << 2) | (m.f["M"] << 1) | m.f["V"]
             out = bytes(m.mem.get((mem_addr + i) & 0xFFFF, 0) for i in range(len(mem_bytes)))
-            return flags, dict(m.r), out
+            regs_out = {k: m.rget(i) for k, i in names.items()}
+            return flags, regs_out, out
         m.step()
     raise Trap("model: step limit")
 
@@ -923,6 +1024,48 @@ def _cl(m, op_):
     m.f["L"] ^= 1
 
 
+@op(0x0A)
+def _ri(m, op_):
+    # B2 RI: return to the level recorded in this bank's C high
+    # nibble; this bank's own P and C.lo are saved on the way out.
+    target = m.rf[(m.level << 4) | 12] >> 4
+    base = m.level << 4
+    m.rf[base + 14] = (m.pc >> 8) & 0xFF
+    m.rf[base + 15] = m.pc & 0xFF
+    m.rf[base + 13] = m.compose_clo()
+    if target == m.level:
+        return  # observed self-switch fall-through (P updated above)
+    tbase = target << 4
+    clo = m.rf[tbase + 13]
+    m.f["V"] = (clo >> 7) & 1
+    m.f["M"] = (clo >> 6) & 1
+    m.f["F"] = (clo >> 5) & 1
+    m.f["L"] = (clo >> 4) & 1
+    m.apply_clo(clo)
+    m.level = target
+    m.pc = (m.rf[tbase + 14] << 8) | m.rf[tbase + 15]
+
+
+@op(0x04)
+def _ei(m, op_):
+    m.int_enable = 1
+
+
+@op(0x05)
+def _di(m, op_):
+    m.int_enable = 0
+
+
+@op(0xB6)
+def _eck(m, op_):
+    m.clock_run = 1
+
+
+@op(0xC6)
+def _dck(m, op_):
+    m.clock_run = 0
+
+
 @op(0x0C)
 def _syn(m, op_):
     pass  # front-panel indicator only
@@ -938,12 +1081,20 @@ def _dly(m, op_):
     pass  # ~4.55 ms delay; no architectural effect
 
 
-# Conditional branches over machine state the kernel runs with:
-# interrupts disabled under the monitor (READING: BI not taken), the
-# real-time clock state unknown -> BCK unmodeled.
+# BI/BCK branch on the modeled enable bits; vectors normalize the
+# state first (DI/EI, DCK/ECK) so the entry value never matters.
 @op(0x1E)
 def _bi(m, op_):
-    m.fetch()  # READING: assumes DI state under TOS
+    d = _s8(m.fetch())
+    if m.int_enable:
+        m.pc = (m.pc + d) & 0xFFFF
+
+
+@op(0x1F)
+def _bck(m, op_):
+    d = _s8(m.fetch())
+    if m.clock_run:
+        m.pc = (m.pc + d) & 0xFFFF
 
 
 # ---------------------------------------------------------------------
@@ -1010,19 +1161,15 @@ def _str(m, op_):
 @op(0xD7)
 def _sar(m, op_):
     n = m.fetch()
-    if n >= 11:
-        raise Trap("SAR beyond modeled register file")
     a = m.rget(0)
-    m.bset(n, a >> 8)
-    m.bset(n + 1, a & 0xFF)
+    m.rfw(n, a >> 8)
+    m.rfw(n + 1, a & 0xFF)
 
 
 @op(0xE6)
 def _lar(m, op_):
     n = m.fetch()
-    if n >= 11:
-        raise Trap("LAR beyond modeled register file")
-    m.rset(0, (m.bget(n) << 8) | m.bget(n + 1))
+    m.rset(0, (m.rfr(n) << 8) | m.rfr(n + 1))
 
 
 # ---------------------------------------------------------------------
@@ -1072,7 +1219,10 @@ def _mvl(m, op_):
 def _mem(m, op_):
     sel = m.fetch()
     subop = sel >> 4
-    if subop in (0, 1, 3):
+    if subop == 0:
+        _mem_binload(m, sel)
+        return
+    if subop in (1, 3):
         raise Trap(f"MEM subop {subop} not modeled")
     if op_ == 0x47:
         count = m.fetch() + 1
@@ -1158,14 +1308,14 @@ def _mem(m, op_):
 def _svc(m, op_):
     num = m.fetch()
     s = m.rget(10)
-    ccb = _ccpack(m) >> 4  # [V M F L] nibble; AOO/PTA read 0 here
-    for v in (ccb << 4 | 0x00, 0x05, m.rget(4) & 0xFF, m.rget(4) >> 8, num):
+    for v in (m.compose_clo(), 0x05, m.rget(4) & 0xFF, m.rget(4) >> 8, num):
         s = (s - 1) & 0xFFFF
         m.mw(s, v)
     m.rset(10, s)
     m.rset(4, m.pc)  # X = return address
     for k in m.f:
         m.f[k] = 0
+    m.pta = 0  # supervisor address space (identity here)
     m.pc = 0x0100
 
 
@@ -1173,10 +1323,11 @@ def _svc(m, op_):
 def _rsv(m, op_):
     s = m.rget(10)
     frame_x = (m.mr((s + 1) & 0xFFFF) << 8) | m.mr((s + 2) & 0xFFFF)
+    frame_cc = m.mr((s + 4) & 0xFFFF)
     m.rset(10, (s + 5) & 0xFFFF)
     m.pc = m.rget(4)
     m.rset(4, frame_x)
-    # flags unchanged; PTA restore invisible at map 0
+    m.pta = frame_cc & 7  # flags unchanged
 
 
 # ---------------------------------------------------------------------
@@ -1232,3 +1383,124 @@ def _big_cfb(m, lenb, template, valaddr, vl):
         m.mw(p, out)
     m.f["F"] = 1 if v != 0 else 0
     m.rset(0, a_out)
+
+
+# ---------------------------------------------------------------------
+# PAGE (0x2E) — B2: page-table access. The monitor runs map 0; the
+# load/store sub-ops move entries between the page RAM and memory.
+# ---------------------------------------------------------------------
+@op(0x2E)
+def _page(m, op_):
+    sel = m.fetch()
+    sub = sel >> 4
+    form = sel & 0xF
+    cnt = m.fetch()
+    n, mapn = cnt >> 3, cnt & 7
+    if form == 0xC:
+        addr = m.fetchw()
+    elif form == 0xD:
+        v0 = m.fetch()
+        reg = v0 >> 4
+        disp = _s8(m.fetch())
+        m.fetch()  # padding zero byte per the encoding
+        addr = (m.rget(reg & 0xE) + disp) & 0xFFFF
+        raise Trap("PAGE register-indexed form untested here")
+    else:
+        raise Trap(f"PAGE form {form:#x}")
+    if sub == 0:  # load entries 0..n from memory
+        for i in range(n + 1):
+            m.page_ram[mapn * 32 + i] = m.mr((addr + i) & 0xFFFF) & 0xFF
+    elif sub == 1:  # store entries 0..n to memory
+        for i in range(n + 1):
+            m.mw((addr + i) & 0xFFFF, m.page_ram[mapn * 32 + i])
+    elif sub == 2:  # load single entry n
+        m.page_ram[mapn * 32 + n] = m.mr(addr) & 0xFF
+    elif sub == 3:  # store single entry n
+        m.mw(addr, m.page_ram[mapn * 32 + n])
+    elif sub == 4:  # rotated full-map load
+        for i in range(32):
+            m.page_ram[mapn * 32 + ((n + i) % 32)] = m.mr((addr + i) & 0xFFFF) & 0xFF
+    else:
+        raise Trap(f"PAGE sub {sub}")
+
+
+# ---------------------------------------------------------------------
+# DMA (0x2F) — B2: channel register access. Vectors never enable a
+# transfer; the register file round-trips are what is testable.
+# ---------------------------------------------------------------------
+@op(0x2F)
+def _dma(m, op_):
+    sel = m.fetch()
+    reg, sub = (sel >> 4) & 0xE, sel & 0xF
+    if sub == 0:
+        m.dma["addr"] = m.rget(reg)
+    elif sub == 1:
+        m.rset(reg, m.dma["addr"])
+    elif sub == 2:
+        m.dma["count"] = m.rget(reg)
+    elif sub == 3:
+        m.rset(reg, m.dma["count"])
+    elif sub in (4, 5):
+        m.dma["dev"] = (sel >> 4) & 3
+    elif sub == 6:
+        raise Trap("DMA enable not modeled (no device)")
+    elif sub == 7:
+        m.dma["en"] = 0
+    elif sub == 8:
+        m.dma["ilvl"] = (sel >> 4) & 0xF
+    else:
+        raise Trap(f"DMA sub {sub} not modeled")
+
+
+# ---------------------------------------------------------------------
+# MEM sub-op 0: the record loader (B2.37 notes; stream layout
+# [type][len][offset16][payload...][checksum], byte sum == 0 mod 256).
+# ---------------------------------------------------------------------
+def _mem_binload(m, sel):
+    sspec, dspec = (sel >> 2) & 3, sel & 3
+    if sspec == 0:
+        base_ptr = m.fetchw()
+    elif sspec == 2:
+        b = m.fetch()
+        base_ptr = m.rget((b >> 4) & 0xE)
+    else:
+        raise Trap("binload src spec")
+    if dspec != 2:
+        raise Trap("binload dst spec")
+    rec_reg = m.fetch() & 0xF
+    base = m.mrw(base_ptr)
+    z = m.rget(rec_reg & 0xE)
+    b0 = m.mr(z)
+    if b0 == 0x80:
+        m.rset(rec_reg & 0xE, (z + 1) & 0xFFFF)
+        m.f["V"] = 1
+        m.f["L"] = 1
+        return
+    if b0 > 1:
+        m.f["F"] = 1
+        return
+    ln = m.mr((z + 1) & 0xFFFF)
+    off = (m.mr((z + 2) & 0xFFFF) << 8) | m.mr((z + 3) & 0xFFFF)
+    dst = (base + off) & 0xFFFF
+    total = sum(m.mr((z + i) & 0xFFFF) for i in range(4))
+    if b0 == 0:
+        for i in range(ln):
+            byt = m.mr((z + 4 + i) & 0xFFFF)
+            total += byt
+            m.mw((dst + i) & 0xFFFF, byt)
+    else:
+        total += sum(m.mr((z + 4 + i) & 0xFFFF) for i in range(ln))
+        i = 0
+        while i + 1 < ln:
+            w = m.mrw((z + 4 + i) & 0xFFFF)
+            t = (base + w) & 0xFFFF
+            m.mww(t, (m.mrw(t) + dst) & 0xFFFF)
+            i += 2
+    total += m.mr((z + 4 + ln) & 0xFFFF)
+    m.rset(0, dst)
+    if total & 0xFF == 0:
+        m.rset(rec_reg & 0xE, (z + 5 + ln) & 0xFFFF)
+        if ln == 0:
+            m.f["V"] = 1
+    else:
+        m.f["F"] = 1

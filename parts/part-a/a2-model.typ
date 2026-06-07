@@ -98,13 +98,56 @@ quotient/remainder sets.
 
 == The register file
 
-All sixteen levels' registers live in a 256-byte register file that is
-also physical memory 0x0000–0x00FF: level _n_'s bank occupies bytes
-16·_n_…16·_n_+15, registers stored big-endian in the order A B X Y Z S
-C P. Ordinary loads and stores reach any bank when the active page map
-exposes physical page 0, and SAR/LAR address the file directly. The
-*live* program counter is processor state, distinct from the P slot,
-which holds the value saved at the last level switch.
+Register banking is the heart of the CPU6's execution model: there is
+no single register set. All sixteen levels' registers live in a
+256-byte register file that is also physical memory 0x0000–0x00FF;
+the interrupt level (IPL) selects which 16-byte slice the
+register-named instructions operate on.
+
+#align(center, table(
+  columns: (auto, auto, 1fr),
+  stroke: 0.5pt,
+  inset: 5pt,
+  table.header([*Bytes*], [*Bank*], [*Contents (big-endian word pairs)*]),
+  [00–0F], [level 0], [`AU AL BU BL XU XL YU YL ZU ZL SU SL CU CL PU PL`],
+  [10–1F], [level 1], [〃],
+  [⋮], [⋮], [〃],
+  [F0–FF], [level 15], [〃 (the trap service bank)],
+))
+
+Ordinary loads and stores reach any bank when the active page map
+exposes physical page 0, and SAR/LAR address the file directly
+regardless of mapping. The *live* program counter and flag nibble are
+processor state, distinct from each bank's P and C slots, which hold
+the values saved at that level's last suspension.
+
+== Levels as coroutines
+
+Because every level keeps its complete context in its bank, the
+sixteen levels behave like coroutines, not like a save/restore
+interrupt stack:
+
+- Entering a level (interrupt, trap) resumes it *where it last left
+  off* — at its bank's P, under its bank's page map. A service
+  routine that ends with RI and is later re-entered continues after
+  the RI's saved point, which is why CENTOS structures its
+  interrupt-driven drivers as loops that "return" mid-body.
+- Each level's address space is sticky: the PTA bits ride in the
+  bank's C low byte across suspensions (§A4). Supervisor and task
+  levels permanently inhabit different maps.
+- A supervisor manufactures execution contexts by writing another
+  bank's cells — plant P (and C) with SAR or plain stores, then let
+  an entry or RI switch there. Dispatching a task is "point S at a
+  stack image, RSV" (§A4).
+- `CU` is stamped on every entry with the interrupted level, so RI
+  knows where to go back to; nesting depth is bounded by the number
+  of levels, not by stack space.
+
+The bank-switch semantics — the entry stamp, the cause code written
+to the service bank's `AL` with `AU` surviving, the live-PC/P
+distinction, and the RI restore path — are microcode-verified and
+exercised on-target by the conformance suite (trap and interrupt
+round trips through planted banks).
 
 == The C register and the flags
 

@@ -158,7 +158,10 @@ def main():
     log = print if args.verbose else (lambda *a: None)
     proc = None
     if args.emulator:
-        port = 6501
+        import random
+
+        port = random.randrange(6510, 6900)
+        errlog = open(os.path.join(os.path.dirname(args.report) or ".", "emulator.log"), "wb")
         proc = subprocess.Popen(
             [
                 os.path.expanduser(f"{args.emulator}/target/release/cen"),
@@ -170,9 +173,10 @@ def main():
                 "--pace=0",
             ],
             stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
+            stderr=errlog,
             cwd=os.path.expanduser(args.emulator),
         )
+        log(f"emulator on port {port} (pid {proc.pid})")
         time.sleep(1.0)
         io = TcpIo("localhost", port)
     elif args.tcp:
