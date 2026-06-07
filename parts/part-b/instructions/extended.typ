@@ -78,10 +78,13 @@
   summary: [
     Program the processor-board DMA channel. The selector byte's low
     nibble picks the operation and its high nibble a word register
-    operand. Transfers proceed a byte per instruction boundary while
-    enabled, walking the address register through the MMU; the
-    transfer ends when the count register wraps to 0xFFFF. CPU6 only
-    (the CPU4 used an external DMA card instead).
+    operand. Transfers are cycle-stealing: the fetch microcode
+    arbitrates the device request line, so a card holding its
+    request transfers back-to-back bytes while instruction
+    retirement stalls; a card pulsing its request gets a byte per
+    instruction boundary. Each byte walks the address register
+    through the MMU under the live page map. CPU6 only (the CPU4
+    used an external DMA card instead).
   ],
   encodings: (
     encoding(
@@ -103,6 +106,15 @@
     ),
   ),
   flags: none,
+  notes: [
+    When the count register wraps to 0xFFFF the processor latches
+    *transfer end*; the latch is readable by the device (the disk
+    controllers poll it to terminate card-side sequences) and is
+    cleared by the next *set count*. Count-terminated devices stop
+    on the wrap itself; card-terminated devices (the Finch
+    controller) keep their own byte counts and use the latch only
+    as a status input.
+  ],
 )
 
 #instruction(
@@ -110,11 +122,10 @@
   qualifier: "(multi-byte integers, 0x46)",
   summary: [
     Arithmetic on big-endian two's-complement integers of 1–16 bytes.
-    A length byte carries source and destination lengths (each nibble
-    + 1), a selector byte the sub-operation and operand specs
+    A length byte carries source and destination lengths (each
+    nibble + 1), a selector byte the sub-operation and operand specs
     (inline address, register pointer, or — for sources — an inline
-    literal). Sub-operations include load/store, add, subtract,
-    compare, negate, and shifts. CPU6 only.
+    literal). CPU6 only.
   ],
   encodings: (
     encoding(
@@ -127,15 +138,44 @@
         ((name: "subop", bits: 4), (name: "sspec", bits: 2), (name: "dspec", bits: 2)),
         ((name: "operand bytes per spec", bits: 16),),
       ),
+      decode: [
+        ```cpu6
+        subop: 0 add            1 subtract       2 compare (no write)
+               3 move (ZAD)     4 negate-move (ZSU)
+               5 multiply       6 divide         7 divide w/ remainder
+               8 CTB (decimal text -> binary)
+               9 CFB (binary -> decimal text)
+        ```
+      ],
     ),
   ),
-  flags: flags-affected(fault: [arith: overflow], link: [arith: carry],
-    minus: "*", value: "*"),
+  flags: flags-affected(fault: [arith: overflow; divide by zero],
+    link: [arith: carry], minus: "*", value: "*"),
+  operation: [
+    ```cpu6
+    // 7 (divide with remainder): quotient overwrites the
+    // destination field; the remainder (source length) is stored
+    // at the address held in A. The OS splits a block number into
+    // track and sector this way, pointing A one byte above the
+    // dividend.
+    Mem[dst .. dst+dstlen]  = Mem[dst]/src
+    Mem[A .. A+srclen]      = Mem[dst] mod src
+    ```
+  ],
   notes: [
     The assembler surfaces this family as `ZAD ZSU ZCM ZNG …` with
     parenthesised byte lengths. Operand specs allow degenerate but
     legal combinations (literal-to-literal); see the optest sources
     for exhaustive examples.
+
+    Sub-op 7's remainder-to-`[A]` rule is microcode-verified (with
+    A = 0 the remainder lands on physical 0x0000 — A's own high
+    byte in the register file). CTB reads AL as the digit count and
+    sets V from value = 0, M from bit 7 of the final low byte, and
+    clears L. CFB formats into a marker template: `@` (0xC0)
+    positions always take a digit, `#` (0xA3) positions take a digit
+    while the value is non-zero and pad afterwards; A returns one
+    below the lowest digit written.
   ],
 )
 
