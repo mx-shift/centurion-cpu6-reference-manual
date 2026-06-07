@@ -106,9 +106,12 @@
   operation: [
     ```cpu6
     if divisor == 0 then FAULT = 1; return   // regs unchanged
+    dividend = R[dst]                        // 16 bits, NOT a pair
     q = dividend / divisor; r = dividend mod divisor
-    if dst is pair leader then R[leader] = r
-    R[follower] = q
+    if dst is pair leader then
+        R[leader] = r; R[follower] = q
+    else
+        R[dst] = q                           // remainder discarded
     VALUE = IsZero(q); MINUS = q<15>; LINK = r != 0
     ```
   ],

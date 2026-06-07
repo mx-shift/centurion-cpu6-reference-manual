@@ -74,11 +74,12 @@
   operation: [
     ```cpu6
     result = n                  // CLRB (0x22)
-    result = (~R[reg]) + n      // IVRB (0x23)
-    R[reg] = result<7:0>
+    result = (~R[reg]) + n      // IVRB (0x23): carry/overflow from
+    R[reg] = result<7:0>        // the add land in L and F
     ```
   ],
-  flags: flags-affected(fault: [CLRB: cleared], link: [CLRB: cleared],
+  flags: flags-affected(fault: [CLRB: cleared; IVRB: add overflow],
+    link: [CLRB: cleared; IVRB: add carry],
     minus: "*", value: "*"),
   notes: [
     `CLAB`/`IVAB` (0x2A/0x2B) are the one-byte `AL` aliases with
@@ -116,8 +117,12 @@
     ```cpu6
     // SRRB: arithmetic right; last bit out enters L
     // SLRB: left; L receives the last bit shifted out of bit 7,
-    //       F set if the sign changed at any step
-    // RRRB/RLRB: 9-bit rotate through L
+    //       F set if the sign changed at any step (a shift by the
+    //       full width drains the sign itself: SLR 0xFFFF by 16
+    //       faults — microcode-verified)
+    // RRRB: 9-bit rotate through L; F cleared
+    // RLRB: 9-bit rotate through L; F set on sign change per step,
+    //       like SLRB
     ```
   ],
   flags: flags-affected(fault: [SLRB: sign change], link: [last bit out],

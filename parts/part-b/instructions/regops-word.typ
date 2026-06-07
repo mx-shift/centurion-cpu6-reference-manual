@@ -81,7 +81,7 @@
     for higher odd nibbles.
 
     `INA DCA CLA IVA SRA SLA` (0x38–0x3D) are one-byte A-register
-    aliases, and `INX`/`DCX` (0x3E/0x3F) step X by 2 — the word-size
-    pointer increment.
+    aliases, and `INX`/`DCX` (0x3E/0x3F) step X by 1
+    (microcode-verified — not by the word size, despite the name).
   ],
 )

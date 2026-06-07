@@ -25,16 +25,22 @@ plain indexed mode for each register in turn.
 == The indexed mode byte
 
 ```cpu6
-[reg:4][0][disp:1][ind:1][id:2]
+[reg:4][disp:1][ind:1][id:2]
 ```
 
 - *reg* — the index register (register-file byte index of its high
-  half: 0 = A, 2 = B, 4 = X, …).
-- *id* — 01: post-increment, 10: pre-decrement, by the operand width.
-- *ind* — indirect: the indexed address selects a word holding the EA.
-- *disp* — a signed displacement byte follows and is added.
-- Bit 4 must be zero; encodings with it set are illegal (trap,
-  cause 0).
+  half: 0 = A, 2 = B, 4 = X, …). The index must be even: bit 4 of
+  the mode byte is the register number's low bit and must be zero;
+  encodings with it set are illegal (trap, cause 0).
+- *disp* (bit 3) — a signed displacement byte follows and is added.
+- *ind* (bit 2) — indirect: the indexed address selects a word
+  holding the EA. Auto-increment/decrement then step by the word
+  size regardless of the operand width.
+- *id* (bits 1:0) — 01: post-increment, 10: pre-decrement, by the
+  operand width (word size when indirect).
+
+Bit positions are microcode-verified (conformance suite, idx
+group).
 
 Combinations compose in that order: decrement, displace, then
 indirection. The assembler writes them `+A`, `+A+`, `−A−`, `+A,3`,
