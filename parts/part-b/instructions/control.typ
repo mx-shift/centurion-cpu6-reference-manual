@@ -54,39 +54,69 @@
 )
 
 #instruction(
-  "SF / RF",
-  qualifier: "(set / reset fault)",
+  "SF",
+  qualifier: "(set fault)",
   summary: [
-    Set or clear the fault flag F directly. All other flags are
-    preserved.
+    Set the fault flag F directly. All other flags are preserved. `RF`
+    is the reset counterpart.
   ],
   encodings: (
     encoding("Implicit", applicability: "CPU4/5/6", asm: "SF",
       diagram: bitbox((( bits: 8, value: "00000010"),))),
+  ),
+  operation: [
+    ```cpu6
+    FAULT = 1
+    ```
+  ],
+  flags: flags-affected(fault: [set]),
+)
+
+#instruction(
+  "RF",
+  qualifier: "(reset fault)",
+  summary: [
+    Clear the fault flag F directly. All other flags are preserved.
+    `SF` is the set counterpart.
+  ],
+  encodings: (
     encoding("Implicit", applicability: "CPU4/5/6", asm: "RF",
       diagram: bitbox((( bits: 8, value: "00000011"),))),
   ),
   operation: [
     ```cpu6
-    FAULT = 1   // SF (opcode 0x02)
-    FAULT = 0   // RF (opcode 0x03)
+    FAULT = 0
     ```
   ],
-  flags: flags-affected(fault: [written]),
+  flags: flags-affected(fault: [cleared]),
 )
 
 #instruction(
-  "EI / DI",
-  qualifier: "(enable / disable interrupts)",
+  "EI",
+  qualifier: "(enable interrupts)",
   summary: [
-    Enable or disable the interrupt system. The enable state is global
-    (not per-level) and is left untouched by interrupt entry, trap
-    entry, and RI — only EI, DI, and processor reset change it. The
-    `BI` branch tests it.
+    Enable the interrupt system. The enable state is global (not
+    per-level) and is left untouched by interrupt entry, trap entry,
+    and RI — only EI, DI, and processor reset change it. The `BI`
+    branch tests it; `DI` is the disable counterpart.
   ],
   encodings: (
     encoding("Implicit", applicability: "CPU4/5/6", asm: "EI",
       diagram: bitbox((( bits: 8, value: "00000100"),))),
+  ),
+  flags: none,
+)
+
+#instruction(
+  "DI",
+  qualifier: "(disable interrupts)",
+  summary: [
+    Disable the interrupt system. The enable state is global (not
+    per-level) and is left untouched by interrupt entry, trap entry,
+    and RI — only EI, DI, and processor reset change it. The `BI`
+    branch tests it; `EI` re-enables.
+  ],
+  encodings: (
     encoding("Implicit", applicability: "CPU4/5/6", asm: "DI",
       diagram: bitbox((( bits: 8, value: "00000101"),))),
   ),
@@ -94,21 +124,45 @@
 )
 
 #instruction(
-  "SL / RL / CL",
-  qualifier: "(set / reset / complement link)",
+  "SL",
+  qualifier: "(set link)",
   summary: [
-    Set, clear, or complement the link (carry) flag L. All other flags
-    are preserved.
+    Set the link (carry) flag L. All other flags are preserved. `RL`
+    clears it; `CL` complements it.
   ],
   encodings: (
     encoding("Implicit", applicability: "CPU4/5/6", asm: "SL",
       diagram: bitbox((( bits: 8, value: "00000110"),))),
+  ),
+  flags: flags-affected(link: [set]),
+)
+
+#instruction(
+  "RL",
+  qualifier: "(reset link)",
+  summary: [
+    Clear the link (carry) flag L. All other flags are preserved. See
+    `SL`.
+  ],
+  encodings: (
     encoding("Implicit", applicability: "CPU4/5/6", asm: "RL",
       diagram: bitbox((( bits: 8, value: "00000111"),))),
+  ),
+  flags: flags-affected(link: [cleared]),
+)
+
+#instruction(
+  "CL",
+  qualifier: "(complement link)",
+  summary: [
+    Complement the link (carry) flag L. All other flags are preserved.
+    See `SL`.
+  ],
+  encodings: (
     encoding("Implicit", applicability: "CPU4/5/6", asm: "CL",
       diagram: bitbox((( bits: 8, value: "00001000"),))),
   ),
-  flags: flags-affected(link: [written]),
+  flags: flags-affected(link: [complemented]),
 )
 
 #instruction(

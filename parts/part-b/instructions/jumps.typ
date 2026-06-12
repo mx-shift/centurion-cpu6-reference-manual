@@ -14,7 +14,7 @@
     encoding(
       "Mode family",
       applicability: "CPU4/5/6",
-      asm: "JMP/ <addr>  JMP$ <addr>  JMP <label>  JMP* <label>  JMP± <idx>",
+      asm: "JMP/ <addr>  JMP$ <addr>  JMP <label>  JMP* <label>  JMP+ <idx>  JMP− <idx>",
       diagram: bitbox(
         ((bits: 5, value: "01110"), (name: "mode", bits: 3)),
         ((name: "operand bytes per mode", bits: 16),),
@@ -23,7 +23,7 @@
         ```cpu6
         mode: 001 /  direct          010 $  indirect
               011    PC-relative     100 *  relative indirect
-              101 ±  indexed (mode byte follows, §A5)
+              101 +/− indexed (mode byte follows, §A5)
         PC = EA
         ```
       ],
@@ -44,7 +44,7 @@
     encoding(
       "Mode family",
       applicability: "CPU4/5/6",
-      asm: "JSR/ <addr>  JSR$ <addr>  JSR <label>  JSR* <label>  JSR± <idx>",
+      asm: "JSR/ <addr>  JSR$ <addr>  JSR <label>  JSR* <label>  JSR+ <idx>  JSR− <idx>",
       diagram: bitbox(
         ((bits: 5, value: "01111"), (name: "mode", bits: 3)),
         ((name: "operand bytes per mode", bits: 16),),
@@ -62,14 +62,14 @@
 )
 
 #instruction(
-  "STK / POP",
-  qualifier: "(multi-register push / pop)",
+  "STK",
+  qualifier: "(multi-register push)",
   summary: [
-    Push or pop a run of register-file bytes. The operand names the
-    first register byte and a count of bytes minus one; STK pushes the
-    run ending at that register descending, POP restores it. The pair
-    brackets interrupt-handler bodies and deep call chains. CPU6
-    only.
+    Push a run of register-file bytes onto the stack. The operand names
+    the first register byte and a count of bytes minus one; the run
+    ending at that register is pushed descending. `POP` is the
+    restoring counterpart; the pair brackets interrupt-handler bodies
+    and deep call chains. CPU6 only.
   ],
   encodings: (
     encoding(
@@ -77,27 +77,48 @@
       applicability: "CPU6",
       asm: "STK <reg>, <count>",
       diagram: bitbox(
-        ((bits: 8, value: "0111111d"),),
+        ((bits: 8, value: "01111110"),),
         ((name: "reg", bits: 4), (name: "count−1", bits: 4)),
       ),
-      decode: [
-        ```cpu6
-        d = opcode<0>   // 0 = STK (0x7E), 1 = POP (0x7F)
-        ```
-      ],
     ),
   ),
   operation: [
     ```cpu6
-    STK: for i = count-1 downto 0:
-             S = S - 1; Mem[S] = RFile[reg + i]
-    POP: for i = 0 to count-1:
-             RFile[reg + i] = Mem[S]; S = S + 1
+    for i = count-1 downto 0:
+        S = S - 1; Mem[S] = RFile[reg + i]
     ```
   ],
   flags: none,
   notes: [
-    `STK A,2` pushes `AU` and `AL` (one word); `POP Y,4` restores
-    Y and Z. Register-file byte indexing is described in §A2.
+    `STK A,2` pushes `AU` and `AL` (one word). Register-file byte
+    indexing is described in §A2.
   ],
+)
+
+#instruction(
+  "POP",
+  qualifier: "(multi-register pop)",
+  summary: [
+    Restore a run of register-file bytes from the stack — the inverse
+    of `STK`, with the same register-count operand. CPU6 only.
+  ],
+  encodings: (
+    encoding(
+      "Register-count",
+      applicability: "CPU6",
+      asm: "POP <reg>, <count>",
+      diagram: bitbox(
+        ((bits: 8, value: "01111111"),),
+        ((name: "reg", bits: 4), (name: "count−1", bits: 4)),
+      ),
+    ),
+  ),
+  operation: [
+    ```cpu6
+    for i = 0 to count-1:
+        RFile[reg + i] = Mem[S]; S = S + 1
+    ```
+  ],
+  flags: none,
+  notes: [`POP Y,4` restores `Y` and `Z`. See `STK`.],
 )

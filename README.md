@@ -21,6 +21,12 @@ just check        # documentation status totals
 
 Fonts: Noto Serif, Noto Sans, Source Code Pro.
 
+The ISA manual's addressing-mode diagrams use the
+[CeTZ](https://typst.app/universe/package/cetz) package. Typst downloads
+and caches it automatically on the first build, so an online build needs
+no manual step; for a fully offline build, pre-populate the Typst
+package cache.
+
 ## License
 
 CC-BY-4.0 (see [LICENSE](LICENSE)). Reproduced/derived material retains
