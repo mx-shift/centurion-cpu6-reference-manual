@@ -1,4 +1,4 @@
-= Pseudocode Definition
+= Appendix B: Pseudocode Definition
 
 The `Operation` sections in Part B use a small pseudocode language,
 defined here.

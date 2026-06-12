@@ -8,9 +8,9 @@
   flags, data types, memory model and MMU, interrupt levels and context
   switching, and addressing modes.
 - *Part B — Instruction Set*: the per-instruction descriptions, in
-  alphabetical order, followed by the extended instruction groups.
-- *Part C — Appendices*: the opcode map, assembler syntax summary, the
-  pseudocode definition, indexes, and processor-generation differences.
+  alphabetical order, followed by the illegal-opcode behaviour.
+- *Appendices*: the opcode map, assembler syntax summary, the pseudocode
+  definition, indexes, and processor-generation differences.
 
 == Numbering conventions
 

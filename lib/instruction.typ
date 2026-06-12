@@ -5,6 +5,17 @@
 #import "theme.typ": *
 #import "bitfield.typ": bitbox, opbits
 
+// Instruction entries register themselves here as (sort-key, content)
+// pairs instead of rendering in place, so the chapter can emit them in
+// alphabetical order (matching the bookmark/Contents order a reader scans
+// to look an instruction up). emit-instructions() places them, sorted.
+#let _instr-list = state("cen-instrs", ())
+#let emit-instructions() = context {
+  for e in _instr-list.final().sorted(key: e => lower(e.first())) {
+    e.last()
+  }
+}
+
 // One encoding variant of an instruction (≙ ARM's "Encoding T1" block).
 //
 //   label:         short variant name shown in bold ("Register-register")
@@ -66,7 +77,15 @@
   notes: none,
   example: none,
 ) = {
-  heading(level: 2)[#name#if qualifier != none [ #qualifier]]
+  let content = {
+  // Structural level 3: an instruction entry is a section under the
+  // level-2 "Instruction Descriptions" chapter (Part B is offset by one,
+  // but an explicit heading level — unlike markup `==` — ignores the
+  // offset, so it is set directly). Logical level 2 → numbered "B2.n".
+  // supplement: [instruction] marks it so the template's heading show
+  // rule starts each instruction entry on a fresh page (architecture
+  // sections sit at the same level but must not break).
+  heading(level: 3, supplement: [instruction])[#name#if qualifier != none [ #qualifier]]
   summary
 
   for enc in encodings {
@@ -112,6 +131,10 @@
   }
   v(1.2em)
   line(length: 100%, stroke: 0.5pt + rule-gray)
+  }
+  // Register rather than render; emit-instructions() places it in
+  // alphabetical order. `name` is the sort key (first mnemonic).
+  _instr-list.update(l => l + ((name, content),))
 }
 
 // "where:" operand glossary entry, used inside the syntax block.
