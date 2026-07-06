@@ -1,0 +1,79 @@
+name: Build manuals
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # The docs pin Liberation Serif/Sans and Source Code Pro (lib/theme.typ).
+      # Install them so CI renders with the real faces instead of a fallback.
+      - name: Install fonts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends fonts-liberation2
+          mkdir -p ~/.local/share/fonts
+          curl -fsSL -o "$HOME/.local/share/fonts/SourceCodePro[wght].ttf" \
+            "https://github.com/google/fonts/raw/main/ofl/sourcecodepro/SourceCodePro%5Bwght%5D.ttf"
+          fc-cache -f
+
+      - name: Set up Typst
+        uses: typst-community/setup-typst@v4
+        with:
+          typst-version: "0.14.2"          # match local; bump when you upgrade
+          cache-dependency-path: manual.typ # caches @preview/cetz across runs
+
+      # Mirrors the `just build` recipe. A missing font is only a Typst
+      # warning (exit 0), so grep for it and fail explicitly.
+      - name: Build the manual
+        run: |
+          set -euo pipefail
+          typst compile manual.typ centurion-cpu6-isa.pdf 2>&1 | tee typst.log
+          if grep -q "unknown font family" typst.log; then
+            echo "::error::Required font missing — PDF would use a fallback face"
+            exit 1
+          fi
+
+      - name: Upload PDFs
+        uses: actions/upload-artifact@v4
+        with:
+          name: manuals
+          path: "*.pdf"
+          if-no-files-found: error
+
+  # On a version tag (e.g. `git tag v1.0 && git push --tags`), attach the
+  # built PDFs to a GitHub Release for that tag.
+  release:
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download built PDFs
+        uses: actions/download-artifact@v4
+        with:
+          name: manuals
+          path: pdfs
+
+      # centurion-cpu6-isa.pdf -> centurion-cpu6-isa-v1.0.pdf
+      - name: Tag PDF filenames with the version
+        run: |
+          set -euo pipefail
+          cd pdfs
+          for f in *.pdf; do
+            mv "$f" "${f%.pdf}-${GITHUB_REF_NAME}.pdf"
+          done
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: pdfs/*.pdf
+          fail_on_unmatched_files: true
+          generate_release_notes: true
