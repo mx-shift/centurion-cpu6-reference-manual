@@ -1,10 +1,10 @@
 out := "centurion-cpu6-isa.pdf"
 
-# Build the PDF
+# Build the manual
 build:
     typst compile manual.typ {{out}}
 
-# Live-rebuild on change
+# Live-rebuild the manual on change
 watch:
     typst watch manual.typ {{out}}
 

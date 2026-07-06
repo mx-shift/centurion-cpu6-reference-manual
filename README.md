@@ -1,8 +1,8 @@
-# centurion-isa
+# Centurion CPU6 Instruction Set Reference Manual
 
-The **Centurion CPU6 Instruction Set Reference Manual** — documentation of
-the Warrex Centurion CPU6 minicomputer architecture in the style of ARM's
-Architecture Reference Manuals, written in [Typst](https://typst.app).
+A reference manual for the Warrex Centurion minicomputer's CPU6
+architecture and instruction set, written in [Typst](https://typst.app)
+in the style of ARM's Architecture Reference Manuals (`manual.typ`).
 
 Built on the Centurion community's reverse-engineering work: the
 [Nakazoto CenturionComputer wiki](https://github.com/Nakazoto/CenturionComputer/wiki)
@@ -21,7 +21,7 @@ just check        # documentation status totals
 
 Fonts: Noto Serif, Noto Sans, Source Code Pro.
 
-The ISA manual's addressing-mode diagrams use the
+The manual's addressing-mode diagrams use the
 [CeTZ](https://typst.app/universe/package/cetz) package. Typst downloads
 and caches it automatically on the first build, so an online build needs
 no manual step; for a fully offline build, pre-populate the Typst
