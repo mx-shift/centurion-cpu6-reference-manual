@@ -5,7 +5,7 @@
 #show: manual.with(
   title: "Centurion Computer",
   subtitle: "CPU6 Instruction Set Reference Manual",
-  version: "Draft 0.2 — instruction semantics microcode-verified (optest 248/248)",
+  version: "Draft 0.2",
 )
 
 #include "parts/front/credits.typ"
